@@ -83,7 +83,35 @@ void users::changePassword() {
 	system("pause");
 }
 
-void users::loadDeductions() {
+void users::registerUser() {
+	string newID, newLName, newFName, newMName, newUL, newPW;
+
+
+	cout << endl << endl << "Please enter new user's Last Name:" << endl;
+	cin >> newLName;
+	
+	cout << endl << "Please enter new user's First Name:" << endl;
+	cin >> newFName;
+	
+	cout << endl << "Please enter new user's Middle Name:" << endl;
+	cin >> newMName;
+	
+	cout << endl << "What is the new user's level? " << endl;
+	cout << endl << "Options: (A) - Admin, (M) - HR Manager, (R) - Recruiter, (P) - HR Personnel" << endl;
+	cout << endl << "Select a letter: ";
+	cin >> newUL;
+	
+	cout << "Please enter the new user's default password: ";
+	cin >> newPW;
+	
+	
+		
+}
+
+
+
+//mode true = load and display to command prompt; false = just load
+void users::viewDeductions(bool mode) { 
 	string line;
 	stringstream sline;
 	int posStart, posEnd;
@@ -91,41 +119,36 @@ void users::loadDeductions() {
 	userInFile.open("database/deductions.txt");
 	if (userInFile.is_open()) {
 		getline(userInFile,line);
+		
 		posStart = line.find("$pg#") + 4;
 		posEnd = line.find("$pg#", posStart);
-		cout << endl << "pagibig string: " << line.substr(posStart, posEnd - posStart);
 		sline << line.substr(posStart, posEnd - posStart);
-//		cout << "test2";
 		sline >> pagibig;
+		if (mode) cout << endl << "Pag-Ibig: \t less " << pagibig * 100 << "%";		
 		sline.ignore(10000,'\n');
-		sline.clear();
-		
-	//	sline.flush();		
-		
-		
-		cout << "pagibig: " << pagibig;			
+		sline.clear();		
 
 		posStart = line.find("$ph#") + 4;
 		posEnd = line.find("$ph#", posStart);
-		cout << endl << "philheath string: " << line.substr(posStart, posEnd - posStart);
 		sline << line.substr(posStart, posEnd - posStart);
-		sline >> philhealth;			
+		sline >> philhealth;
+		if (mode) cout << endl << "PhilHealth: \t less " << philhealth * 100 << "%";			
 		sline.ignore(10000,'\n');
 		sline.clear();
 		
 		posStart = line.find("$ss#") + 4;
 		posEnd = line.find("$ss#", posStart);
-		cout << endl << "sss string: " << line.substr(posStart, posEnd - posStart);
 		sline << line.substr(posStart, posEnd - posStart);
-		sline >> sss;			
+		sline >> sss;
+		if (mode) cout << endl << "SSS: \t\t less " << sss * 100 << "%";
 		sline.ignore(10000,'\n');
 		sline.clear();
 		
 		posStart = line.find("$tx#") + 4;
 		posEnd = line.find("$tx#", posStart);
-		cout << endl << "tax string: " << line.substr(posStart, posEnd - posStart);
 		sline << line.substr(posStart, posEnd - posStart);
-		sline >> tax;			
+		sline >> tax;
+		if (mode) cout << endl << "Tax: \t\t less " << tax * 100 << "%";
 		sline.ignore(10000,'\n');
 		sline.clear();
 
@@ -133,50 +156,50 @@ void users::loadDeductions() {
 	}
   	else cout << "Error: Unable to open Deductions database.";
   	
-  	
-	cout << endl << "Deductions: " << pagibig << " " << philhealth << " " << sss << " " << tax;
-  	system("pause");
-	
+	cout << endl;
+	system("pause");	
 }
 
-void users::viewDeductions() {
-	string line;
-	int posStart, posEnd;
-	
-	userInFile.open("database/deductions.txt");
-	if (userInFile.is_open()) {
-		cout << endl << "=== List of Deductions ===";
-		
-		getline(userInFile,line);
-		posStart = line.find("$pg#") + 4;
-		posEnd = line.find("$pg#", posStart);
-		cout << endl << "Pag-Ibig: \t less " << line.substr(posStart, posEnd - posStart) << "%";
-		
-		getline(userInFile,line);
-		posStart = line.find("$ph#") + 4;
-		posEnd = line.find("$ph#", posStart);
-		cout << endl << "PhilHealth: \t less " << line.substr(posStart, posEnd - posStart) << "%";
-		
-		getline(userInFile,line);
-		posStart = line.find("$ss#") + 4;
-		posEnd = line.find("$ss#", posStart);
-		cout << endl << "SSS: \t\t less " << line.substr(posStart, posEnd - posStart) << "%";
-
-		getline(userInFile,line);
-		posStart = line.find("$tx#") + 4;
-		posEnd = line.find("$tx#", posStart);
-		cout << endl << "Tax: \t\t less " << line.substr(posStart, posEnd - posStart) << "%";
-
-		userInFile.close();
-	}
-  	else cout << "Error: Unable to open Deductions database.";
-  	
-  	cout << endl;
-	system("pause");
-		
-}
 
 void users::changeDeductions() {
+	string out; 
+	ostringstream buff1, buff2, buff3, buff4;
+	
+	system("cls");
+	
+	cout << endl << "Note: Deductions are deducted from the base salary as percentages.";
+	cout << endl << "Please enter the new values in decimal form. For example, enter 0.125 for a 12.5% deduction.";
+	
+	cout << endl << endl << "Enter the Pag-Ibig contribution deduction. " << endl;
+	pagibig = mActions.askFloatInput(1);
+	buff1 << pagibig;
+	
+	cout << endl << "Enter the PhilHealth contribution deduction. " << endl;
+	philhealth = mActions.askFloatInput(1);
+	buff2 << philhealth;
+	
+	cout << endl <<  "Enter the SSS contribution deduction. " << endl;
+	sss = mActions.askFloatInput(1);
+	buff3 << sss;
+	
+	cout << endl << "Enter the tax contribution deduction. " << endl;
+	tax = mActions.askFloatInput(1);
+	buff4 << tax;
+	
+	userOutFile.open("database/deductions.txt");
+	
+	if (userOutFile.is_open()){
+		out = "$pg#" + buff1.str() + "$pg#$ph#" + buff2.str() + "$ph#$ss#" + buff3.str() + "$ss#$tx#" + buff4.str() + "$tx#";
+		userOutFile << out; 
+		userOutFile.close();
+		
+		cout << endl << "Here are the new values for each deduction: ";
+		viewDeductions(true);
+	} else {
+		cout << endl << "Error: Unable to open Deductions database."; 
+	}
+	
+	
 	
 }
 
@@ -284,6 +307,24 @@ void users::updateUserDB(string id, string newInfo) {
 	}
 	
 	
+}
+
+string users::getLastUserEntry() {
+	string line, last; 
+	
+	userInFile.open("database/users.txt");
+	
+	if (userInFile.is_open()) {
+		while ( getline (userInFile,line) ) {
+			if (line.at(0) == '$') {
+				last = line;
+			}					
+		}
+		 userInFile.close();
+	}
+  	else cout << "Error: Unable to open Users database."; 
+
+	return last;
 }
 
 

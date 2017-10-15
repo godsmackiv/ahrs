@@ -11,8 +11,9 @@ class miscActions {
 	private:
 	
 	public:
-		float askFloatInput(int);
-		int askIntInput(int);
+		float askFloatInput(int); //
+		int askIntInput(int); //
+		string trimOuterSpaces(string);
 	
 	
 };

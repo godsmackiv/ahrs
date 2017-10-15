@@ -17,14 +17,18 @@ int main(int argc, char** argv) {
 //	cout << usersDB.searchUserDB("qwertyui", "pw", &testString);
 //	
 //	cout << endl << testString;
-	f = m.askFloatInput(1);
-	cout << f;
+//	f = m.askFloatInput(1);
+//	cout << f;
 //	usersDB.loginUser();
 ////	cout << "done logging test";
 ////	system("pause");
 //	 
-//	usersDB.viewDeductions();
+//	usersDB.viewDeductions(false);
 //	usersDB.changePassword();
+//	usersDB.changeDeductions();
+
+	testString = usersDB.getLastUserEntry();
+	cout << "the last line is: " << testString;
 
 //	usersDB.updateUserDB("000003", "$id#000003$id#$pw#12345678$pw#$ln#Alvarez$ln#$fn#Ralph Louis$fn#$mn#Arizobal$mn#$ul#admin$ul#");
 	
