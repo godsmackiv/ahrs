@@ -1,0 +1,4 @@
+$jid#000001$jid#$jpn#Teacher$jpn#
+$jid#000002$jid#$jpn#Secretary$jpn#
+$jid#000003$jid#$jpn#Janitor$jpn#
+$jid#000004$jid#$jpn#Dorm Supervisor$jpn#

@@ -1,0 +1,11 @@
+$did#000001$did#$dco#COMPE$dco#$dna#Computer Engineering$dna#
+$did#000002$did#$dco#DORM$dco#$dna#Dormitory$dna#
+$did#000003$did#$dco#EECE$dco#$dna#Electrical, Electronics & Communications Engineering$dna#
+$did#000004$did#$dco#ADMIN$dco#$dna#Administration$dna#
+$did#000005$did#$dco#BHS$dco#$dna#Boys High School$dna#
+$did#000006$did#$dco#GHS$dco#$dna#Girls High School$dna#
+$did#000007$did#$dco#SHS$dco#$dna#Senior High School$dna#
+$did#000008$did#$dco#ES$dco#$dna#Elementary School$dna#
+$did#000009$did#$dco#KGN$dco#$dna#Kindergarten$dna#
+$did#000010$did#$dco#BUS$dco#$dna#Business$dna#
+$did#000011$did#$dco#PRES$dco#$dna#Office of the President$dna#
