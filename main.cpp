@@ -27,8 +27,9 @@ int main(int argc, char** argv) {
 //	usersDB.changePassword();
 //	usersDB.changeDeductions();
 
-	testString = usersDB.getLastUserEntry();
-	cout << "the last line is: " << testString;
+//	testString = usersDB.getLastUserEntry();
+//	cout << "the last line is: " << testString;
+	usersDB.registerUser();
 
 //	usersDB.updateUserDB("000003", "$id#000003$id#$pw#12345678$pw#$ln#Alvarez$ln#$fn#Ralph Louis$fn#$mn#Arizobal$mn#$ul#admin$ul#");
 	

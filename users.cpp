@@ -3,8 +3,7 @@
 // login users, verifies if account exist, and verifies if password is matched
 void users::loginUser() {
 	string input, currentUser;
-	int posStart, posEnd;
-	
+
 	system("cls");
 	cout << "Please enter your user ID: ";
 	cin >>  input;
@@ -15,30 +14,17 @@ void users::loginUser() {
 //		cout << "test1";
 		userID = input;
 		
-		posStart = currentUser.find("$pw#") + 4;
-		posEnd = currentUser.find("$pw#", posStart);
-		password = currentUser.substr(posStart, posEnd - posStart);
+		password = getValueFromEntry("$pw#", currentUser);
 		
 		cout << "Please enter your password: ";
 		cin >> input;
 		if (input == password) {
 			cout << endl << "Login successful!";
 			
-			posStart = currentUser.find("$fn#") + 4;
-			posEnd = currentUser.find("$fn#", posStart);
-			firstName = currentUser.substr(posStart, posEnd - posStart);
-	
-			posStart = currentUser.find("$ln#") + 4;
-			posEnd = currentUser.find("$ln#", posStart);
-			lastName = currentUser.substr(posStart, posEnd - posStart);		
-			
-			posStart = currentUser.find("$mn#") + 4;
-			posEnd = currentUser.find("$mn#", posStart);
-			middleName = currentUser.substr(posStart, posEnd - posStart);
-			
-			posStart = currentUser.find("$ul#") + 4;
-			posEnd = currentUser.find("$ul#", posStart);
-			userLevel = currentUser.substr(posStart, posEnd - posStart);
+			firstName = getValueFromEntry("$fn#", currentUser);
+			lastName = getValueFromEntry("$ln#", currentUser);
+			middleName = getValueFromEntry("$mn#", currentUser);
+			userLevel = getValueFromEntry("$ul#", currentUser);
 			
 			cout << endl << "Welcome " + lastName + ", " + firstName + " " + middleName + "!";
 			
@@ -84,28 +70,143 @@ void users::changePassword() {
 }
 
 void users::registerUser() {
-	string newID, newLName, newFName, newMName, newUL, newPW;
+	string newID, newLName, newFName, newMName, newUL, newPW, temp, lastEntry;
+	int posStart, posEnd, id, aN, mN, rN, pN;
+	stringstream sline, sAN, sMN, sRN, sPN;
+	bool repeat;
+	char s;
 
-
-	cout << endl << endl << "Please enter new user's Last Name:" << endl;
-	cin >> newLName;
+	system("cls");
 	
-	cout << endl << "Please enter new user's First Name:" << endl;
-	cin >> newFName;
+	lastEntry = getLastUserEntry();
+//	cout << lastEntry;
 	
-	cout << endl << "Please enter new user's Middle Name:" << endl;
-	cin >> newMName;
+	userInFile.open("database/users.txt");
+	userOutFile.open("temp.txt");
 	
-	cout << endl << "What is the new user's level? " << endl;
-	cout << endl << "Options: (A) - Admin, (M) - HR Manager, (R) - Recruiter, (P) - HR Personnel" << endl;
-	cout << endl << "Select a letter: ";
-	cin >> newUL;
-	
-	cout << "Please enter the new user's default password: ";
-	cin >> newPW;
-	
-	
+	repeat = true;
+	if (userInFile.is_open() && userOutFile.is_open()){
+		while (getline(userInFile, temp)) {
+			if (repeat) {
+				sline << getValueFromEntry("$aN#", temp);
+				sline >> aN;
+				sline.str(string());
+				sline.clear();
+				sline << getValueFromEntry("$mN#", temp);
+				sline >> mN;
+				sline.str(string());
+				sline.clear();
+				sline << getValueFromEntry("$rN#", temp);
+				sline >> rN;
+				sline.str(string());
+				sline.clear();
+				sline << getValueFromEntry("$pN#", temp);
+				sline >> pN;
+				sline.str(string());
+				sline.clear();
+//				cout << aN << " " << mN << " " << rN << " " << pN;
+				
+				cout << endl << "Please enter new user's Last Name:" << endl;
+				cin >> newLName;
+				
+				cout << endl << "Please enter new user's First Name:" << endl;
+				cin >> newFName;
+				
+				cout << endl << "Please enter new user's Middle Name:" << endl;
+				cin >> newMName;
+				
+				while (repeat) {
+					cout << endl << "What is the new user's level? " << endl;
+					cout << endl << "Options: (A) - Admin, (M) - HR Manager, (R) - Recruiter, (P) - HR Personnel" << endl;
+					cout << endl << "Select a letter: ";
+					cin >> s;
+			
+					switch(s) {
+						case 'A': case 'a':
+							newUL = "admin";
+							aN++;
+							repeat = false;
+							break;
+						case 'M': case 'm':
+							newUL = "manager";
+							mN++;
+							repeat = false;
+							break;	
+						case 'R': case 'r':
+							newUL = "recruiter";
+							rN++;
+							repeat = false;
+							break;
+						case 'P': case 'p':
+							newUL = "personnel";
+							pN++;
+							repeat = false;
+							break;	
+						default:
+							cout << "Error: Invalid selection. Please try again." << endl;
+							cin.clear();
+							cin.ignore(10000,'\n');
+							break;
+					}
+				}
+				
+				cout << "Please enter the new user's default password: ";
+				cin >> newPW;
+				
+				//lastEntry = getLastUserEntry();
+				sline << getValueFromEntry("$id#", lastEntry);
+//				cout << "gothere";
+				sline >> id;
+				id++;
+				sline.str(string());
+				sline.clear();
+				sline << id;
+				sline >> newID;
+				while (newID.length() < 6) {
+					newID.insert(0, "0");
+				}
+//				cout << newID;
+			}
+			
+			
+			temp += "\n";
+			userOutFile << temp;
+		}
 		
+		userOutFile << "$id#"+newID+"$id#$pw#"+newPW+"$pw#$ln#"+newLName+"$ln#$fn#"+newFName+"$fn#$mn#"+newMName+"$mn#$ul#"+newUL+"$ul#";
+		
+		userInFile.close();
+		userOutFile.close();
+		
+		ifstream fileIn("temp.txt");
+		ofstream fileOut("database/users.txt");
+		
+		repeat = true;
+		if (fileIn.is_open() && fileOut.is_open()) {
+			while (getline(fileIn, temp)) {
+				if (repeat) {
+					sAN << aN;
+					sMN << mN;
+					sRN << rN;
+					sPN << pN;
+					fileOut << "$aN#"+sAN.str()+"$aN#$mN#"+sMN.str()+"$mN#$rN#"+sRN.str()+"$rN#$pN#"+sPN.str()+"$pN#\n";
+					repeat = false;
+				} else {
+					temp += "\n";
+					fileOut << temp;
+				}
+				
+			}
+			fileIn.close();
+			fileOut.close();	
+		} else {
+			cout << endl << "Error: Unable to update Users database."; 
+		}
+	remove("temp.txt");	
+	} else {
+		cout << endl << "Error: Unable to open Users database."; 
+	}
+	
 }
 
 
@@ -234,19 +335,17 @@ bool users::searchUserDB(string query, string type) {
 	return false;
 }
 
-//search and gets the whole line where query was found
-bool users::searchUserDB(string query, string type, string *focus) {
+//search and gets the whole line where query matching with an element was found
+bool users::searchUserDB(string query, string element, string *focus) {
 	string line, found;
-	int posStart, posEnd;
+
 
 	userInFile.open("database/users.txt");
 	if (userInFile.is_open()) {
 		while ( getline (userInFile,line) ) {
 			*focus = line;
 //			cout << endl << line;
-			posStart = line.find("$"+type+"#") + 4;
-			posEnd = line.find("$"+type+"#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
+			found = getValueFromEntry("$"+element+"#", line);
 //			cout << endl << found;
 //			cout << endl << line.substr(posStart, posEnd - posStart);
 			if (query == found) {
@@ -264,7 +363,7 @@ bool users::searchUserDB(string query, string type, string *focus) {
 	return false;
 }
 
-// updates line of specified id, replaces whole line with newInfo
+// updates line of specified db element ID, replaces whole line with newInfo
 void users::updateUserDB(string id, string newInfo) {
 	string temp, orig;
 	int posStart, posEnd;
@@ -318,13 +417,29 @@ string users::getLastUserEntry() {
 		while ( getline (userInFile,line) ) {
 			if (line.at(0) == '$') {
 				last = line;
-			}					
+			}		
 		}
+		
+		
 		 userInFile.close();
 	}
   	else cout << "Error: Unable to open Users database."; 
 
 	return last;
 }
+
+string users::getValueFromEntry(string element, string entry) {
+//	cout << "entered! element is " << element << " entry is " << entry;
+	int posStart, posEnd;
+	
+//	cout << element;
+	
+	posStart = entry.find(element) + 4;
+	posEnd = entry.find(element, posStart);
+	return entry.substr(posStart, posEnd - posStart);
+//	cout <<"exited";
+}
+
+
 
 

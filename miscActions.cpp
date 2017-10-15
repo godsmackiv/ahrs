@@ -62,6 +62,14 @@ int miscActions::askIntInput(int mode) {
 		cin.ignore(10000, '\n');
 	} while (repeat);
 	return input;
-
-	
 }
+
+//stringstream miscActions::clearSStream(stringstream argStream) {
+//	stringstream temp; 
+//	
+//	temp << argStream;
+//	temp.str(string());
+//	temp.clear();
+//	
+//	return temp;
+//}

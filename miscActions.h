@@ -13,6 +13,7 @@ class miscActions {
 	public:
 		float askFloatInput(int); //
 		int askIntInput(int); //
+		stringstream clearSStream(stringstream);
 		string trimOuterSpaces(string);
 	
 	

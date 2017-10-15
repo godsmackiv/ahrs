@@ -35,16 +35,17 @@ class users {
 		
 		void loginUser(); //
 		void changePassword(); //
-		void registerUser(); 
+		void registerUser(); //
 		void deleteUser(); 
 		void viewDeductions(bool); //
 		void changeDeductions(); //
-		bool searchUserDB(string, string); // basic
+		bool searchUserDB(string, string); // basic; if found or not
 		bool searchUserDB(string, string, string *); //assigns string to *focus where query was found
 //		bool searchUserDB(string, string, string); //search query within third arg string
  		//bool assignUserInfo();
 		void updateUserDB(string, string); //
 		string getLastUserEntry();
+		string getValueFromEntry(string, string); //gets specific value of a database element within a database entry
 };
 
 #endif
