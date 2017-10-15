@@ -1,0 +1,61 @@
+# Project: HRS
+# Makefile created by Dev-C++ 5.8.3
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o departments.o locations.o jobPositions.o benefits.o employeeRecords.o jobOpenings.o timeReports.o payroll.o users.o paySlips.o miscActions.o
+LINKOBJ  = main.o departments.o locations.o jobPositions.o benefits.o employeeRecords.o jobOpenings.o timeReports.o payroll.o users.o paySlips.o miscActions.o
+LIBS     = -L"C:/Dev-Cpp/MinGW64/lib" -L"C:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"C:/Dev-Cpp/MinGW64/include" -I"C:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include"
+CXXINCS  = -I"C:/Dev-Cpp/MinGW64/include" -I"C:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++"
+BIN      = HRS.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+departments.o: departments.cpp
+	$(CPP) -c departments.cpp -o departments.o $(CXXFLAGS)
+
+locations.o: locations.cpp
+	$(CPP) -c locations.cpp -o locations.o $(CXXFLAGS)
+
+jobPositions.o: jobPositions.cpp
+	$(CPP) -c jobPositions.cpp -o jobPositions.o $(CXXFLAGS)
+
+benefits.o: benefits.cpp
+	$(CPP) -c benefits.cpp -o benefits.o $(CXXFLAGS)
+
+employeeRecords.o: employeeRecords.cpp
+	$(CPP) -c employeeRecords.cpp -o employeeRecords.o $(CXXFLAGS)
+
+jobOpenings.o: jobOpenings.cpp
+	$(CPP) -c jobOpenings.cpp -o jobOpenings.o $(CXXFLAGS)
+
+timeReports.o: timeReports.cpp
+	$(CPP) -c timeReports.cpp -o timeReports.o $(CXXFLAGS)
+
+payroll.o: payroll.cpp
+	$(CPP) -c payroll.cpp -o payroll.o $(CXXFLAGS)
+
+users.o: users.cpp
+	$(CPP) -c users.cpp -o users.o $(CXXFLAGS)
+
+paySlips.o: paySlips.cpp
+	$(CPP) -c paySlips.cpp -o paySlips.o $(CXXFLAGS)
+
+miscActions.o: miscActions.cpp
+	$(CPP) -c miscActions.cpp -o miscActions.o $(CXXFLAGS)

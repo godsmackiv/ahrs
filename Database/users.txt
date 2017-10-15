@@ -1,0 +1,13 @@
+$aN#3$aN#$mN#3$mN#$rN#3$rN#$pN#3$pN#
+$id#000001$id#$pw#4321abcd$pw#$ln#Encarnacion$ln#$fn#Androel$fn#$mn#Altar$mn#$ul#admin$ul#
+$id#000002$id#$pw#1234pass$pw#$ln#Calumpang$ln#$fn#Cleavon Hendrix$fn#$mn#Cabanig$mn#$ul#admin$ul#
+$id#000003$id#$pw#12345678$pw#$ln#Alvarez$ln#$fn#Ralph Louis$fn#$mn#Arizobal$mn#$ul#admin$ul#
+$id#000004$id#$pw#87654321$pw#$ln#Alfanta$ln#$fn#John Gio$fn#$mn#Maquiso$mn#$ul#manager$ul#
+$id#000005$id#$pw#monkey12$pw#$ln#Lobaton$ln#$fn#Jurece$fn#$mn#Barbosa$mn#$ul#manager$ul#
+$id#000006$id#$pw#password$pw#$ln#Vasquez$ln#$fn#Erlisar$fn#$mn#Edillo$mn#$ul#manager$ul#
+$id#000007$id#$pw#wordpass$pw#$ln#Gaytos$ln#$fn#Carl Norman$fn#$mn#Caballegan$mn#$ul#recruiter$ul#
+$id#000008$id#$pw#hellobye$pw#$ln#Gaytos$ln#$fn#Carlito Jr.$fn#$mn#Caballegan$mn#$ul#recruiter$ul#
+$id#000009$id#$pw#goodbyes$pw#$ln#Gaytos$ln#$fn#Norielle$fn#$mn#Caballegan$mn#$ul#recruiter$ul#
+$id#000010$id#$pw#youemail$pw#$ln#Amper$ln#$fn#Rizza Mae$fn#$mn#Bayutas$mn#$ul#personnel$ul#
+$id#000011$id#$pw#wordpass$pw#$ln#Balmores$ln#$fn#Ridentor$fn#$mn#Suralta$mn#$ul#personnel$ul#
+$id#000012$id#$pw#qwertyui$pw#$ln#Borres$ln#$fn#Monique$fn#$mn#Soronio$mn#$ul#personnel$ul#
