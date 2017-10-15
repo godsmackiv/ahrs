@@ -1,0 +1,4 @@
+$lc#MC$lc#$ln#Main Campus$ln#
+$lc#TC$lc#$ln#Talamban Campus$ln#
+$lc#SC$lc#$ln#South Campus$ln#
+$lc#NC$lc#$ln#North Campus$ln#
