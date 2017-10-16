@@ -8,10 +8,12 @@ using namespace std;
 int main(int argc, char** argv) {
 	users usersDB;
 	string testString; 
-	gino test
+	
 	float f;
 	miscActions m;
 	
+//	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
+//	usersDB.deleteUser();
 //	usersDB.test();
 //	cout << usersDB.searchUserDB("000001", "id");
 //	cout << usersDB.searchUserDB("qwertyui", "pw", &testString);

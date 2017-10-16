@@ -10,7 +10,7 @@ void users::loginUser() {
 	
 	
 	
-	if (searchUserDB(input, "id", &currentUser)) {
+	if (searchUserDB(input, "$id#", &currentUser, false)) {
 //		cout << "test1";
 		userID = input;
 		
@@ -70,17 +70,17 @@ void users::changePassword() {
 }
 
 void users::registerUser() {
-	string newID, newLName, newFName, newMName, newUL, newPW, temp, lastEntry;
-	int posStart, posEnd, id, aN, mN, rN, pN;
-	stringstream sline, sAN, sMN, sRN, sPN;
+	string newID, newLName, newFName, newMName, newUL, newPW, temp;
+	int posStart, posEnd, id, aN, mN, rN, pN, lI;
+	stringstream sline, sAN, sMN, sRN, sPN, sLI;
 	bool repeat;
 	char s;
 
 	system("cls");
 	
-	lastEntry = getLastUserEntry();
+//	lastEntry = getLastUserEntry();
 //	cout << lastEntry;
-	
+//	cout << "weee";
 	userInFile.open("database/users.txt");
 	userOutFile.open("temp.txt");
 	
@@ -102,6 +102,10 @@ void users::registerUser() {
 				sline.clear();
 				sline << getValueFromEntry("$pN#", temp);
 				sline >> pN;
+				sline.str(string());
+				sline.clear();
+				sline << getValueFromEntry("$lI#", temp);
+				sline >> lI;
 				sline.str(string());
 				sline.clear();
 //				cout << aN << " " << mN << " " << rN << " " << pN;
@@ -154,13 +158,10 @@ void users::registerUser() {
 				cin >> newPW;
 				
 				//lastEntry = getLastUserEntry();
-				sline << getValueFromEntry("$id#", lastEntry);
-//				cout << "gothere";
-				sline >> id;
-				id++;
+				lI++;
 				sline.str(string());
 				sline.clear();
-				sline << id;
+				sline << lI;
 				sline >> newID;
 				while (newID.length() < 6) {
 					newID.insert(0, "0");
@@ -189,7 +190,8 @@ void users::registerUser() {
 					sMN << mN;
 					sRN << rN;
 					sPN << pN;
-					fileOut << "$aN#"+sAN.str()+"$aN#$mN#"+sMN.str()+"$mN#$rN#"+sRN.str()+"$rN#$pN#"+sPN.str()+"$pN#\n";
+					sLI << lI;
+					fileOut << "$aN#"+sAN.str()+"$aN#$mN#"+sMN.str()+"$mN#$rN#"+sRN.str()+"$rN#$pN#"+sPN.str()+"$pN#$lI#"+sLI.str()+"$lI#\n";
 					repeat = false;
 				} else {
 					temp += "\n";
@@ -209,6 +211,107 @@ void users::registerUser() {
 	
 }
 
+void users::deleteUser() {
+	string id, found, level, temp, orig; 
+	int posStart, posEnd, aN, mN, rN, pN, lI;
+	stringstream sline, sAN, sMN, sRN, sPN, sLI;
+	bool repeat;
+	
+	cout << endl << "Enter the user ID number of the account you wish to delete: ";
+	cin >> id;
+	if (searchUserDB(id, "$id#", &found, false)) {
+//		cout << "search found";
+		
+		userInFile.open("database/users.txt");
+		userOutFile.open("temp.txt");
+		
+		repeat = true;
+		
+		if (userInFile.is_open() && userOutFile.is_open()){
+			while (getline(userInFile, temp)) {
+				if (repeat) {
+					repeat = false;
+					sline << getValueFromEntry("$aN#", temp);
+					sline >> aN;
+					sline.str(string());
+					sline.clear();
+					sline << getValueFromEntry("$mN#", temp);
+					sline >> mN;
+					sline.str(string());
+					sline.clear();
+					sline << getValueFromEntry("$rN#", temp);
+					sline >> rN;
+					sline.str(string());
+					sline.clear();
+					sline << getValueFromEntry("$pN#", temp);
+					sline >> pN;
+					sline.str(string());
+					sline.clear();
+					sline << getValueFromEntry("$lI#", temp);
+					sline >> lI; 
+//					cout << "li is " << lI;
+					sline.str(string());
+					sline.clear();
+				}
+				orig = temp;
+				posStart = temp.find("$id#") + 4;
+				posEnd = temp.find("$id#", posStart);
+				if (!(id == temp.substr(posStart, posEnd - posStart))) {
+					orig += "\n";
+					userOutFile << orig;
+				} else {
+					level = getValueFromEntry("$ul#", orig);
+					if (level == "admin") {
+						aN--;
+					} else if (level == "manager") {
+						mN--;
+					} else if (level == "recruiter") {
+						rN--;
+					} else {
+						pN--;
+					}
+				}
+				
+			}
+			
+			userInFile.close();
+			userOutFile.close();
+			
+			ifstream fileIn("temp.txt");
+			ofstream fileOut("database/users.txt");
+			
+			repeat = true;
+			if (fileIn.is_open() && fileOut.is_open()) {
+				while (getline(fileIn, temp)) {
+					if (repeat) {
+						sAN << aN;
+						sMN << mN;
+						sRN << rN;
+						sPN << pN;
+						sLI << lI;
+						fileOut << "$aN#"+sAN.str()+"$aN#$mN#"+sMN.str()+"$mN#$rN#"+sRN.str()+"$rN#$pN#"+sPN.str()+"$pN#$lI#"+sLI.str()+"$lI#\n";
+						repeat = false;
+					} else {
+						temp += "\n";
+						fileOut << temp;
+					}
+					
+				}
+				
+				fileIn.close();
+				fileOut.close();	
+			} else {
+				cout << endl << "Error: Unable to update Users database."; 
+			}
+		remove("temp.txt");	
+		} else {
+			cout << endl << "Error: Unable to open Users database."; 
+		}
+
+	} else {
+//		cout << "none found";
+	}
+}
 
 
 //mode true = load and display to command prompt; false = just load
@@ -336,30 +439,44 @@ bool users::searchUserDB(string query, string type) {
 }
 
 //search and gets the whole line where query matching with an element was found
-bool users::searchUserDB(string query, string element, string *focus) {
+//keepSearch if true, searches whole database, false only first found
+bool users::searchUserDB(string query, string element, string *focus, bool keepSearching) {
 	string line, found;
+	int ctr;
 
-
+	ctr = 0;
 	userInFile.open("database/users.txt");
 	if (userInFile.is_open()) {
+		if (keepSearching) 
+			cout << endl << "Search results: ";	
 		while ( getline (userInFile,line) ) {
 			*focus = line;
 //			cout << endl << line;
-			found = getValueFromEntry("$"+element+"#", line);
+			found = getValueFromEntry(element, line);
 //			cout << endl << found;
 //			cout << endl << line.substr(posStart, posEnd - posStart);
-			if (query == found) {
+			if (keepSearching) {
+				if (query == found) {
+					cout << endl << line; // edit this to be more user friendly
+					ctr++;
+				}
+			} else {
+				if (query == found) {
 				userInFile.close();
 				//cout << endl << focus;
 				return true;
-			}			
+				}		
+			}
 		}
-
+		if (!ctr) {
+			if (keepSearching) {
+				cout << endl << "No entries found!";
+			} 
+		}
 		 userInFile.close();
 	}
   	else cout << "Error: Unable to open Users database."; 
-  	
-  	
+
 	return false;
 }
 

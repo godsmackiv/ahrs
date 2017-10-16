@@ -40,7 +40,7 @@ class users {
 		void viewDeductions(bool); //
 		void changeDeductions(); //
 		bool searchUserDB(string, string); // basic; if found or not
-		bool searchUserDB(string, string, string *); //assigns string to *focus where query was found
+		bool searchUserDB(string, string, string *, bool); //assigns string to *focus where query was found
 //		bool searchUserDB(string, string, string); //search query within third arg string
  		//bool assignUserInfo();
 		void updateUserDB(string, string); //
