@@ -212,14 +212,18 @@ void users::registerUser() {
 }
 
 void users::deleteUser() {
-	string id, found, level, temp, orig; 
+	string id, found, level, temp, orig, currentUser;  //found is entry of user to be deleted
 	int posStart, posEnd, aN, mN, rN, pN, lI;
 	stringstream sline, sAN, sMN, sRN, sPN, sLI;
-	bool repeat;
+	bool repeat, proceedDelete;
 	
 	cout << endl << "Enter the user ID number of the account you wish to delete: ";
 	cin >> id;
+	searchUserDB(userID, "$id#", &currentUser, false);
+	
 	if (searchUserDB(id, "$id#", &found, false)) {
+		proceedDelete = true;
+		
 //		cout << "search found";
 		
 		userInFile.open("database/users.txt");
@@ -229,6 +233,7 @@ void users::deleteUser() {
 		
 		if (userInFile.is_open() && userOutFile.is_open()){
 			while (getline(userInFile, temp)) {
+				//retrieve user population
 				if (repeat) {
 					repeat = false;
 					sline << getValueFromEntry("$aN#", temp);
@@ -253,63 +258,92 @@ void users::deleteUser() {
 					sline.str(string());
 					sline.clear();
 				}
+				
+				//cout << endl << "aN: " << aN;
+				//cout << endl << "user level: " << getValueFromEntry("$ul#", temp);
+				
+				// UT4 - unable to delete own account
+				if (id == getValueFromEntry("$id#", currentUser)) {
+					cout << endl << "Error: You cannot delete your own account.";
+					proceedDelete = false;
+					break;
+				// UT5 - at least two admins 	
+				} else if ((getValueFromEntry("$ul#", found) == "admin") && aN <= 2) {
+					cout << endl << "Error: You cannot delete the last two admins (including yourself).";
+					proceedDelete = false;
+					break;
+				}   
+								
+				//proceed with deletions, start by putting into temp text file
 				orig = temp;
 				posStart = temp.find("$id#") + 4;
 				posEnd = temp.find("$id#", posStart);
-				if (!(id == temp.substr(posStart, posEnd - posStart))) {
+				if (!(id == temp.substr(posStart, posEnd - posStart))) { //skip entry with matching user ID, to be skipped when updating database
 					orig += "\n";
 					userOutFile << orig;
-				} else {
-					level = getValueFromEntry("$ul#", orig);
-					if (level == "admin") {
-						aN--;
-					} else if (level == "manager") {
-						mN--;
-					} else if (level == "recruiter") {
-						rN--;
-					} else {
-						pN--;
-					}
-				}
-				
+				} 				
 			}
+			
+			//UT 7
+			//make new functions confirmDelete, confirmDeleteLastofLevel, ask to enter admin ID and password
+			
 			
 			userInFile.close();
 			userOutFile.close();
 			
-			ifstream fileIn("temp.txt");
-			ofstream fileOut("database/users.txt");
-			
-			repeat = true;
-			if (fileIn.is_open() && fileOut.is_open()) {
-				while (getline(fileIn, temp)) {
-					if (repeat) {
-						sAN << aN;
-						sMN << mN;
-						sRN << rN;
-						sPN << pN;
-						sLI << lI;
-						fileOut << "$aN#"+sAN.str()+"$aN#$mN#"+sMN.str()+"$mN#$rN#"+sRN.str()+"$rN#$pN#"+sPN.str()+"$pN#$lI#"+sLI.str()+"$lI#\n";
-						repeat = false;
-					} else {
-						temp += "\n";
-						fileOut << temp;
-					}
-					
+			if (proceedDelete) {
+//				cout << endl << "proceeding with deletion!";
+				//put back contents to main database file, but without the deleted entry
+				ifstream fileIn("temp.txt");
+				ofstream fileOut("database/users.txt");
+				
+				//update user popluation
+				level = getValueFromEntry("$ul#", found);
+				if (level == "admin") {
+					aN--;
+				} else if (level == "manager") {
+					mN--;
+				} else if (level == "recruiter") {
+					rN--;
+				} else {
+					pN--;
 				}
 				
-				fileIn.close();
-				fileOut.close();	
-			} else {
-				cout << endl << "Error: Unable to update Users database."; 
+				//add rest of the remaining database entries
+				repeat = true;
+				if (fileIn.is_open() && fileOut.is_open()) {
+					while (getline(fileIn, temp)) {
+						if (repeat) {
+							sAN << aN;
+							sMN << mN;
+							sRN << rN;
+							sPN << pN;
+							sLI << lI;
+							fileOut << "$aN#"+sAN.str()+"$aN#$mN#"+sMN.str()+"$mN#$rN#"+sRN.str()+"$rN#$pN#"+sPN.str()+"$pN#$lI#"+sLI.str()+"$lI#\n";
+							repeat = false;
+						} else {
+							temp += "\n";
+							fileOut << temp;
+						}
+						
+					}
+					
+					fileIn.close();
+					fileOut.close();	
+				} else {
+					cout << endl << "Error: Unable to update Users database."; 
+				}				
 			}
+			
+			
+			
 		remove("temp.txt");	
 		} else {
 			cout << endl << "Error: Unable to open Users database."; 
 		}
 
 	} else {
-//		cout << "none found";
+		cout << endl << "Error: No user exists with that ID.";
 	}
 }
 

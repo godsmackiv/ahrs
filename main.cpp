@@ -12,8 +12,9 @@ int main(int argc, char** argv) {
 	float f;
 	miscActions m;
 	
+	usersDB.loginUser();
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
-//	usersDB.deleteUser();
+	usersDB.deleteUser();
 //	usersDB.test();
 //	cout << usersDB.searchUserDB("000001", "id");
 //	cout << usersDB.searchUserDB("qwertyui", "pw", &testString);
@@ -31,7 +32,7 @@ int main(int argc, char** argv) {
 
 //	testString = usersDB.getLastUserEntry();
 //	cout << "the last line is: " << testString;
-	usersDB.registerUser();
+//	usersDB.registerUser();
 
 //	usersDB.updateUserDB("000003", "$id#000003$id#$pw#12345678$pw#$ln#Alvarez$ln#$fn#Ralph Louis$fn#$mn#Arizobal$mn#$ul#admin$ul#");
 	
