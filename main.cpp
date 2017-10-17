@@ -2,7 +2,7 @@
 #include <string>
 #include "users.h"
 #include "miscActions.h"
-
+#include <conio.h>
 using namespace std;
 
 int main(int argc, char** argv) {
@@ -13,13 +13,15 @@ int main(int argc, char** argv) {
 	int q;
 	float f;
 	miscActions m;
-
 	usersDB.loginUser();
+	
 	if(usersDB.getUserLevel()=="manager"){
 		system("cls");
 		m.managerMenu();
 		system("cls");
 		m.loadingBar();
+		system("cls");
+		m.managerSubMenu();
 	}
 	else if(usersDB.getUserLevel()=="admin"){
 		cout<<"admin";

@@ -9,13 +9,15 @@ using namespace std;
 
 class miscActions {
 	private:
-	
+		char task;
+		char perform;
 	public:
 		float askFloatInput(int); //
 		int askIntInput(int); //
 		stringstream clearSStream(stringstream);
 		string trimOuterSpaces(string);
-		int managerMenu(void);
+		void managerMenu(void);
+		void managerSubMenu(void);
 		void loadingBar(void);
 	
 	
