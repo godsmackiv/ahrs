@@ -1,5 +1,6 @@
 #include "miscActions.h"
-
+#include <windows.h>
+#include <conio.h>
 float miscActions::askFloatInput(int mode) {
 	float input;
 	string str;
@@ -74,6 +75,26 @@ int miscActions::askIntInput(int mode) {
 //	return temp;
 //}
 int miscActions::managerMenu(void){
-	cout<<
+	char task;
+	cout<<"\t\t\t\t\t=========================================="<<endl;
+	cout<<"\t\t\t\t\t=\t[F] File Maintenance\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[T] Transactions\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[I] Inquiry\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[R] Report\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[U] Utilities\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=========================================="<<endl;
+	cout<<"\t\t\t\t\tEnter letter of choice: ";
+	cin>>task;
+	return task;
 }
 
+void miscActions::loadingBar(void){
+	char a=177;
+	cout<<"\n\t\t\t\t\t Loading. . . .\n";
+	cout<<"\t\t\t\t\t ";
+	for(int i=0;i<=20;i++){
+		cout<<a;
+		Sleep(90);
+	}
+	getch();
+}
