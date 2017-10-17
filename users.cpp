@@ -2,7 +2,7 @@
 
 // login users, verifies if account exist, and verifies if password is matched
 void users::loginUser() {
-	string input, currentUser;
+	string input, currentUser; //currentUser is line containing elements of current user
 
 	system("cls");
 	cout << "Please enter your user ID: ";

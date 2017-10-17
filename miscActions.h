@@ -4,6 +4,8 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <windows.h>
+#include <conio.h>
 
 using namespace std;
 
@@ -15,6 +17,8 @@ class miscActions {
 		int askIntInput(int); //
 		stringstream clearSStream(stringstream);
 		string trimOuterSpaces(string);
+		void displayLoadingBar();
+		
 
 	
 	

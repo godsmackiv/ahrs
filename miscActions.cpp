@@ -74,4 +74,16 @@ int miscActions::askIntInput(int mode) {
 //	return temp;
 //}
 
-
+void miscActions::displayLoadingBar() {
+	system("cls");
+	system("color 2f");
+	system("color 0a");
+	char a=177;
+	cout<<"\n\n\n\t\t\t\t Loading. . . .";
+	cout<<"\n\n";
+	cout<<"\t\t\t\t ";
+	for(int i=0;i<=25;i++){
+		cout<<a;
+		Sleep(25);
+	}
+}

@@ -12,8 +12,10 @@ int main(int argc, char** argv) {
 	float f;
 	miscActions m;
 
+	m.displayLoadingBar();
+
 	
-//	usersDB.loginUser();
+	usersDB.loginUser();
 
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
 //	usersDB.deleteUser();
