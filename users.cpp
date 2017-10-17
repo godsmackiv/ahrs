@@ -283,7 +283,7 @@ void users::deleteUser() {
 				} 				
 			}
 			
-			//UT 7
+			//UT 6 and 7
 			//make new functions confirmDelete, confirmDeleteLastofLevel, ask to enter admin ID and password
 			
 			
