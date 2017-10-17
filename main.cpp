@@ -11,20 +11,12 @@ int main(int argc, char** argv) {
 	int q;
 	float f;
 	miscActions m;
-<<<<<<< HEAD
+
 	
-	usersDB.loginUser();
-=======
-	usersDB.loginUser();
-	if(usersDB.getUserLevel()=="manager"){
-		 cout<<"manager";
-	}
-	else if(usersDB.getUserLevel()=="admin"){
-		cout<<"admin";
-	}
->>>>>>> 0ecf5d9a136ec34182bde8c0617c652e30a0d876
+//	usersDB.loginUser();
+
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
-	usersDB.deleteUser();
+//	usersDB.deleteUser();
 //	usersDB.test();
 //	cout << usersDB.searchUserDB("000001", "id");
 //	cout << usersDB.searchUserDB("qwertyui", "pw", &testString);

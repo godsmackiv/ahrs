@@ -48,7 +48,7 @@ class users {
 		string getLastUserEntry();
 		string getValueFromEntry(string, string); //gets specific value of a database element within a database entry
 	//	int getUserLevel1(string);
->>>>>>> 0ecf5d9a136ec34182bde8c0617c652e30a0d876
+
 };
 
 #endif
