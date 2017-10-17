@@ -179,8 +179,6 @@ Result = convert.str();//set Result to the content of the stream
 		return 0;
 	}
 	else{
-		string line, found, type;
-		int posStart=0, posEnd=0;
 		
 		cout<<"select info to edit"<<endl;
 		cout<<"[1]  Name"<<endl;
@@ -208,7 +206,7 @@ Result = convert.str();//set Result to the content of the stream
 		while(choice<1&&choice>18){
 			cin>>choice;
 		}
-		string newInfo;
+		string newInfo,type;
 		cout<<"Enter new data: ";
 		cin.ignore();
 		getline(cin,newInfo);
@@ -262,40 +260,44 @@ Result = convert.str();//set Result to the content of the stream
 			case 19: type="ebs";
 				break;
 		}
-		erInFile.open("database/employees.txt");
-		erOutFile.open("database/tempEmployees.txt");
-		string newLine;
-		int editStart=0,editEnd=0;
-		if (erInFile.is_open()) {
-			while ( getline (erInFile,line) ) {
-				posStart = line.find("$eid#") + 5;
-				posEnd = line.find("$eid#", posStart);
-				found = line.substr(posStart, posEnd - posStart);
-				editStart=line.find("$"+type+"#")+5;
-				editEnd=editStart+newInfo.length()+5;
-				if (Result != found) {
-					erOutFile<<line<<endl;
-				}
-				else{
-					for(int k=0;k<editStart;k++){
-						erOutFile<<line[k];
-					}
-					erOutFile<<newInfo;
-					for(int i=0;i<line.length()-editEnd+1;i++){
-						erOutFile<<line[i+editEnd];
-					}
-					erOutFile<<endl;
-				}	
-			}
-			erOutFile.close();
-			erInFile.close();
-			if(rewriteEmployeeRecord()) return 1;
-			else return 0;
-		}
-	  	else cout << "Error: Unable to open Users database."; 
+		if(editEmployee(Result,newInfo,type)) return 1;
+		else return 0;
 	  	
-		return false;
 	}
+}
+
+bool employeeRecords::editEmployee(string employeeID,string newInfo,string type){
+	erInFile.open("database/employees.txt");
+	erOutFile.open("database/tempEmployees.txt");
+	string newLine,line,found;
+	int posStart=0,posEnd=0,editStart=0,editEnd=0;
+	if (erInFile.is_open()) {
+		while ( getline (erInFile,line) ) {
+			posStart = line.find("$eid#") + 5;
+			posEnd = line.find("$eid#", posStart);
+			found = line.substr(posStart, posEnd - posStart);
+			editStart=line.find("$"+type+"#")+5;
+			editEnd=editStart+newInfo.length()+5;
+			if (employeeID != found) {
+				erOutFile<<line<<endl;
+			}
+			else{
+				for(int k=0;k<editStart;k++){
+					erOutFile<<line[k];
+				}
+				erOutFile<<newInfo;
+				for(int i=0;i<line.length()-editEnd+1;i++){
+					erOutFile<<line[i+editEnd];
+				}
+				erOutFile<<endl;
+			}	
+		}
+		erOutFile.close();
+		erInFile.close();
+		if(rewriteEmployeeRecord()) return 1;
+		else return 0;
+	}
+  	else cout << "Error: Unable to open Users database."; 
 }
 
 bool employeeRecords::rewriteEmployeeRecord(){

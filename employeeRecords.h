@@ -14,7 +14,8 @@ class employeeRecords{
 		
 		ifstream erInFile;
 		ofstream erOutFile;				
-	public:		
+	public:
+		bool editEmployee(string,string,string);		
 		bool searchEmployee(string,string);
 		bool createNewEmployee();
 		bool deleteEmployee();
