@@ -15,6 +15,9 @@ int main(int argc, char** argv) {
 	if(usersDB.getUserLevel()=="manager"){
 		 cout<<"manager";
 	}
+	else if(usersDB.getUserLevel()=="admin"){
+		cout<<"admin";
+	}
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
 //	usersDB.deleteUser();
 //	usersDB.test();
