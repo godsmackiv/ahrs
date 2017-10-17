@@ -13,6 +13,7 @@ using namespace std;
 class users {
 	private:
 		string userID, lastName, firstName, middleName, userLevel, password;
+	//	int userLevel1;
 		float pagibig, philhealth, sss, tax;
 		ofstream userOutFile;
 		ifstream userInFile;
@@ -46,6 +47,7 @@ class users {
 		void updateUserDB(string, string); //
 		string getLastUserEntry();
 		string getValueFromEntry(string, string); //gets specific value of a database element within a database entry
+	//	int getUserLevel1(string);
 };
 
 #endif

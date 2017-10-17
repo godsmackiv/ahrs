@@ -8,10 +8,13 @@ using namespace std;
 int main(int argc, char** argv) {
 	users usersDB;
 	string testString; 
-	
+	int q;
 	float f;
 	miscActions m;
-	
+	usersDB.loginUser();
+	if(usersDB.getUserLevel()=="manager"){
+		 cout<<"manager";
+	}
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
 //	usersDB.deleteUser();
 //	usersDB.test();
@@ -21,7 +24,7 @@ int main(int argc, char** argv) {
 //	cout << endl << testString;
 //	f = m.askFloatInput(1);
 //	cout << f;
-//	usersDB.loginUser();
+	
 ////	cout << "done logging test";
 ////	system("pause");
 //	 
@@ -31,7 +34,7 @@ int main(int argc, char** argv) {
 
 //	testString = usersDB.getLastUserEntry();
 //	cout << "the last line is: " << testString;
-	usersDB.registerUser();
+//	usersDB.registerUser();
 
 //	usersDB.updateUserDB("000003", "$id#000003$id#$pw#12345678$pw#$ln#Alvarez$ln#$fn#Ralph Louis$fn#$mn#Arizobal$mn#$ul#admin$ul#");
 	

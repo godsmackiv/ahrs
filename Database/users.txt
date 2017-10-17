@@ -1,4 +1,4 @@
-$aN#4$aN#$mN#4$mN#$rN#3$rN#$pN#5$pN#$lI#17$lI#
+$aN#4$aN#$mN#5$mN#$rN#3$rN#$pN#5$pN#$lI#18$lI#
 $id#000001$id#$pw#4321abcd$pw#$ln#Encarnacion$ln#$fn#Androel$fn#$mn#Altar$mn#$ul#admin$ul#
 $id#000002$id#$pw#1234pass$pw#$ln#Calumpang$ln#$fn#Cleavon Hendrix$fn#$mn#Cabanig$mn#$ul#admin$ul#
 $id#000003$id#$pw#12345678$pw#$ln#Alvarez$ln#$fn#Ralph Louis$fn#$mn#Arizobal$mn#$ul#admin$ul#
@@ -15,3 +15,4 @@ $id#000013$id#$pw#66667777$pw#$ln#Lavina$ln#$fn#Sweet$fn#$mn#Alamat$mn#$ul#perso
 $id#000014$id#$pw#99991111$pw#$ln#Alo$ln#$fn#Peter$fn#$mn#Epharata$mn#$ul#manager$ul#
 $id#000015$id#$pw#ppppqqqq$pw#$ln#Carbon$ln#$fn#Christian$fn#$mn#Bayaw$mn#$ul#admin$ul#
 $id#000017$id#$pw#kkkkllll$pw#$ln#Espina$ln#$fn#Robert$fn#$mn#Cacayan$mn#$ul#personnel$ul#
+$id#000018$id#$pw#1234$pw#$ln#Calumpang$ln#$fn#Cleavon$fn#$mn#Hendrix$mn#$ul#manager$ul#

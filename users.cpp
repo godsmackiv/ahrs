@@ -25,7 +25,6 @@ void users::loginUser() {
 			lastName = getValueFromEntry("$ln#", currentUser);
 			middleName = getValueFromEntry("$mn#", currentUser);
 			userLevel = getValueFromEntry("$ul#", currentUser);
-			
 			cout << endl << "Welcome " + lastName + ", " + firstName + " " + middleName + "!";
 			
 		} else {
@@ -557,6 +556,30 @@ string users::getValueFromEntry(string element, string entry) {
 //	cout <<"exited";
 }
 
+string users::getUserLevel(){
+	return userLevel;
+}
 
+//int users::getUserLevel1(string ul){
+//	string temp, orig;
+//	int posStart, posEnd;
+//	
+//	userInFile.open("database/users.txt");
+//	
+//	if (userInFile.is_open() && userOutFile.is_open()){
+//		while (getline(userInFile, temp)) {
+//			orig = temp;
+//			posStart = temp.find("$ul#") + 4;
+//			posEnd = temp.find("$ul#", posStart);
+//			if (ul == temp.substr(posStart, posEnd - posStart)) {
+//				userInFile>>userLevel1;
+//			}
+//			orig += "\n";
+//			
+//		}
+//		userInFile.close();
+//	return userLevel1;
+//}
+//}
 
 
