@@ -8,11 +8,21 @@ using namespace std;
 int main(int argc, char** argv) {
 	users usersDB;
 	string testString; 
-	
+	int q;
 	float f;
 	miscActions m;
+<<<<<<< HEAD
 	
 	usersDB.loginUser();
+=======
+	usersDB.loginUser();
+	if(usersDB.getUserLevel()=="manager"){
+		 cout<<"manager";
+	}
+	else if(usersDB.getUserLevel()=="admin"){
+		cout<<"admin";
+	}
+>>>>>>> 0ecf5d9a136ec34182bde8c0617c652e30a0d876
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
 	usersDB.deleteUser();
 //	usersDB.test();
@@ -22,7 +32,7 @@ int main(int argc, char** argv) {
 //	cout << endl << testString;
 //	f = m.askFloatInput(1);
 //	cout << f;
-//	usersDB.loginUser();
+	
 ////	cout << "done logging test";
 ////	system("pause");
 //	 

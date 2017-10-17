@@ -73,3 +73,7 @@ int miscActions::askIntInput(int mode) {
 //	
 //	return temp;
 //}
+int miscActions::managerMenu(void){
+	cout<<
+}
+

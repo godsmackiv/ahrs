@@ -15,6 +15,7 @@ class miscActions {
 		int askIntInput(int); //
 		stringstream clearSStream(stringstream);
 		string trimOuterSpaces(string);
+		void managerMenu(void);
 	
 	
 };
