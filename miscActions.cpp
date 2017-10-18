@@ -74,25 +74,13 @@ int miscActions::askIntInput(int mode) {
 //	
 //	return temp;
 //}
-void miscActions::managerMenu(void){
-	cout<<"\t\t\t\t\t================= MANAGER ================"<<endl;
-	cout<<"\t\t\t\t\t=\t[F] File Maintenance\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=\t[T] Transactions\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=\t[I] Inquiry\t\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=\t[R] Report\t\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=\t[U] Utilities\t\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=========================================="<<endl;
-	cout<<"\t\t\t\t\tEnter letter of choice: ";
-	cin>>task;
-}
-
 
 void miscActions::managerSubMenu(void){
 	char input;
 	switch(toupper(task))
 	{
 		case 'F':{
-			cout<<"\t\t\t\t\t============ File Management ============"<<endl;
+			cout<<"\t\t\t\t\t============ File Maintenance ============"<<endl;
 			cout<<"\t\t\t\t\t=\t\t[C] Create\t\t="<<endl;
 			cout<<"\t\t\t\t\t=\t\t[V] View\t\t="<<endl;
 			cout<<"\t\t\t\t\t=\t\t[U] Update\t\t="<<endl;
@@ -216,6 +204,7 @@ void miscActions::managerSubMenu(void){
 				}
 			break;
 			}
+			break;
 		}
 		
 		case 'R':{
@@ -250,6 +239,85 @@ void miscActions::managerSubMenu(void){
 }
 
 }
+
+void miscActions::Menu(void){
+	cout<<"\t\t\t\t\t=========================================="<<endl;
+	cout<<"\t\t\t\t\t=\t[F] File Maintenance\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[T] Transactions\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[I] Inquiry\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[R] Report\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[U] Utilities\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=========================================="<<endl;
+	cout<<"\t\t\t\t\tEnter letter of choice: ";
+	cin>>task;
+}
+
+void miscActions::recruiterSubMenu(void){
+	char input;
+	switch(toupper(task))
+	{
+		case 'F':{
+			cout<<"\t\t\t\t\t============ File Maintenance ==========="<<endl;
+			cout<<"\t\t\t\t\t= [C] Create Employee\t\t\t="<<endl;
+			cout<<"\t\t\t\t\t= [U] Update Employee Data Records\t="<<endl;
+			cout<<"\t\t\t\t\t= [D] Delete Employee Data Records\t="<<endl;
+			cout<<"\t\t\t\t\t========================================="<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'I':{
+			cout<<"\t\t\t\t\t================== Inquiry ===================="<<endl;
+			cout<<"\t\t\t\t\t= [J] View List of Available Job Openings     ="<<endl;
+			cout<<"\t\t\t\t\t= [A] View List of Applicants for a Job Order ="<<endl;
+			cout<<"\t\t\t\t\t= [S] View Summary of Benefits                ="<<endl;
+			cout<<"\t\t\t\t\t= [B] View Benefits of an Employee            ="<<endl;
+			cout<<"\t\t\t\t\t==============================================="<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'T':{
+			cout<<"\t\t\t\t\t============= Transactions ==============="<<endl;
+			cout<<"\t\t\t\t\t=\t[C] Create Job Opening\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=\t[E] Edit Job Opening\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=\t[V] View Job Opening\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=\t[D] Delete Job Opening\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=\t[A] Assign Applicant\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=========================================="<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			
+			break;
+		}
+		
+		case 'R':{
+			cout<<"\t\t\t\t========================= Report ========================"<<endl;
+			cout<<"\t\t\t\t=\t[O] View Open Job Positions\t\t\t="<<endl;
+			cout<<"\t\t\t\t=\t[D] Display List of Candidates\t\t\t="<<endl;
+			cout<<"\t\t\t\t=\t[B] Benefits of all Employees\t\t\t="<<endl;
+			cout<<"\t\t\t\t=\t[E] Benefits of an Employees\t\t\t="<<endl;
+			cout<<"\t\t\t\t========================================================="<<endl;
+			cout<<"\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'U':{
+			cout<<"\t\t\t\t\t=============== Utilities =================="<<endl;
+			cout<<"\t\t\t\t\t= \t   [C] Change Password \t           ="<<endl;
+			cout<<"\t\t\t\t\t============================================"<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		default: {
+			break;
+		}
+	
+}
+
+}
+
 void miscActions::loadingBar(void){
 	char a=177;
 	cout<<"\n\t\t\t\t\t\t Loading. . . .\n";
@@ -258,5 +326,5 @@ void miscActions::loadingBar(void){
 		cout<<a;
 		Sleep(40);
 	}
-	getch();
+
 }

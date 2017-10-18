@@ -17,14 +17,22 @@ int main(int argc, char** argv) {
 	
 	if(usersDB.getUserLevel()=="manager"){
 		system("cls");
-		m.managerMenu();
+		m.Menu();
 		system("cls");
 		m.loadingBar();
 		system("cls");
 		m.managerSubMenu();
 	}
-	else if(usersDB.getUserLevel()=="admin"){
-		cout<<"admin";
+	else if(usersDB.getUserLevel()=="recruiter"){
+		system("cls");
+		m.Menu();
+		system("cls");
+		m.loadingBar();
+		system("cls");
+		m.recruiterSubMenu();
+	}
+	else{
+		
 	}
 
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
