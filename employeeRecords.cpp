@@ -28,12 +28,12 @@ bool employeeRecords::searchEmployee(string query,string type){
 }
 
 bool employeeRecords::createNewEmployee(){
-	string stringInput,line;
+	string line;
 	
 	cout<<"Name: ";
 	cin.ignore();
 	getline(cin,name);
-	if(searchEmployee(stringInput,"ena")){
+	if(searchEmployee(name,"ena")){
 		cout<<"employee name already exists"<<endl;
 		return 0;
 	} 
@@ -194,16 +194,14 @@ Result = convert.str();//set Result to the content of the stream
 		cout<<"[11] Mothers's Occupation"<<endl;
 		cout<<"[12] Marital Status"<<endl;
 		cout<<"[13] Start Date"<<endl;
-		cout<<"[14] Employee Status"<<endl;
-		cout<<"[15] Educational Attainment"<<endl;
-		cout<<"[16] Name of School"<<endl;
-		cout<<"[17] School Address"<<endl;
-		cout<<"[18] Year Graduated"<<endl;
-		cout<<"[19] Base Salary"<<endl;
+		cout<<"[13] Educational Attainment"<<endl;
+		cout<<"[14] Name of School"<<endl;
+		cout<<"[16] School Address"<<endl;
+		cout<<"[17] Year Graduated"<<endl;
 		cout<<endl<<"Edit choice: ";
 		int choice=0;
 		cin>>choice;
-		while(choice<1&&choice>18){
+		while(choice<1&&choice>17){
 			cin>>choice;
 		}
 		string newInfo,type;
@@ -247,17 +245,13 @@ Result = convert.str();//set Result to the content of the stream
 				break;
 			case 13: type="esd";
 				break;
-			case 14: type="ees";
+			case 14: type="eat";
 				break;
-			case 15: type="eat";
+			case 15: type="esn";
 				break;
-			case 16: type="esn";
+			case 16: type="esa";
 				break;
-			case 17: type="esa";
-				break;
-			case 18: type="eyg";
-				break;
-			case 19: type="ebs";
+			case 17: type="eyg";
 				break;
 		}
 		if(editEmployee(Result,newInfo,type)) return 1;
@@ -269,7 +263,7 @@ Result = convert.str();//set Result to the content of the stream
 bool employeeRecords::editEmployee(string employeeID,string newInfo,string type){
 	erInFile.open("database/employees.txt");
 	erOutFile.open("database/tempEmployees.txt");
-	string newLine,line,found;
+	string newLine,line,found,temp;
 	int posStart=0,posEnd=0,editStart=0,editEnd=0;
 	if (erInFile.is_open()) {
 		while ( getline (erInFile,line) ) {
@@ -282,13 +276,11 @@ bool employeeRecords::editEmployee(string employeeID,string newInfo,string type)
 				erOutFile<<line<<endl;
 			}
 			else{
-				for(int k=0;k<editStart;k++){
-					erOutFile<<line[k];
-				}
+				temp=line.substr(0,editStart);
+				erOutFile<<temp;
 				erOutFile<<newInfo;
-				for(int i=0;i<line.length()-editEnd+1;i++){
-					erOutFile<<line[i+editEnd];
-				}
+				temp=line.substr(editEnd,line.size());
+				erOutFile<<temp;
 				erOutFile<<endl;
 			}	
 		}
