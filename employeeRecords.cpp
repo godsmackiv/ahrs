@@ -19,7 +19,6 @@ bool employeeRecords::searchEmployee(string query,string type){
 				return true;
 			}			
 		}
-
 		 erInFile.close();
 	}
   	else cout << "Error: Unable to open Users database."; 
@@ -31,12 +30,12 @@ bool employeeRecords::createNewEmployee(){
 	string line;
 	
 	cout<<"Name: ";
-	cin.ignore();
 	getline(cin,name);
 	if(searchEmployee(name,"ena")){
 		cout<<"employee name already exists"<<endl;
 		return 0;
 	} 
+	
 	cout<<"Age: ";
 	cin>>age;
 	if(age<18){
@@ -44,21 +43,26 @@ bool employeeRecords::createNewEmployee(){
 		return 0;
 	}
 	
-	employeeID=1;
 	erInFile.open("database/employees.txt");
 	if (erInFile.is_open()) {
+		string line, found;
+		int posStart=0, posEnd=0;
 		while ( getline (erInFile,line) ) {
-			employeeID++;
+			posStart = line.find("$eid#") + 5;
+			posEnd = line.find("$eid#", posStart);
+			found = line.substr(posStart, posEnd - posStart);
 		}
-		 erInFile.close();
+		stringstream strID(found);
+		strID >>employeeID;
+		employeeID++;
+		erInFile.close();
 	}
-  	else cout << "Error: Unable to open Users database."; 
+  	else cout << "Error: Unable to open Employees database."; 
 	
 	cout<<"Address: ";
 	cin.ignore();
 	getline(cin,address);
 	cout<<"Contact Number: ";
-	cin.ignore();
 	getline(cin,contactNumber);
 	cout<<"E-mail Address: ";
 	getline(cin,emailAddress);
@@ -271,7 +275,7 @@ bool employeeRecords::editEmployee(string employeeID,string newInfo,string type)
 			posEnd = line.find("$eid#", posStart);
 			found = line.substr(posStart, posEnd - posStart);
 			editStart=line.find("$"+type+"#")+5;
-			editEnd=editStart+newInfo.length()+5;
+			editEnd=line.find("$"+type+"#",editStart);
 			if (employeeID != found) {
 				erOutFile<<line<<endl;
 			}
