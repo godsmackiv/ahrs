@@ -1,4 +1,4 @@
-$jid#000001$jid#$jpn#Teacher$jpn#
-$jid#000002$jid#$jpn#Secretary$jpn#
-$jid#000003$jid#$jpn#Janitor$jpn#
-$jid#000004$jid#$jpn#Dorm Supervisor$jpn#
+$jid#000001$jid#$jpc#TCH$jpc#$jpn#Teacher$jpn#
+$jid#000002$jid#$jpc#SEC$jpc$jpn#Secretary$jpn#
+$jid#000003$jid#$jpc#JNT$jpc$jpn#Janitor$jpn#
+$jid#000004$jid#$jpc#DMS$jpc$jpn#Dorm Supervisor$jpn#
