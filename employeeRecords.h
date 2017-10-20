@@ -6,20 +6,21 @@
 using namespace std;
 class employeeRecords{
 	private:
-		int employeeID, age; ;																							//employee info(integers)
+		int employeeID, age; 																							//employee info(integers)
 		string contactNumber, name, address, emailAddress, birthday, sex, maritalStatus, startDate, employmentStatus;	//employee info(strings)
 		string fathersName, fathersOccupation, mothersName, mothersOccupation;											//parents info
 		string educationalAttainment, schoolName, schoolAddress;														//educational attainment info(string)
-		int yearGraduated,baseSalary;	
+		int yearGraduated,baseSalary;
+		string position;
 		
 		ifstream erInFile;
 		ofstream erOutFile;				
-	public:
-		bool editEmployee(string,string,string);		
+	public:		
 		bool searchEmployee(string,string);
 		bool createNewEmployee();
 		bool deleteEmployee();
 		bool updateEmployee();
+		bool editEmployee(string,string,string);
 		bool rewriteEmployeeRecord();
 };
 

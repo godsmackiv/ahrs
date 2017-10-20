@@ -1,0 +1,4 @@
+$jid#000001$jid#$jpo#Teacher$jpo#$jde#Computer Engineering$jde#$jlo#Talamban$jlo#$req#Masteral Degree%%Two years work experience%%Proficient in C++$req#$jap#000001%%000002%%000003$jap#$jav#Open$jav#
+$jid#000002$jid#$jpo#Secretary$jpo#$jde#Computer Engineering$jde#$jlo#Talamban$jlo#$req#High school graduate%%Proficient in English$req#$jap#000004%%000005$jap#$jav#Open$jav#
+$jid#000003$jid#$jpo#Janitor$jpo#$jde#Dormitory$jde#$jlo#Talamban$jlo#$req#Some high school%%Hardworking$req#$jap#000006$jap#$jav#Open$jav#
+$jid#000004$jid#$jpo#Dorm Supervisor$jpo#$jde#Dormitory$jde#$jlo#Talamban$jlo#$req#Bachelor's Degree in Psychology%%Two years work experience%%People skills$req#$jap#000007$jap#$jav#Open$jav#

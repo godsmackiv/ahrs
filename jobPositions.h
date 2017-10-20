@@ -12,11 +12,11 @@ class jobPositions{
 		ifstream jpInFile;
 		ofstream jpOutFile;				
 	public:
-		bool editJobPosition(string,string,string);
 		bool searchJobPosition(string,string);
 		bool createNewJobPosition();
 		bool deleteJobPosition();
 		bool updateJobPosition();
+		bool editJobPosition(string,string,string);
 		bool rewriteJobPositionRecord();
 };
 

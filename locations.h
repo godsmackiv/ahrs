@@ -12,11 +12,11 @@ class locations{
 		ifstream locInFile;
 		ofstream locOutFile;				
 	public:
-		bool editLocation(string,string,string);
 		bool searchLocation(string,string);
 		bool createNewLocation();
 		bool deleteLocation();
 		bool updateLocation();
+		bool editLocation(string,string,string);
 		bool rewriteLocationRecord();
 };
 

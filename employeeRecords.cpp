@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <cstdlib>
+#include <ctime>
 
 bool employeeRecords::searchEmployee(string query,string type){
 	string line, found;
@@ -80,10 +81,11 @@ bool employeeRecords::createNewEmployee(){
 	getline(cin,mothersOccupation);
 	cout<<"Marital Status: ";
 	getline(cin,maritalStatus);
-	cout<<"Start Date: ";
-	getline(cin,startDate);
-	cout<<"Employment Status: ";
-	getline(cin,employmentStatus);
+	
+	startDate="\t";
+	
+	employmentStatus="Applicant";
+	
 	cout<<"Educational Attainment: ";
 	getline(cin,educationalAttainment);
 	cout<<"Name of School: ";
@@ -93,9 +95,10 @@ bool employeeRecords::createNewEmployee(){
 	
 	cout<<"Year Graduated: ";
 	cin>>yearGraduated;
-	cout<<"Base Salary: ";
-	cin>>baseSalary;
 	
+	baseSalary=0;
+	
+	position="\t";
 	
 	erOutFile.open("database/employees.txt",ios_base::app);
 	
@@ -118,7 +121,8 @@ bool employeeRecords::createNewEmployee(){
 	erOutFile<<"$esn#"<<schoolName<<"$esn#";
 	erOutFile<<"$esa#"<<schoolAddress<<"$esa#";
 	erOutFile<<"$eyg#"<<yearGraduated<<"$eyg#";
-	erOutFile<<"$ebs#"<<baseSalary<<"$ebs#"<<endl;
+	erOutFile<<"$ebs#"<<baseSalary<<"$ebs#";
+	erOutFile<<"$ejp#"<<position<<"$ejp#"<<endl;
 	
 	erOutFile.close();
 	return 1;

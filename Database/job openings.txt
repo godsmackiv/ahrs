@@ -1,4 +1,0 @@
-$jn#000001$jn#$po#Teacher$po#$de#Computer Engineering$de#$lo#Talamban$lo#$jr#Masteral Degree%%Two years work experience%%Proficient in C++$jr#$aa#000001%%000002%%000003$aa#$av#Open$av#
-$jn#000002$jn#$po#Secretary$po#$de#Computer Engineering$de#$lo#Talamban$lo#$jr#High school graduate%%Proficient in English$jr#$aa#000004%%000005$aa#$av#Open$av#
-$jn#000003$jn#$po#Janitor$po#$de#Dormitory$de#$lo#Talamban$lo#$jr#Some high school%%Hardworking$jr#$aa#000006$aa#$av#Open$av#
-$jn#000004$jn#$po#Dorm Supervisor$po#$de#Dormitory$de#$lo#Talamban$lo#$jr#Bachelor's Degree in Psychology%%Two years work experience%%People skills$jr#$aa#000007$aa#$av#Open$av#

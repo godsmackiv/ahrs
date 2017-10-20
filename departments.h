@@ -12,11 +12,11 @@ class departments{
 		ifstream deptInFile;
 		ofstream deptOutFile;				
 	public:
-		bool editDepartment(string,string,string);
 		bool searchDepartment(string,string);
 		bool createNewDepartment();
 		bool deleteDepartment();
 		bool updateDepartment();
+		bool editDepartment(string,string,string);
 		bool rewriteDepartmentRecord();
 };
 

@@ -11,11 +11,11 @@ class benefits{
 		ifstream benInFile;
 		ofstream benOutFile;
 	public:
-		bool editBenefit(string, string, string);
 		bool searchBenefit(string, string);
 		bool createNewBenefit();
 		bool deleteBenefit();
 		bool updateBenefit();
+		bool editBenefit(string, string, string);
 		bool rewriteBenefitRecord();
 };
 
