@@ -24,9 +24,8 @@ bool benefits::searchBenefit(string query, string type){
 }
 
 bool benefits::createNewBenefit(){
-	string line;
-	
-	
+	string line, found;
+		
 	cout<<"Name: ";
 	getline(cin,name);
 	if(searchBenefit(name,"bna")){
@@ -36,13 +35,8 @@ bool benefits::createNewBenefit(){
 	
 	benInFile.open("database/benefits.txt");
 	if (benInFile.is_open()) {
-		string line, found;
-		int posStart=0, posEnd=0;
-		while(getline(benInFile,line)){
-			posStart = line.find("$bco#") + 5;
-			posEnd = line.find("$bco#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-		}
+		getline(benInFile,line);
+		found=line.substr(4,6);
 		stringstream strID(found);
 		strID >>benefitCode;
 		benefitCode++;
@@ -58,8 +52,14 @@ bool benefits::createNewBenefit(){
 	tstruct = *localtime(&now);
 	strftime(dtnow, sizeof(dtnow), "%B %d, %Y", &tstruct);
 	createDate=dtnow;
+	
+	benOutFile.open("database/tempBenefits.txt");
+	benOutFile<<"$lI#"<<setw(6)<<setfill('0')<<benefitCode<<"$lI#"<<endl;
+	benOutFile.close();
+	if(!editBenefit(" "," "," ")) return 0;
+	
 	benOutFile.open("database/benefits.txt",ios_base::app);	
-	benOutFile<<"$bco#"<<setw(3)<<setfill('0')<<benefitCode<<"$bco#";
+	benOutFile<<"$bco#"<<setw(6)<<setfill('0')<<benefitCode<<"$bco#";
 	benOutFile<<"$bna#"<<name<<"$bna#";
 	benOutFile<<"$bam#"<<amount<<"$bam#";
 	benOutFile<<"$bcd#"<<createDate<<"$bcd#"<<endl;	
@@ -72,7 +72,7 @@ bool benefits::deleteBenefit(){
 	cin>>benefitCode;
 	string result;
 	stringstream convert;
-	convert<<setw(3)<<setfill('0')<<benefitCode;
+	convert<<setw(6)<<setfill('0')<<benefitCode;
 	result=convert.str();
 	
 	if(!searchBenefit(result,"bco")){
@@ -116,7 +116,7 @@ bool benefits::updateBenefit(){
 	
 	string Result;//string which will contain the result
 	stringstream convert; // stringstream used for the conversion
-	convert<<setw(3)<<setfill('0')<<benefitCode;//add the value of Number to the characters in the stream
+	convert<<setw(6)<<setfill('0')<<benefitCode;//add the value of Number to the characters in the stream
 	Result = convert.str();//set Result to the content of the stream
 
 	if(!searchBenefit(Result,"bco")){
@@ -147,6 +147,9 @@ bool benefits::updateBenefit(){
 			case 2: type="bam";
 				break;
 		}
+		benOutFile.open("database/tempBenefits.txt");
+		benOutFile<<"$lI#"<<setw(6)<<setfill('0')<<benefitCode<<"$lI#"<<endl;
+		benOutFile.close();
 		if(editBenefit(Result,newInfo,type)) return 1;
 		else return 0;
 	}
@@ -154,10 +157,11 @@ bool benefits::updateBenefit(){
 
 bool benefits::editBenefit(string benefitCode, string newInfo, string type){
 	benInFile.open("database/benefits.txt");
-	benOutFile.open("database/tempBenefits.txt");
+	benOutFile.open("database/tempBenefits.txt",ios_base::app);
 	string newLine,line,found,temp;
 	int posStart=0,posEnd=0,editStart=0,editEnd=0;
 	if (benInFile.is_open()) {
+		getline(benInFile,line);
 		while ( getline (benInFile,line) ) {
 			posStart = line.find("$bco#") + 5;
 			posEnd = line.find("$bco#", posStart);

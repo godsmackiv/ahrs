@@ -23,7 +23,7 @@ bool locations::searchLocation(string query,string type){
 }
 
 bool locations::createNewLocation(){
-	string line;
+	string line, found;
 	
 	cout<<"Name: ";
 	getline(cin,name);
@@ -34,7 +34,6 @@ bool locations::createNewLocation(){
 	
 	locInFile.open("database/locations.txt");
 	if (locInFile.is_open()) {
-		string line, found;
 		int posStart=0, posEnd=0;
 		while(getline(locInFile,line)){
 			posStart = line.find("$lid#") + 5;
@@ -51,6 +50,11 @@ bool locations::createNewLocation(){
 	cout<<"Code: ";
 	getline(cin,code);
 	
+	locOutFile.open("database/tempLocations.txt");
+	locOutFile<<"$lI#"<<setw(6)<<setfill('0')<<locationID<<"$lI#"<<endl;
+	locOutFile.close();
+	if(!editLocation(" "," "," ")) return 0;
+
 	locOutFile.open("database/locations.txt",ios_base::app);
 	locOutFile<<"$lid#"<<setw(6)<<setfill('0')<<locationID<<"$lid#";
 	locOutFile<<"$lco#"<<code<<"$lco#";
@@ -139,6 +143,9 @@ bool locations::updateLocation(){
 			case 2: type="lco";
 				break;
 		}
+		locOutFile.open("database/tempLocations.txt");
+		locOutFile<<"$lI#"<<setw(6)<<setfill('0')<<locationID<<"$lI#"<<endl;
+		locOutFile.close();
 		if(editLocation(Result,newInfo,type)) return 1;
 		else return 0;
 	}
@@ -146,10 +153,11 @@ bool locations::updateLocation(){
 
 bool locations::editLocation(string locationID, string newInfo, string type){
 	locInFile.open("database/locations.txt");
-	locOutFile.open("database/tempLocations.txt");
+	locOutFile.open("database/tempLocations.txt",ios_base::app);
 	string newLine,line,found,temp;
 	int posStart=0,posEnd=0,editStart=0,editEnd=0;
 	if (locInFile.is_open()) {
+		getline(locInFile,line);
 		while ( getline (locInFile,line) ) {
 			posStart = line.find("$lid#") + 5;
 			posEnd = line.find("$lid#", posStart);

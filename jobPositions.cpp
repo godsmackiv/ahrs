@@ -51,6 +51,11 @@ bool jobPositions::createNewJobPosition(){
 	cout<<"Code: ";
 	getline(cin,code);
 	
+	jpOutFile.open("database/tempJobPositions.txt");
+	jpOutFile<<"$lI#"<<setw(6)<<setfill('0')<<jobPositionID<<"$lI#"<<endl;
+	jpOutFile.close();
+	if(!editJobPosition(" "," "," ")) return 0;
+	
 	jpOutFile.open("database/jobPositions.txt",ios_base::app);
 	jpOutFile<<"$jid#"<<setw(6)<<setfill('0')<<jobPositionID<<"$jid#";
 	jpOutFile<<"$jpc#"<<code<<"$jpc#";
@@ -139,6 +144,9 @@ bool jobPositions::updateJobPosition(){
 			case 2: type="jpc";
 				break;
 		}
+		jpOutFile.open("database/tempJobPositions.txt");
+		jpOutFile<<"$lI#"<<setw(6)<<setfill('0')<<jobPositionID<<"$lI#"<<endl;
+		jpOutFile.close();
 		if(editJobPosition(Result,newInfo,type)) return 1;
 		else return 0;
 	}
@@ -146,10 +154,11 @@ bool jobPositions::updateJobPosition(){
 
 bool jobPositions::editJobPosition(string jobPositionID, string newInfo, string type){
 	jpInFile.open("database/jobPositions.txt");
-	jpOutFile.open("database/tempJobPositions.txt");
+	jpOutFile.open("database/tempJobPositions.txt",ios_base::app);
 	string newLine,line,found,temp;
 	int posStart=0,posEnd=0,editStart=0,editEnd=0;
 	if (jpInFile.is_open()) {
+		getline(jpInFile,line);
 		while ( getline (jpInFile,line) ) {
 			posStart = line.find("$jid#") + 5;
 			posEnd = line.find("$jid#", posStart);
