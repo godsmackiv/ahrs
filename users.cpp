@@ -5,7 +5,8 @@ void users::loginUser() {
 	string input, currentUser;
 
 	system("cls");
-	cout << "Please enter your user ID: ";
+	cout<<"\t\t\t\t\t\tHuman Resource System\n\n";
+	cout << "\t\t\t\t\t  Please enter your user ID: ";
 	cin >>  input;
 	
 	
@@ -16,26 +17,26 @@ void users::loginUser() {
 		
 		password = getValueFromEntry("$pw#", currentUser);
 		
-		cout << "Please enter your password: ";
+		cout << "\t\t\t\t\t  Please enter your password: ";
 		cin >> input;
 		if (input == password) {
-			cout << endl << "Login successful!";
+			cout << endl << "\t\t\t\t\t\t  Login successful!";
 			
 			firstName = getValueFromEntry("$fn#", currentUser);
 			lastName = getValueFromEntry("$ln#", currentUser);
 			middleName = getValueFromEntry("$mn#", currentUser);
 			userLevel = getValueFromEntry("$ul#", currentUser);
-			cout << endl << "Welcome " + lastName + ", " + firstName + " " + middleName + "!";
+			cout << endl << "\t\t\t\t\t  Welcome " + lastName + ", " + firstName + " " + middleName + "!";
 			
 		} else {
-			cout << endl << "Error: Incorrect password.";
+			cout << endl << "\t\t\t\t\t  Error: Incorrect password.";
 		}
 		
 	} else {
-		cout << "Error: Unable to login. No user with that ID found.";
+		cout << "\t\t\t\t\t  Error: Unable to login. No user with that ID found.";
 	}
 	
-	cout << endl;
+	cout << endl<<endl<< "\t\t\t\t\t  ";
 	system("pause");
 }
 
