@@ -6,23 +6,63 @@
 using namespace std;
 
 int main(int argc, char** argv) {
+	system("color 2f");
+	system("color 0a");
 	users usersDB;
 	string testString; 
 	int q;
 	float f;
 	miscActions m;
-<<<<<<< HEAD
 	
 	usersDB.loginUser();
-=======
-	usersDB.loginUser();
-	if(usersDB.getUserLevel()=="manager"){
-		 cout<<"manager";
+	while(1){
+		if(usersDB.getUserLevel()=="manager"){
+			system("cls");
+			m.Menu();
+			system("cls");
+			m.loadingBar();
+			system("cls");
+			m.managerSubMenu();
+		}
+		else if(usersDB.getUserLevel()=="recruiter"){
+			system("cls");
+			m.Menu();
+			system("cls");
+			m.loadingBar();
+			system("cls");
+			m.recruiterSubMenu();
+		}
+		else if(usersDB.getUserLevel()=="personnel"){
+			system("cls");
+			m.Menu();
+			system("cls");
+			m.loadingBar();
+			system("cls");
+			m.personnelSubMenu();
+		}
+		else if(usersDB.getUserLevel()=="admin"){
+			system("cls");
+			m.Menu();
+			system("cls");
+			m.loadingBar();
+			system("cls");
+			m.adminSubMenu();
+		}
 	}
-	else if(usersDB.getUserLevel()=="admin"){
-		cout<<"admin";
-	}
->>>>>>> 0ecf5d9a136ec34182bde8c0617c652e30a0d876
+
+
+
+
+	
+//	usersDB.loginUser();
+//	usersDB.loginUser();
+//	if(usersDB.getUserLevel()=="manager"){
+//		 cout<<"manager";
+//	}
+//	else if(usersDB.getUserLevel()=="admin"){
+//		cout<<"admin";
+//	}
+
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
 	usersDB.deleteUser();
 //	usersDB.test();
