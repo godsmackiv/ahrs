@@ -23,7 +23,7 @@ bool employeeRecords::searchEmployee(string query,string type){
 		}
 		 erInFile.close();
 	}
-  	else cout << "Error: Unable to open Users database."; 
+  	else cout << "Error: Unable to open Employee database."; 
   	
 	return false;
 }
@@ -165,7 +165,7 @@ Result = convert.str();//set Result to the content of the stream
 				if(rewriteEmployeeRecord()) return 1;
 				else return 0;
 			}
-		  	else cout << "Error: Unable to open Users database."; 
+		  	else cout << "Error: Unable to open Employee database."; 
 		  	
 			return false;
 		}
@@ -208,7 +208,7 @@ Result = convert.str();//set Result to the content of the stream
 		cout<<endl<<"Edit choice: ";
 		int choice=0;
 		cin>>choice;
-		while(choice<1&&choice>17){
+		while(choice<1&&choice>16){
 			cin>>choice;
 		}
 		string newInfo,type;
@@ -298,7 +298,7 @@ bool employeeRecords::editEmployee(string employeeID,string newInfo,string type)
 		if(rewriteEmployeeRecord()) return 1;
 		else return 0;
 	}
-  	else cout << "Error: Unable to open Users database."; 
+  	else cout << "Error: Unable to open Employee database."; 
 }
 
 bool employeeRecords::rewriteEmployeeRecord(){
@@ -314,6 +314,6 @@ bool employeeRecords::rewriteEmployeeRecord(){
 		remove("database/tempEmployees.txt");
 		return 1;
 	}
-  	else cout << "Error: Unable to open Users database."; 
+  	else cout << "Error: Unable to open Employee database."; 
   	return 0;
 }
