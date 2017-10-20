@@ -270,11 +270,11 @@ Result = convert.str();//set Result to the content of the stream
 
 bool employeeRecords::editEmployee(string employeeID,string newInfo,string type){
 	erInFile.open("database/employees.txt");
-//	erOutFile.open("database/tempEmployees.txt",ios_base::app);
+	erOutFile.open("database/tempEmployees.txt",ios_base::app);
 	string newLine,line,found,temp;
 	int posStart=0,posEnd=0,editStart=0,editEnd=0;
 	if (erInFile.is_open()) {
-//		getline(erInFile,line);
+		getline(erInFile,line);
 		while ( getline (erInFile,line) ) {
 			posStart = line.find("$eid#") + 5;
 			posEnd = line.find("$eid#", posStart);
@@ -316,4 +316,32 @@ bool employeeRecords::rewriteEmployeeRecord(){
 	}
   	else cout << "Error: Unable to open Employee database."; 
   	return 0;
+}
+
+bool employeeRecords::isApplicant(string employeeID){
+	string line, found;
+	int posStart=0, posEnd=0;
+
+	erInFile.open("database/employees.txt");
+	if (erInFile.is_open()) {
+		getline(erInFile,line);
+		while ( getline (erInFile,line) ) {
+			posStart = line.find("$eid#") + 5;
+			posEnd = line.find("$eid#", posStart);
+			found = line.substr(posStart, posEnd - posStart);
+			if (employeeID == found) {
+				posStart=line.find("$ees#")+5;
+				posEnd=line.find("$ees#",posStart);
+				found=line.substr(posStart,posEnd-posStart);
+				if(found=="Applicant"){
+					erInFile.close();
+					return true;
+				}
+			}			
+		}
+		 erInFile.close();
+	}
+  	else cout << "Error: Unable to open Employee database."; 
+  	
+	return false;	
 }

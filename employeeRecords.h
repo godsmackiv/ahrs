@@ -11,17 +11,17 @@ class employeeRecords{
 		string fathersName, fathersOccupation, mothersName, mothersOccupation;											//parents info
 		string educationalAttainment, schoolName, schoolAddress;														//educational attainment info(string)
 		int yearGraduated,baseSalary;
-		string position;
-		
-		ifstream erInFile;
-		ofstream erOutFile;				
+		string position;			
 	public:		
+		ifstream erInFile;
+		ofstream erOutFile;	
 		bool searchEmployee(string,string);
 		bool createNewEmployee();
 		bool deleteEmployee();
 		bool updateEmployee();
 		bool editEmployee(string,string,string);
 		bool rewriteEmployeeRecord();
+		bool isApplicant(string);
 };
 
 #endif

@@ -36,6 +36,9 @@ class jobOpenings{
 		bool assignApplicant();
 		void addRequirements();
 		void addApplicants();
+		bool isAlreadyApplied(string,string);
+		bool hireApplicant();
+		string retrieveInfo(string,string);
 };
 
 #endif
