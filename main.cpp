@@ -13,7 +13,9 @@ int main(int argc, char** argv) {
 	int q;
 	float f;
 	miscActions m;
+	//m.hidePass();
 	usersDB.loginUser();
+	
 	while(1){
 		if(usersDB.getUserLevel()=="manager"){
 			system("cls");

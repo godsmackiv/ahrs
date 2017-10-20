@@ -1,16 +1,19 @@
 #ifndef __MISCACTIONS_H_INCLUDED__
 #define __MISCACTIONS_H_INCLUDED__
-
+#include "users.h"
 #include <string>
 #include <sstream>
 #include <iostream>
-
+class users;
 using namespace std;
 
 class miscActions {
 	private:
 		char task;
-		char perform;
+		char perform,report;
+		ofstream userOutFile;
+		ifstream userInFile;
+		users *u;
 	public:
 		float askFloatInput(int); //
 		int askIntInput(int); //
@@ -22,7 +25,8 @@ class miscActions {
 		void personnelSubMenu(void);
 		void adminSubMenu(void);
 		void loadingBar(void);
-	
+		void viewReports(void);
+		string hidePass(void);
 	
 };
 

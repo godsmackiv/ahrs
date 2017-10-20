@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include "miscActions.h"
-
+class miscActions;
 using namespace std;
 
 class users {
@@ -17,7 +17,7 @@ class users {
 		float pagibig, philhealth, sss, tax;
 		ofstream userOutFile;
 		ifstream userInFile;
-		miscActions mActions;
+		miscActions *mActions;
 	
 	public:
 		string getUserID(void);
