@@ -14,18 +14,40 @@ int main(int argc, char** argv) {
 	float f;
 	miscActions m;
 	usersDB.loginUser();
-	
-	if(usersDB.getUserLevel()=="manager"){
-		system("cls");
-		m.managerMenu();
-		system("cls");
-		m.loadingBar();
-		system("cls");
-		m.managerSubMenu();
-	}
-	else if(usersDB.getUserLevel()=="admin"){
-		cout<<"admin";
-	}
+	while(1){
+		if(usersDB.getUserLevel()=="manager"){
+			system("cls");
+			m.Menu();
+			system("cls");
+			m.loadingBar();
+			system("cls");
+			m.managerSubMenu();
+		}
+		else if(usersDB.getUserLevel()=="recruiter"){
+			system("cls");
+			m.Menu();
+			system("cls");
+			m.loadingBar();
+			system("cls");
+			m.recruiterSubMenu();
+		}
+		else if(usersDB.getUserLevel()=="personnel"){
+			system("cls");
+			m.Menu();
+			system("cls");
+			m.loadingBar();
+			system("cls");
+			m.personnelSubMenu();
+		}
+		else if(usersDB.getUserLevel()=="admin"){
+			system("cls");
+			m.Menu();
+			system("cls");
+			m.loadingBar();
+			system("cls");
+			m.adminSubMenu();
+		}
+}
 
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
 //	usersDB.deleteUser();

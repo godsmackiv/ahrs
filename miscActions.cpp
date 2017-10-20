@@ -74,25 +74,13 @@ int miscActions::askIntInput(int mode) {
 //	
 //	return temp;
 //}
-void miscActions::managerMenu(void){
-	cout<<"\t\t\t\t\t================= MANAGER ================"<<endl;
-	cout<<"\t\t\t\t\t=\t[F] File Maintenance\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=\t[T] Transactions\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=\t[I] Inquiry\t\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=\t[R] Report\t\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=\t[U] Utilities\t\t\t ="<<endl;
-	cout<<"\t\t\t\t\t=========================================="<<endl;
-	cout<<"\t\t\t\t\tEnter letter of choice: ";
-	cin>>task;
-}
-
 
 void miscActions::managerSubMenu(void){
 	char input;
 	switch(toupper(task))
 	{
 		case 'F':{
-			cout<<"\t\t\t\t\t============ File Management ============"<<endl;
+			cout<<"\t\t\t\t\t============ File Maintenance ==========="<<endl;
 			cout<<"\t\t\t\t\t=\t\t[C] Create\t\t="<<endl;
 			cout<<"\t\t\t\t\t=\t\t[V] View\t\t="<<endl;
 			cout<<"\t\t\t\t\t=\t\t[U] Update\t\t="<<endl;
@@ -103,7 +91,7 @@ void miscActions::managerSubMenu(void){
 			switch(toupper(input))
 			{
 				case 'C':{
-					cout<<"\t\t\t\t\t================ Create ================"<<endl;
+					cout<<"\t\t\t\t\t================ Create ================="<<endl;
 					cout<<"\t\t\t\t\t=\t[1] Create Department\t\t="<<endl;
 					cout<<"\t\t\t\t\t=\t[2] Create Location\t\t="<<endl;
 					cout<<"\t\t\t\t\t=\t[3] Create Job Position\t\t="<<endl;
@@ -115,7 +103,7 @@ void miscActions::managerSubMenu(void){
 					break;
 				}
 				case 'V':{
-					cout<<"\t\t\t\t\t================= View ================="<<endl;
+					cout<<"\t\t\t\t\t================= View =================="<<endl;
 					cout<<"\t\t\t\t\t=\t[1] View Department\t\t="<<endl;
 					cout<<"\t\t\t\t\t=\t[2] View Location\t\t="<<endl;
 					cout<<"\t\t\t\t\t=\t[3] View Job Position\t\t="<<endl;
@@ -157,10 +145,16 @@ void miscActions::managerSubMenu(void){
 			break;
 		}
 		case 'I':{
-			cout<<"\t\t\t\t\t=============== Inquiry =================="<<endl;
-			cout<<"\t\t\t\t\t= [P] View Pay Slip of Employees         ="<<endl;
-			cout<<"\t\t\t\t\t= [C] View Current Benefit Enrollment\t ="<<endl;
-			cout<<"\t\t\t\t\t=========================================="<<endl;
+			cout<<"\t\t\t\t\t==================== Inquiry ======================"<<endl;
+			cout<<"\t\t\t\t\t= [J] View Available Job Opening                  ="<<endl;
+			cout<<"\t\t\t\t\t= [A] View List of Applicant                      ="<<endl;
+			cout<<"\t\t\t\t\t= [L] View List of Pay Roll Information           ="<<endl;
+			cout<<"\t\t\t\t\t= [P] View Pay Roll of Employee                   ="<<endl;
+			cout<<"\t\t\t\t\t= [F] View Filtered Pay Slips                     ="<<endl;
+			cout<<"\t\t\t\t\t= [C] View Current Benefit Enrollment             ="<<endl;
+			cout<<"\t\t\t\t\t= [E] View Current Benefit Enrollment of Employee ="<<endl;
+			cout<<"\t\t\t\t\t= [S] Search\t                                  ="<<endl;
+			cout<<"\t\t\t\t\t==================================================="<<endl;
 			cout<<"\t\t\t\t\tEnter input: ";
 			cin>>input;
 			break;
@@ -178,29 +172,36 @@ void miscActions::managerSubMenu(void){
 			switch(toupper(input))
 			{
 				case 'M':{
-					cout<<"\t\t\t\t\t========== Manage Job Openings ==========="<<endl;
+					cout<<"\t\t\t\t\t========== Manage Job Openings =========="<<endl;
 					cout<<"\t\t\t\t\t=\t[1] Create Job Opening\t\t="<<endl;
 					cout<<"\t\t\t\t\t=\t[2] View Job Opening\t\t="<<endl;
-					cout<<"\t\t\t\t\t=\t[3] Assign Applicant\t\t="<<endl;
-					cout<<"\t\t\t\t\t=\t[4] Hire Employee\t\t="<<endl;
-					cout<<"\t\t\t\t\t=========================================="<<endl;
+					cout<<"\t\t\t\t\t=\t[3] Edit Job Opening\t\t="<<endl;
+					cout<<"\t\t\t\t\t=\t[4] Delete Job Opening\t\t="<<endl;
+					cout<<"\t\t\t\t\t=\t[5] Assign Applicant\t\t="<<endl;
+					cout<<"\t\t\t\t\t=\t[6] Hire Employee\t\t="<<endl;
+					cout<<"\t\t\t\t\t========================================="<<endl;
 					cout<<"\t\t\t\t\tEnter input: ";
 					cin>>perform;
 					break;
 				}
 				case 'T':{
-					fflush(stdin);
 					cout<<"\t\t\t\t\t============== Time Reports ==============="<<endl;
-					cout<<"\t\t\t\t\t= [1] View Employees without Time Reports ="<<endl;
-					cout<<"\t\t\t\t\t= [2] Approve Time Report\t\t  ="<<endl;
-					cout<<"\t\t\t\t\t= [3] Delete Time Report Adjustment\t  ="<<endl;
+					cout<<"\t\t\t\t\t=\t[1] View Employee                 ="<<endl;
+					cout<<"\t\t\t\t\t=\t[2] Approve Time Report           ="<<endl;
+					cout<<"\t\t\t\t\t=\t[3] Time Report Adjustment        ="<<endl;
 					cout<<"\t\t\t\t\t==========================================="<<endl;
 					cout<<"\t\t\t\t\tEnter input: ";
 					cin>>perform;
 					break;
 				}
 				case 'P':{
-						
+					cout<<"\t\t\t\t\t================= Salary ================="<<endl;
+					cout<<"\t\t\t\t\t= [1] View Employee Salary ="<<endl;
+					cout<<"\t\t\t\t\t= [2] View Employee Info\t\t  ="<<endl;
+					cout<<"\t\t\t\t\t= [3] Compute Salary\t  ="<<endl;
+					cout<<"\t\t\t\t\t==========================================="<<endl;
+					cout<<"\t\t\t\t\tEnter input: ";
+					cin>>perform;	
 					break;
 				}
 				case 'G':{
@@ -216,20 +217,24 @@ void miscActions::managerSubMenu(void){
 				}
 			break;
 			}
+			break;
 		}
 		
 		case 'R':{
-			cout<<"\t\t\t\t========================= Report ========================"<<endl;
-			cout<<"\t\t\t\t=\t[1] View Open Job Positions\t\t\t="<<endl;
-			cout<<"\t\t\t\t=\t[2] Print Open Job Positions\t\t\t="<<endl;
-			cout<<"\t\t\t\t=\t[3] Display List of Candidates\t\t\t="<<endl;
-			cout<<"\t\t\t\t=\t[4] Print List of Candidates\t\t\t="<<endl;
-			cout<<"\t\t\t\t=\t[5] View Pay Roll Information of Employee\t="<<endl;
-			cout<<"\t\t\t\t=\t[6] View Pay Roll Information of All Employee\t="<<endl;
-			cout<<"\t\t\t\t=\t[7] Print Pay Slip of Employee\t\t\t="<<endl;
-			cout<<"\t\t\t\t=\t[8] Print Pay Slip of All Employee\t\t="<<endl;
-			cout<<"\t\t\t\t=\t[9] Print Current Benefit Enrollment\t\t="<<endl;
-			cout<<"\t\t\t\t========================================================="<<endl;
+			cout<<"\t\t\t\t============================ Report =========================="<<endl;
+			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
+			cout<<"\t\t\t\t=\t[2] Print Open Job Positions                         ="<<endl;
+			cout<<"\t\t\t\t=\t[3] Display List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[4] Print List of Candidates                         ="<<endl;
+			cout<<"\t\t\t\t=\t[5] View Pay Roll Information of Employee            ="<<endl;
+			cout<<"\t\t\t\t=\t[6] Print Pay Slip of Employee                       ="<<endl;
+			cout<<"\t\t\t\t=\t[7] View Pay Roll Information of All Employee        ="<<endl;
+			cout<<"\t\t\t\t=\t[8] Print Pay Slip of All Employee                   ="<<endl;
+			cout<<"\t\t\t\t=\t[9] View Current Benefit Enrollment                  ="<<endl;
+			cout<<"\t\t\t\t=\t[10] Print Current Benefit Enrollment                ="<<endl;
+			cout<<"\t\t\t\t=\t[11] View Current Benefit Enrollment of an Employee  ="<<endl;
+			cout<<"\t\t\t\t=\t[12] Print Current Benefit Enrollment of an Employee ="<<endl;
+			cout<<"\t\t\t\t=============================================================="<<endl;
 			cout<<"\t\t\t\tEnter input: ";
 			cin>>input;
 			break;
@@ -250,6 +255,220 @@ void miscActions::managerSubMenu(void){
 }
 
 }
+
+void miscActions::Menu(void){
+	cout<<"\t\t\t\t\t=========================================="<<endl;
+	cout<<"\t\t\t\t\t=\t[F] File Maintenance\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[T] Transactions\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[I] Inquiry\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[R] Report\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[U] Utilities\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=========================================="<<endl;
+	cout<<"\t\t\t\t\tEnter letter of choice: ";
+	cin>>task;
+}
+
+void miscActions::recruiterSubMenu(void){
+	char input;
+	switch(toupper(task))
+	{
+		case 'F':{
+			cout<<"\t\t\t\t\t============ File Maintenance ==========="<<endl;
+			cout<<"\t\t\t\t\t= [C] Create Employee\t\t\t="<<endl;
+			cout<<"\t\t\t\t\t= [U] Update Employee Data Records\t="<<endl;
+			cout<<"\t\t\t\t\t= [D] Delete Employee Data Records\t="<<endl;
+			cout<<"\t\t\t\t\t========================================="<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'I':{
+			cout<<"\t\t\t\t\t================== Inquiry ===================="<<endl;
+			cout<<"\t\t\t\t\t= [J] View List of Available Job Openings     ="<<endl;
+			cout<<"\t\t\t\t\t= [A] View List of Applicants for a Job Order ="<<endl;
+			cout<<"\t\t\t\t\t= [S] View Summary of Benefits                ="<<endl;
+			cout<<"\t\t\t\t\t= [B] View Benefits of an Employee            ="<<endl;
+			cout<<"\t\t\t\t\t= [S] Search\t                                  ="<<endl;
+			cout<<"\t\t\t\t\t==============================================="<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'T':{
+			cout<<"\t\t\t\t\t============= Transactions ==============="<<endl;
+			cout<<"\t\t\t\t\t=\t[C] Create Job Opening\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=\t[E] Edit Job Opening\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=\t[V] View Job Opening\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=\t[D] Delete Job Opening\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=\t[A] Assign Applicant\t\t ="<<endl;
+			cout<<"\t\t\t\t\t=========================================="<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			
+			break;
+		}
+		
+		case 'R':{
+			cout<<"\t\t\t\t============================ Report =========================="<<endl;
+			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
+			cout<<"\t\t\t\t=\t[2] Print Open Job Positions                         ="<<endl;
+			cout<<"\t\t\t\t=\t[3] Display List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[4] Print List of Candidates                         ="<<endl;
+			cout<<"\t\t\t\t=\t[5] View Current Benefit Enrollment                  ="<<endl;
+			cout<<"\t\t\t\t=\t[6] Print Current Benefit Enrollment                ="<<endl;
+			cout<<"\t\t\t\t=\t[7] View Current Benefit Enrollment of an Employee  ="<<endl;
+			cout<<"\t\t\t\t=\t[8] Print Current Benefit Enrollment of an Employee ="<<endl;
+			cout<<"\t\t\t\t=============================================================="<<endl;
+			cout<<"\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'U':{
+			cout<<"\t\t\t\t\t=============== Utilities =================="<<endl;
+			cout<<"\t\t\t\t\t= \t   [C] Change Password \t           ="<<endl;
+			cout<<"\t\t\t\t\t= \t   [D] Delete User\t\t   ="<<endl;
+			cout<<"\t\t\t\t\t============================================"<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		default: {
+			break;
+		}
+}
+
+}
+
+void miscActions::personnelSubMenu(void){
+	char input;
+	switch(toupper(task))
+	{
+		case 'F':{
+			fflush(stdin);
+			cout<<"\t\t\t\tAccess Denied! User Level must be Manager or Recruiter.\n\t\t\t\t";
+			system("pause");
+			break;
+		}
+		case 'I':{
+			cout<<"\t\t\t\t\t================== Inquiry ===================="<<endl;
+			cout<<"\t\t\t\t\t= [J] View List of Available Job Openings     ="<<endl;
+			cout<<"\t\t\t\t\t= [A] View List of Applicants for a Job Order ="<<endl;
+			cout<<"\t\t\t\t\t= [S] View Summary of Benefits                ="<<endl;
+			cout<<"\t\t\t\t\t= [B] View Benefits of an Employee            ="<<endl;
+			cout<<"\t\t\t\t\t= [S] Search                                  ="<<endl;
+			cout<<"\t\t\t\t\t==============================================="<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'T':{
+			cout<<"\t\t\t\t\t=============== Transactions ============="<<endl;
+			cout<<"\t\t\t\t\t= [V] View List of Employee Time Reports ="<<endl;
+			cout<<"\t\t\t\t\t= [T] View Time Report Status            ="<<endl;
+			cout<<"\t\t\t\t\t= [R] Time Report Adjustments            ="<<endl;
+			cout<<"\t\t\t\t\t= [D] Delete Time Report                 ="<<endl;
+			cout<<"\t\t\t\t\t= [B] View All Benefits                  ="<<endl;
+			cout<<"\t\t\t\t\t=========================================="<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			
+			break;
+		}
+		
+		case 'R':{
+			cout<<"\t\t\t\t============================ Report =========================="<<endl;
+			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
+			cout<<"\t\t\t\t=\t[2] Print Open Job Positions                         ="<<endl;
+			cout<<"\t\t\t\t=\t[3] Display List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[4] Print List of Candidates                         ="<<endl;
+			cout<<"\t\t\t\t=\t[5] View Current Benefit Enrollment                  ="<<endl;
+			cout<<"\t\t\t\t=\t[6] Print Current Benefit Enrollment                 ="<<endl;
+			cout<<"\t\t\t\t=\t[7] View Current Benefit Enrollment of an Employee   ="<<endl;
+			cout<<"\t\t\t\t=\t[8] Print Current Benefit Enrollment of an Employee  ="<<endl;
+			cout<<"\t\t\t\t=============================================================="<<endl;
+			cout<<"\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'U':{
+			cout<<"\t\t\t\t\t=============== Utilities =================="<<endl;
+			cout<<"\t\t\t\t\t= \t   [C] Change Password             ="<<endl;
+			cout<<"\t\t\t\t\t= \t   [D] Delete User                 ="<<endl;
+			cout<<"\t\t\t\t\t============================================"<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		default: {
+			break;
+		}
+}
+
+}
+void miscActions::adminSubMenu(void){
+	char input;
+	switch(toupper(task))
+	{
+		case 'F':{
+			fflush(stdin);
+			cout<<"\t\t\t\tAccess Denied! User Level must be Manager, Recruiter or Personnel.\n\t\t\t\t";
+			system("pause");
+			break;
+		}
+		case 'I':{
+			cout<<"\t\t\t\t\t================== Inquiry ===================="<<endl;
+			cout<<"\t\t\t\t\t= [J] View List of Available Job Openings     ="<<endl;
+			cout<<"\t\t\t\t\t= [A] View List of Applicants for a Job Order ="<<endl;
+			cout<<"\t\t\t\t\t= [S] View Summary of Benefits                ="<<endl;
+			cout<<"\t\t\t\t\t= [B] View Benefits of an Employee            ="<<endl;
+			cout<<"\t\t\t\t\t= [S] Search                                  ="<<endl;
+			cout<<"\t\t\t\t\t==============================================="<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'T':{
+			fflush(stdin);
+			cout<<"\t\t\t\tAccess Denied! User Level must be Manager, Recruiter or Personnel.\n\t\t\t\t";
+			system("pause");
+			break;
+		}
+		
+		case 'R':{
+			cout<<"\t\t\t\t============================ Report =========================="<<endl;
+			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
+			cout<<"\t\t\t\t=\t[2] Print Open Job Positions                         ="<<endl;
+			cout<<"\t\t\t\t=\t[3] Display List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[4] Print List of Candidates                         ="<<endl;
+			cout<<"\t\t\t\t=\t[5] View Current Benefit Enrollment                  ="<<endl;
+			cout<<"\t\t\t\t=\t[6] Print Current Benefit Enrollment                 ="<<endl;
+			cout<<"\t\t\t\t=\t[7] View Current Benefit Enrollment of an Employee   ="<<endl;
+			cout<<"\t\t\t\t=\t[8] Print Current Benefit Enrollment of an Employee  ="<<endl;
+			cout<<"\t\t\t\t=============================================================="<<endl;
+			cout<<"\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		case 'U':{
+			cout<<"\t\t\t\t\t=============== Utilities =================="<<endl;
+			cout<<"\t\t\t\t\t= \t   [R] Register New User           ="<<endl;
+			cout<<"\t\t\t\t\t= \t   [C] Change Password             ="<<endl;
+			cout<<"\t\t\t\t\t= \t   [O] Override Code               ="<<endl;
+			cout<<"\t\t\t\t\t= \t   [S] Delete Specific User        ="<<endl;
+			cout<<"\t\t\t\t\t= \t   [D] Delete User                 ="<<endl;
+			cout<<"\t\t\t\t\t= \t   [V] View Credentials            ="<<endl;
+			cout<<"\t\t\t\t\t= \t   [U] Update Credentials          ="<<endl;
+			cout<<"\t\t\t\t\t============================================"<<endl;
+			cout<<"\t\t\t\t\tEnter input: ";
+			cin>>input;
+			break;
+		}
+		default: {
+			break;
+		}
+}
+
+}
 void miscActions::loadingBar(void){
 	char a=177;
 	cout<<"\n\t\t\t\t\t\t Loading. . . .\n";
@@ -258,5 +477,5 @@ void miscActions::loadingBar(void){
 		cout<<a;
 		Sleep(40);
 	}
-	getch();
+
 }
