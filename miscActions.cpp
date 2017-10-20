@@ -236,7 +236,8 @@ void miscActions::managerSubMenu(void){
 			cout<<"\t\t\t\t=\t[12] Print Current Benefit Enrollment of an Employee ="<<endl;
 			cout<<"\t\t\t\t=============================================================="<<endl;
 			cout<<"\t\t\t\tEnter input: ";
-			cin>>input;
+			cin>>report;
+			viewReports();
 			break;
 		}
 		case 'U':{
@@ -252,7 +253,7 @@ void miscActions::managerSubMenu(void){
 			break;
 		}
 	
-}
+	}
 
 }
 
@@ -469,6 +470,148 @@ void miscActions::adminSubMenu(void){
 }
 
 }
+
+void miscActions::viewReports(){
+	string jid, jpo, jde, jlo, req, jap, jav,temp;
+	int posStart, posEnd, jiD, jpO, jdE, jlO, reQ, jaP, jaV;
+	stringstream sline, sJID, sJPO, sJDE, sJLO, sREQ, sJAP, sJAV;
+	bool repeat;
+	char s;
+
+	system("cls");
+	
+//	lastEntry = getLastUserEntry();
+//	cout << lastEntry;
+//	cout << "weee";
+	userInFile.open("database/job openings.txt");
+	userOutFile.open("temp.txt");
+	
+	repeat = true;
+	switch(report){
+		case '1':{
+		
+			if (userInFile.is_open() && userOutFile.is_open()){
+				while (getline(userInFile, temp)) {
+					if (repeat) {
+						sline << u->getValueFromEntry("$jid#", temp);
+						sline >> jiD;
+						sline.str(string());
+						sline.clear();
+						sline << u->getValueFromEntry("$jpo#", temp);
+						sline >> jpO;
+						sline.str(string());
+						sline.clear();
+						sline << u->getValueFromEntry("$jde#", temp);
+						sline >> jde;
+						sline.str(string());
+						sline.clear();
+						sline << u->getValueFromEntry("$jlo#", temp);
+						sline >> jlO;
+						sline.str(string());
+						sline.clear();
+						sline << u->getValueFromEntry("$req#", temp);
+						sline >> req;
+						sline.str(string());
+						sline.clear();
+						sline << u->getValueFromEntry("$jap#", temp);
+						sline >> jaP;
+						sline.str(string());
+						sline.clear();
+						sline << u->getValueFromEntry("$jav#", temp);
+						sline >> jaV;
+						sline.str(string());
+						sline.clear();
+					temp += "\n";
+					userOutFile << temp;
+				}
+				
+		//		userOutFile << "$id#"+newID+"$id#$pw#"+newPW+"$pw#$ln#"+newLName+"$ln#$fn#"+newFName+"$fn#$mn#"+newMName+"$mn#$ul#"+newUL+"$ul#";
+				
+				userInFile.close();
+				userOutFile.close();
+				
+				ifstream fileIn("temp.txt");
+				ofstream fileOut("joOpenings.txt");
+				
+				repeat = true;
+				if (fileIn.is_open() && fileOut.is_open()) {
+					while (getline(fileIn, temp)) {
+						if (repeat) {
+							sJID << jiD;
+							sJPO << jpO;
+							sJDE << jdE;
+							sJLO << jlO;
+							sREQ << reQ;
+							sJAP << jaP;
+							sJAV << jaV;
+							fileOut << "$jid#"+sJID.str()+"$jid#$jpo#"+sJPO.str()+"$jpo#$jde#"+sJDE.str()+"$jde#$jlo#"+sJLO.str()+"$jlo#$req#"+sREQ.str()+"$req#$jap#"+sJAP.str()+"$jap#$jav#"+sJAV.str()+"$jav#\n";
+							repeat = false;
+							if(sJAV.str()=="Open"){
+								cout<<"open";
+								system("pause");
+							}
+						} else {
+							temp += "\n";
+							fileOut << temp;
+						}
+						
+					}
+					fileIn.close();
+					fileOut.close();	
+				} else {
+					cout << endl << "Error: Unable to open jobOpening database."; 
+					}
+				remove("temp.txt");	
+				} 
+			}		
+			else {
+				cout << endl << "Error: Unable to open jobOpening database."; 
+			}
+			system("pause");
+			break;
+		}
+	}
+}
+
+string miscActions::hidePass(void){
+	START:
+	char pass[32],a;
+	int i;
+//	cout<<"Enter Password: ";
+	for(i=0;;){
+		a=getch();
+		if((a>='a'&&a<='z')||(a>='A'&&a<='Z')||(a>='0'&&a<='9'))
+        //check if a is numeric or alphabet
+        {
+            pass[i]=a;//stores a in pass
+            ++i;
+            cout<<"*";
+        }
+        if(a=='\b'&&i>=1)//if user typed backspace
+        //i should be greater than 1.
+        {
+            cout<<"\b \b";//rub the character behind the cursor.
+            --i;
+        }
+        if(a=='\r')//if enter is pressed
+        {
+            pass[i]='\0';//null means end of string.
+            break;//break the loop
+            
+        }
+		
+	}
+//	cout<<"\nYou entered : "<<pass;
+	
+	if(i<=3)
+    {
+        cout<<"\nMinimum 4 digits needed.\nEnter Again";
+        getch();//It was not pausing :p
+        goto START;
+    }
+    return pass;
+}
+
 void miscActions::loadingBar(void){
 	char a=177;
 	cout<<"\n\t\t\t\t\t\t Loading. . . .\n";
@@ -480,3 +623,55 @@ void miscActions::loadingBar(void){
 
 }
 
+string miscActions::getDateTime(bool timeOnly, bool dateOnly) {
+	time_t now;
+	time(&now); //get current time
+	string t;
+	
+	if (timeOnly && !dateOnly) {
+		t = ctime(&now);
+		t = t.substr(11, 5);
+	} else if (!timeOnly && dateOnly) {
+		t = ctime(&now);
+		t = t.substr(4, 6) + ", " + t.substr(20, 4);
+	} else if (!timeOnly && !dateOnly) {
+		t = ctime(&now);
+		t = t.substr(11, 5) + " " + t.substr(4, 6) + " " + t.substr(20, 4);
+	} else {
+		cout << endl << "Error: Invalid time and date mode.";
+	}
+
+	return t;
+}
+
+int miscActions::convertMonth(string sMonth) {
+	int n = 0;
+	
+	if (sMonth == "Jan") {
+		n = 1;
+	} else if (sMonth == "Feb") {
+		n = 2;
+	} else if (sMonth == "Mar") {
+		n = 3;
+	} else if (sMonth == "Apr") {
+		n = 4;
+	} else if (sMonth == "May") {
+		n = 5;
+	} else if (sMonth == "Jun") {
+		n = 6;
+	} else if (sMonth == "Jul") {
+		n = 7;
+	} else if (sMonth == "Aug") {
+		n = 8;
+	} else if (sMonth == "Sep") {
+		n = 9;
+	} else if (sMonth == "Oct") {
+		n = 10;
+	} else if (sMonth == "Nov") {
+		n = 11;
+	} else if (sMonth == "Dec") {
+		n = 12;
+	} 
+	return n;
+}
+		

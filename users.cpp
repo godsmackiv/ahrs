@@ -2,10 +2,11 @@
 
 // login users, verifies if account exist, and verifies if password is matched
 void users::loginUser() {
-	string input, currentUser;
+	string input, currentUser,pass;
 
 	system("cls");
-	cout << "Please enter your user ID: ";
+	cout<<"\t\t\t\t\t\tHuman Resource System\n\n";
+	cout << "\t\t\t\t\t  Please enter your user ID: ";
 	cin >>  input;
 	
 	
@@ -16,26 +17,26 @@ void users::loginUser() {
 		
 		password = getValueFromEntry("$pw#", currentUser);
 		
-		cout << "Please enter your password: ";
-		cin >> input;
-		if (input == password) {
-			cout << endl << "Login successful!";
+		cout << "\t\t\t\t\t  Please enter your password: ";
+		//mActions->hidePass();
+		if (mActions->hidePass() == password) {
+			cout << endl << "\t\t\t\t\t\t  Login successful!";
 			
 			firstName = getValueFromEntry("$fn#", currentUser);
 			lastName = getValueFromEntry("$ln#", currentUser);
 			middleName = getValueFromEntry("$mn#", currentUser);
 			userLevel = getValueFromEntry("$ul#", currentUser);
-			cout << endl << "Welcome " + lastName + ", " + firstName + " " + middleName + "!";
+			cout << endl << "\t\t\t\t\t  Welcome " + lastName + ", " + firstName + " " + middleName + "!";
 			
 		} else {
-			cout << endl << "Error: Incorrect password.";
+			cout << endl << "\t\t\t\t\t  Error: Incorrect password.";
 		}
 		
 	} else {
-		cout << "Error: Unable to login. No user with that ID found.";
+		cout << "\t\t\t\t\t  Error: Unable to login. No user with that ID found.";
 	}
 	
-	cout << endl;
+	cout <<endl<<endl<< "\t\t\t\t\t  ";
 	system("pause");
 }
 
@@ -408,19 +409,19 @@ void users::changeDeductions() {
 	cout << endl << "Please enter the new values in decimal form. For example, enter 0.125 for a 12.5% deduction.";
 	
 	cout << endl << endl << "Enter the Pag-Ibig contribution deduction. " << endl;
-	pagibig = mActions.askFloatInput(1);
+	pagibig = mActions->askFloatInput(1);
 	buff1 << pagibig;
 	
 	cout << endl << "Enter the PhilHealth contribution deduction. " << endl;
-	philhealth = mActions.askFloatInput(1);
+	philhealth = mActions->askFloatInput(1);
 	buff2 << philhealth;
 	
 	cout << endl <<  "Enter the SSS contribution deduction. " << endl;
-	sss = mActions.askFloatInput(1);
+	sss = mActions->askFloatInput(1);
 	buff3 << sss;
 	
 	cout << endl << "Enter the tax contribution deduction. " << endl;
-	tax = mActions.askFloatInput(1);
+	tax = mActions->askFloatInput(1);
 	buff4 << tax;
 	
 	userOutFile.open("database/deductions.txt");

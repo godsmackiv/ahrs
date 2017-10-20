@@ -1,7 +1,16 @@
 #ifndef __EMPLOYEERECORDS_H_INCLUDED__
 #define __EMPLOYEERECORDS_H_INCLUDED__
+
 #include <iostream>
 #include <fstream>
+#include <iomanip>
+#include <string>
+#include <sstream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
+#include <cctype>
 
 using namespace std;
 class employeeRecords{
@@ -22,6 +31,9 @@ class employeeRecords{
 		bool updateEmployee();
 		bool editEmployee(string,string,string);
 		bool rewriteEmployeeRecord();
+		int getNumberOfEmployees();
+		string getEmployeeInfo(string, string); // requires ID is known
+		
 };
 
 #endif

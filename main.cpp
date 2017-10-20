@@ -2,6 +2,8 @@
 #include <string>
 #include "users.h"
 #include "miscActions.h"
+#include "timeReports.h"
+#include "employeeRecords.h"
 
 using namespace std;
 
@@ -13,42 +15,55 @@ int main(int argc, char** argv) {
 	int q;
 	float f;
 	miscActions m;
+	string s;
+	timeReports t;
 	
-	usersDB.loginUser();
-	while(1){
-		if(usersDB.getUserLevel()=="manager"){
-			system("cls");
-			m.Menu();
-			system("cls");
-			m.loadingBar();
-			system("cls");
-			m.managerSubMenu();
-		}
-		else if(usersDB.getUserLevel()=="recruiter"){
-			system("cls");
-			m.Menu();
-			system("cls");
-			m.loadingBar();
-			system("cls");
-			m.recruiterSubMenu();
-		}
-		else if(usersDB.getUserLevel()=="personnel"){
-			system("cls");
-			m.Menu();
-			system("cls");
-			m.loadingBar();
-			system("cls");
-			m.personnelSubMenu();
-		}
-		else if(usersDB.getUserLevel()=="admin"){
-			system("cls");
-			m.Menu();
-			system("cls");
-			m.loadingBar();
-			system("cls");
-			m.adminSubMenu();
-		}
-	}
+	employeeRecords e;
+//	
+//	cout << e.getEmployeeInfo("000005", "esd");
+	t.autoGenerateTimeReports();
+//	t.enterTimeReport();
+	
+//	s = m.getDateTime(false, false);
+//	cout << s;
+
+	
+	
+//	usersDB.loginUser();
+//	while(1){
+//		if(usersDB.getUserLevel()=="manager"){
+//			system("cls");
+//			m.Menu();
+//			system("cls");
+//			m.loadingBar();
+//			system("cls");
+//			m.managerSubMenu();
+//		}
+//		else if(usersDB.getUserLevel()=="recruiter"){
+//			system("cls");
+//			m.Menu();
+//			system("cls");
+//			m.loadingBar();
+//			system("cls");
+//			m.recruiterSubMenu();
+//		}
+//		else if(usersDB.getUserLevel()=="personnel"){
+//			system("cls");
+//			m.Menu();
+//			system("cls");
+//			m.loadingBar();
+//			system("cls");
+//			m.personnelSubMenu();
+//		}
+//		else if(usersDB.getUserLevel()=="admin"){
+//			system("cls");
+//			m.Menu();
+//			system("cls");
+//			m.loadingBar();
+//			system("cls");
+//			m.adminSubMenu();
+//		}
+//	}
 
 
 
@@ -64,7 +79,7 @@ int main(int argc, char** argv) {
 //	}
 
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
-	usersDB.deleteUser();
+//	usersDB.deleteUser();
 //	usersDB.test();
 //	cout << usersDB.searchUserDB("000001", "id");
 //	cout << usersDB.searchUserDB("qwertyui", "pw", &testString);

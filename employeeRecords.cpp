@@ -1,8 +1,5 @@
 #include "employeeRecords.h"
-#include <iomanip>
-#include <string>
-#include <sstream>
-#include <cstdlib>
+
 
 bool employeeRecords::searchEmployee(string query,string type){
 	string line, found;
@@ -10,6 +7,7 @@ bool employeeRecords::searchEmployee(string query,string type){
 
 	erInFile.open("database/employees.txt");
 	if (erInFile.is_open()) {
+		getline(erInFile,line);
 		while ( getline (erInFile,line) ) {
 			posStart = line.find("$"+type+"#") + 5;
 			posEnd = line.find("$"+type+"#", posStart);
@@ -21,14 +19,14 @@ bool employeeRecords::searchEmployee(string query,string type){
 		}
 		 erInFile.close();
 	}
-  	else cout << "Error: Unable to open Users database."; 
+  	else cout << "Error: Unable to open Employees database."; 
   	
 	return false;
 }
 
 bool employeeRecords::createNewEmployee(){
-	string line;
-	
+	string line, found;
+		
 	cout<<"Name: ";
 	getline(cin,name);
 	if(searchEmployee(name,"ena")){
@@ -45,13 +43,8 @@ bool employeeRecords::createNewEmployee(){
 	
 	erInFile.open("database/employees.txt");
 	if (erInFile.is_open()) {
-		string line, found;
-		int posStart=0, posEnd=0;
-		while ( getline (erInFile,line) ) {
-			posStart = line.find("$eid#") + 5;
-			posEnd = line.find("$eid#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-		}
+		getline(erInFile,line);
+		found=line.substr(4,6);
 		stringstream strID(found);
 		strID >>employeeID;
 		employeeID++;
@@ -80,10 +73,11 @@ bool employeeRecords::createNewEmployee(){
 	getline(cin,mothersOccupation);
 	cout<<"Marital Status: ";
 	getline(cin,maritalStatus);
-	cout<<"Start Date: ";
-	getline(cin,startDate);
-	cout<<"Employment Status: ";
-	getline(cin,employmentStatus);
+	
+	startDate="\t";
+	
+	employmentStatus="Applicant";
+	
 	cout<<"Educational Attainment: ";
 	getline(cin,educationalAttainment);
 	cout<<"Name of School: ";
@@ -93,12 +87,17 @@ bool employeeRecords::createNewEmployee(){
 	
 	cout<<"Year Graduated: ";
 	cin>>yearGraduated;
-	cout<<"Base Salary: ";
-	cin>>baseSalary;
 	
+	baseSalary=0;
 	
-	erOutFile.open("database/employees.txt",ios_base::app);
+	position="\t";
 	
+//	erOutFile.open("database/tempEmployees.txt");
+//	erOutFile<<"$lI#"<<setw(6)<<setfill('0')<<employeeID<<"$lI#"<<endl;
+//	erOutFile.close();
+//	if(!editEmployee(" "," "," ")) return 0;
+	
+	erOutFile.open("database/employees.txt",ios_base::app);	
 	erOutFile<<"$eid#"<<setw(6)<<setfill('0')<<employeeID<<"$eid#";
 	erOutFile<<"$ena#"<<name<<"$ena#";
 	erOutFile<<"$ead#"<<address<<"$ead#";
@@ -118,7 +117,8 @@ bool employeeRecords::createNewEmployee(){
 	erOutFile<<"$esn#"<<schoolName<<"$esn#";
 	erOutFile<<"$esa#"<<schoolAddress<<"$esa#";
 	erOutFile<<"$eyg#"<<yearGraduated<<"$eyg#";
-	erOutFile<<"$ebs#"<<baseSalary<<"$ebs#"<<endl;
+	erOutFile<<"$ebs#"<<baseSalary<<"$ebs#";
+	erOutFile<<"$ejp#"<<position<<"$ejp#"<<endl;
 	
 	erOutFile.close();
 	return 1;
@@ -197,11 +197,10 @@ Result = convert.str();//set Result to the content of the stream
 		cout<<"[10] Mothers's Name"<<endl;
 		cout<<"[11] Mothers's Occupation"<<endl;
 		cout<<"[12] Marital Status"<<endl;
-		cout<<"[13] Start Date"<<endl;
 		cout<<"[13] Educational Attainment"<<endl;
 		cout<<"[14] Name of School"<<endl;
-		cout<<"[16] School Address"<<endl;
-		cout<<"[17] Year Graduated"<<endl;
+		cout<<"[15] School Address"<<endl;
+		cout<<"[16] Year Graduated"<<endl;
 		cout<<endl<<"Edit choice: ";
 		int choice=0;
 		cin>>choice;
@@ -247,29 +246,31 @@ Result = convert.str();//set Result to the content of the stream
 				break;
 			case 12: type="ems";
 				break;
-			case 13: type="esd";
+			case 13: type="eat";
 				break;
-			case 14: type="eat";
+			case 14: type="esn";
 				break;
-			case 15: type="esn";
+			case 15: type="esa";
 				break;
-			case 16: type="esa";
-				break;
-			case 17: type="eyg";
+			case 16: type="eyg";
 				break;
 		}
-		if(editEmployee(Result,newInfo,type)) return 1;
-		else return 0;
+//	erOutFile.open("database/tempEmployees.txt");
+//	erOutFile<<"$lI#"<<setw(6)<<setfill('0')<<employeeID<<"$lI#"<<endl;
+//	erOutFile.close();
+	if(editEmployee(Result,newInfo,type)) return 1;
+	else return 0;
 	  	
 	}
 }
 
 bool employeeRecords::editEmployee(string employeeID,string newInfo,string type){
 	erInFile.open("database/employees.txt");
-	erOutFile.open("database/tempEmployees.txt");
+//	erOutFile.open("database/tempEmployees.txt",ios_base::app);
 	string newLine,line,found,temp;
 	int posStart=0,posEnd=0,editStart=0,editEnd=0;
 	if (erInFile.is_open()) {
+//		getline(erInFile,line);
 		while ( getline (erInFile,line) ) {
 			posStart = line.find("$eid#") + 5;
 			posEnd = line.find("$eid#", posStart);
@@ -311,4 +312,65 @@ bool employeeRecords::rewriteEmployeeRecord(){
 	}
   	else cout << "Error: Unable to open Users database."; 
   	return 0;
+}
+
+int employeeRecords::getNumberOfEmployees() {
+	string line;
+	int posStart, posEnd, numEmployees; 
+	stringstream sline;
+	
+	erInFile.open("database/employees.txt");
+	if (erInFile.is_open()) {
+		getline(erInFile, line);
+		
+		posStart = line.find("$lI#") + 4;
+		posEnd = line.find("$lI#", posStart);		
+		
+		sline << line.substr(posStart, posEnd - posStart);
+//		cout << sline.str() << " ";		
+		sline >> numEmployees;
+	}
+  	else {
+		cout << "Error: Unable to open Users database."; 
+		return 0;
+	}
+	return numEmployees;
+}
+
+string employeeRecords::getEmployeeInfo(string ID, string type) {
+	string line, temp;
+	int posStart, posEnd;
+	
+	erInFile.open("database/employees.txt");
+	if (erInFile.is_open()) {
+		
+		
+//		cout<<"got here";
+//		cout << getline (erInFile,line);
+//		cout << getline (erInFile,line);
+//		cout << line;
+		
+		while ( getline (erInFile,line) ) {
+			
+//			cout<<"got here";
+			posStart = line.find("$eid#") + 5;
+			posEnd = line.find("$eid#", posStart);
+//			cout << endl << posStart << " " << posEnd;
+//			cout << " " << line.substr(posStart, posEnd - posStart);
+			if (line.substr(posStart, posEnd - posStart) == ID) {
+//				cout << "got here";
+				posStart = line.find("$"+type+"#") + 5;
+				posEnd = line.find("$"+type+"#", posStart);
+//				cout << line;
+				line = line.substr(posStart, posEnd - posStart); 
+				break;
+			}// else {
+////				cout << endl << "boo!";
+//			}
+		}
+		 erInFile.close();
+	}
+  	else cout << "Error: Unable to open Employees database."; 
+	
+	return line;
 }

@@ -23,7 +23,7 @@ bool departments::searchDepartment(string query,string type){
 }
 
 bool departments::createNewDepartment(){
-	string line;
+	string line, found;
 	
 	cout<<"Name: ";
 	getline(cin,name);
@@ -34,7 +34,6 @@ bool departments::createNewDepartment(){
 	
 	deptInFile.open("database/departments.txt");
 	if (deptInFile.is_open()) {
-		string line, found;
 		int posStart=0, posEnd=0;
 		while(getline(deptInFile,line)){
 			posStart = line.find("$did#") + 5;
@@ -51,6 +50,11 @@ bool departments::createNewDepartment(){
 	cout<<"Code: ";
 	getline(cin,code);
 	
+	deptOutFile.open("database/tempDepartments.txt");
+	deptOutFile<<"$lI#"<<setw(6)<<setfill('0')<<departmentID<<"$lI#"<<endl;
+	deptOutFile.close();
+	if(!editDepartment(" "," "," ")) return 0;
+
 	deptOutFile.open("database/departments.txt",ios_base::app);
 	deptOutFile<<"$did#"<<setw(6)<<setfill('0')<<departmentID<<"$did#";
 	deptOutFile<<"$dco#"<<code<<"$dco#";
@@ -139,17 +143,21 @@ bool departments::updateDepartment(){
 			case 2: type="dco";
 				break;
 		}
-		if(editDepartment(Result,newInfo,type)) return 1;
-		else return 0;
+	deptOutFile.open("database/tempDepartments.txt");
+	deptOutFile<<"$lI#"<<setw(6)<<setfill('0')<<departmentID<<"$lI#"<<endl;
+	deptOutFile.close();
+	if(editDepartment(Result,newInfo,type)) return 1;
+	else return 0;
 	}
 }
 
 bool departments::editDepartment(string departmentID, string newInfo, string type){
 	deptInFile.open("database/departments.txt");
-	deptOutFile.open("database/tempDepartments.txt");
+	deptOutFile.open("database/tempDepartments.txt",ios_base::app);
 	string newLine,line,found,temp;
 	int posStart=0,posEnd=0,editStart=0,editEnd=0;
 	if (deptInFile.is_open()) {
+		getline(deptInFile,line);
 		while ( getline (deptInFile,line) ) {
 			posStart = line.find("$did#") + 5;
 			posEnd = line.find("$did#", posStart);
