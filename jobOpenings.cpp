@@ -270,63 +270,8 @@ bool jobOpenings::rewriteJobOpeningRecord(){
 }
 
 bool jobOpenings::assignApplicant(){
-	string Result;//string which will contain the result
-	stringstream convert,convert1; // stringstream used for the conversion
-	int applicantID;
-	string strJobOpeningID;
-	cout<<"Enter Job Opening ID: ";
-	cin>>jobOpeningID;
-	convert<<setw(6)<<setfill('0')<<jobOpeningID;//add the value of Number to the characters in the stream
-	strJobOpeningID = convert.str();//set Result to the content of the stream
-	if(searchJobOpening(strJobOpeningID,"jid")){
-		cout<<"Enter Applicant ID: ";
-		cin>>applicantID;
-		convert1<<setw(6)<<setfill('0')<<applicantID;//add the value of Number to the characters in the stream
-		Result = convert1.str();//set Result to the content of the stream
-		if(er.searchEmployee(Result,"eid")){
-			if(er.isApplicant(Result)){
-				if(!isAlreadyApplied(retrieveInfo(strJobOpeningID,"jap"),Result)){
-					joInFile.open("database/jobOpenings.txt");
-					joOutFile.open("database/tempJobOpenings.txt");
-					string line;
-					getline(joInFile,line);
-					joOutFile<<line<<endl;
-					joOutFile.close();
-					joInFile.close();
-					if(searchJobOpening("\t","jap")){
-						if(editJobOpening(strJobOpeningID,Result,"jap")) return 1;
-						else{
-							cout<<"error";
-							return 0;
-						}
-					}
-					else{
-						if(editJobOpening(strJobOpeningID,retrieveInfo(strJobOpeningID,"jap")+"%%"+Result,"jap")) return 1;
-						else{
-							cout<<"error";
-							return 0;
-						}
-					}
-				}
-				else{
-					cout<<"Applicant already applied for this job opening";
-					return 0;
-				}
-			}
-			else{
-				cout<<"Employee not an Applicant";
-				return 0;
-			}
-		}
-		else{
-			cout<<"Applicant not found";
-			return 0;
-		}
-	}
-	else{
-		cout<<"Job Opening not Found";
-		return 0;
-	}
+	if(applicantTransaction(1)) return 1;
+	else return 0;
 }
 
 void jobOpenings::addRequirements(){
@@ -423,6 +368,11 @@ bool jobOpenings::isAlreadyApplied(string allApplicants, string newApplicant){
 }
 
 bool jobOpenings::hireApplicant(){
+	if(applicantTransaction(2)) return 1;
+	else return 0;
+}
+
+bool jobOpenings::applicantTransaction(int transactType){
 	string Result;//string which will contain the result
 	stringstream convert,convert1; // stringstream used for the conversion
 	int applicantID;
@@ -438,43 +388,73 @@ bool jobOpenings::hireApplicant(){
 		Result = convert1.str();//set Result to the content of the stream
 		if(er.searchEmployee(Result,"eid")){
 			if(er.isApplicant(Result)){
-				if(isAlreadyApplied(retrieveInfo(strJobOpeningID,"jap"),Result)){
-					string allApplicants=retrieveInfo(strJobOpeningID,"jap");
-					if(allApplicants!=Result){
-						int posStart=0,posEnd=6;
-						string found;
-						while(posStart<allApplicants.size()){
-							found=allApplicants.substr(posStart,posEnd);
-							if(found!=Result){
-								applicants=applicants+"%%"+found;
+				if(transactType==1){
+					if(!isAlreadyApplied(retrieveInfo(strJobOpeningID,"jap"),Result)){
+						joInFile.open("database/jobOpenings.txt");
+						joOutFile.open("database/tempJobOpenings.txt");
+						string line;
+						getline(joInFile,line);
+						joOutFile<<line<<endl;
+						joOutFile.close();
+						joInFile.close();
+						if(searchJobOpening("\t","jap")){
+							if(editJobOpening(strJobOpeningID,Result,"jap")) return 1;
+							else{
+								cout<<"error";
+								return 0;
 							}
-							posStart+=8;
+						}
+						else{
+							if(editJobOpening(strJobOpeningID,retrieveInfo(strJobOpeningID,"jap")+"%%"+Result,"jap")) return 1;
+							else{
+								cout<<"error";
+								return 0;
+							}
 						}
 					}
-					else applicants="\t";
-					joOutFile.open("database/tempJobOpenings.txt");
-					joInFile.open("database/jobOpenings.txt");
-					string line;
-					getline(joInFile,line);
-					joOutFile<<line<<endl;
-					joInFile.close();
-					joOutFile.close();
-					if(editJobOpening(strJobOpeningID,applicants,"jap")){
-						er.erOutFile.open("database/tempEmployees.txt");
-						er.erInFile.open("database/employees.txt");
-						string line;
-						getline(er.erInFile,line);
-						er.erOutFile<<line<<endl;
-						er.erInFile.close();
-						er.erOutFile.close();
-						er.editEmployee(Result,"Probation","ees");
-						er.editEmployee(Result,retrieveInfo(strJobOpeningID,"jpo"),"ejp");
-						return 1;
+					else{
+						cout<<"Applicant already applied for this job opening";
+						return 0;
 					}
 				}
-				else{
-					cout<<"Applicant is not applied for this job opening";
-					return 0;
+				if(transactType==2){
+					if(isAlreadyApplied(retrieveInfo(strJobOpeningID,"jap"),Result)){
+						string allApplicants=retrieveInfo(strJobOpeningID,"jap");
+						if(allApplicants!=Result){
+							int posStart=0,posEnd=6;
+							string found;
+							while(posStart<allApplicants.size()){
+								found=allApplicants.substr(posStart,posEnd);
+								if(found!=Result){
+									applicants=applicants+"%%"+found;
+								}
+								posStart+=8;
+							}
+						}
+						else applicants="\t";
+						joOutFile.open("database/tempJobOpenings.txt");
+						joInFile.open("database/jobOpenings.txt");
+						string line;
+						getline(joInFile,line);
+						joOutFile<<line<<endl;
+						joInFile.close();
+						joOutFile.close();
+						if(editJobOpening(strJobOpeningID,applicants,"jap")){
+							er.erOutFile.open("database/tempEmployees.txt");
+							er.erInFile.open("database/employees.txt");
+							string line;
+							getline(er.erInFile,line);
+							er.erOutFile<<line<<endl;
+							er.erInFile.close();
+							er.erOutFile.close();
+							er.editEmployee(Result,"Probation","ees");
+							er.editEmployee(Result,retrieveInfo(strJobOpeningID,"jpo"),"ejp");
+							return 1;
+						}
+					}
+					else{
+						cout<<"Applicant not applied for this job opening";
+					}
 				}
 			}
 			else{
@@ -492,4 +472,3 @@ bool jobOpenings::hireApplicant(){
 		return 0;
 	}
 }
-

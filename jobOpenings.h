@@ -39,6 +39,7 @@ class jobOpenings{
 		bool isAlreadyApplied(string,string);
 		bool hireApplicant();
 		string retrieveInfo(string,string);
+		bool applicantTransaction(int);
 };
 
 #endif
