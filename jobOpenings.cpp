@@ -51,14 +51,10 @@ bool jobOpenings::createNewJobOpening(){
 	
 	joInFile.open("database/jobOpenings.txt");
 	if (joInFile.is_open()) {
-		int posStart=0, posEnd=0;
-		while(getline(joInFile,line)){
-			posStart = line.find("$jid#") + 5;
-			posEnd = line.find("$jid#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-		}
+		getline(joInFile,line);
+		found=line.substr(4,6);
 		stringstream strID(found);
-		strID>>jobOpeningID;
+		strID >>jobOpeningID;
 		jobOpeningID++;
 		joInFile.close();
 	}
