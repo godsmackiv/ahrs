@@ -472,106 +472,43 @@ void miscActions::adminSubMenu(void){
 }
 
 void miscActions::viewReports(){
-	string jid, jpo, jde, jlo, req, jap, jav,temp;
-	int posStart, posEnd, jiD, jpO, jdE, jlO, reQ, jaP, jaV;
-	stringstream sline, sJID, sJPO, sJDE, sJLO, sREQ, sJAP, sJAV;
-	bool repeat;
-	char s;
-
-	system("cls");
-	
-//	lastEntry = getLastUserEntry();
-//	cout << lastEntry;
-//	cout << "weee";
-	userInFile.open("jobOpenings.txt");
-	userOutFile.open("temp.txt");
-	
-	repeat = true;
-	switch(report){
-		case '1':{
-		
-			if (userInFile.is_open() && userOutFile.is_open()){
-				while (getline(userInFile, temp)) {
-					if (repeat) {
-						sline << u->getValueFromEntry("$jid#", temp);
-						sline >> jiD;
-						sline.str(string());
-						sline.clear();
-						sline << u->getValueFromEntry("$jpo#", temp);
-						sline >> jpO;
-						sline.str(string());
-						sline.clear();
-						sline << u->getValueFromEntry("$jde#", temp);
-						sline >> jde;
-						sline.str(string());
-						sline.clear();
-						sline << u->getValueFromEntry("$jlo#", temp);
-						sline >> jlO;
-						sline.str(string());
-						sline.clear();
-						sline << u->getValueFromEntry("$req#", temp);
-						sline >> req;
-						sline.str(string());
-						sline.clear();
-						sline << u->getValueFromEntry("$jap#", temp);
-						sline >> jaP;
-						sline.str(string());
-						sline.clear();
-						sline << u->getValueFromEntry("$jav#", temp);
-						sline >> jaV;
-						sline.str(string());
-						sline.clear();
-					temp += "\n";
-					userOutFile << temp;
-				}
-				
-		//		userOutFile << "$id#"+newID+"$id#$pw#"+newPW+"$pw#$ln#"+newLName+"$ln#$fn#"+newFName+"$fn#$mn#"+newMName+"$mn#$ul#"+newUL+"$ul#";
-				
-				userInFile.close();
-				userOutFile.close();
-				
-				ifstream fileIn("temp.txt");
-				ofstream fileOut("joOpenings.txt");
-				
-				repeat = true;
-				if (fileIn.is_open() && fileOut.is_open()) {
-					while (getline(fileIn, temp)) {
-						if (repeat) {
-							sJID << jiD;
-							sJPO << jpO;
-							sJDE << jdE;
-							sJLO << jlO;
-							sREQ << reQ;
-							sJAP << jaP;
-							sJAV << jaV;
-							fileOut << "$jid#"+sJID.str()+"$jid#$jpo#"+sJPO.str()+"$jpo#$jde#"+sJDE.str()+"$jde#$jlo#"+sJLO.str()+"$jlo#$req#"+sREQ.str()+"$req#$jap#"+sJAP.str()+"$jap#$jav#"+sJAV.str()+"$jav#\n";
-							repeat = false;
-							if(sJAV.str()=="Open"){
-								cout<<"open";
-								system("pause");
-							}
-						} else {
-							temp += "\n";
-							fileOut << temp;
-						}
-						
-					}
-					fileIn.close();
-					fileOut.close();	
-				} else {
-					cout << endl << "Error: Unable to open jobOpening database."; 
-					}
-				remove("temp.txt");	
-				} 
-			}		
-			else {
-				cout << endl << "Error: Unable to open jobOpening database."; 
-			}
-			system("pause");
-			break;
+	string line, found;
+	int posStart=0, posEnd=0;
+	cout<<"\t\t\t\t\t All Available Job Opening\n\n";
+	userInFile.open("database/job openings.txt");
+	if (userInFile.is_open()) {
+		while ( getline (userInFile,line) ) {
+			posStart = line.find("$jn#") + 4;
+			posEnd = line.find("$jn#", posStart);
+			found = line.substr(posStart, posEnd - posStart);
+				cout<<"\t\t\t\t\t Job #: "<<found<<endl;	
+			posStart = line.find("$po#") + 4;
+			posEnd = line.find("$po#", posStart);
+			found = line.substr(posStart, posEnd - posStart);
+				cout<<"\t\t\t\t\t Job Position: "<<found<<endl;
+			posStart = line.find("$de#") + 4;
+			posEnd = line.find("$de#", posStart);
+			found = line.substr(posStart, posEnd - posStart);
+				cout<<"\t\t\t\t\t Department #: "<<found<<endl;		
+			posStart = line.find("$lo#") + 4;
+			posEnd = line.find("$lo#", posStart);
+			found = line.substr(posStart, posEnd - posStart);
+				cout<<"\t\t\t\t\t Location #: "<<found<<endl;
+			posStart = line.find("$jr#") + 4;
+			posEnd = line.find("$jr#", posStart);
+			found = line.substr(posStart, posEnd - posStart);
+				cout<<"\t\t\t\t\t Job Requirements: "<<found<<endl;
+			posStart = line.find("$aa#") + 4;
+			posEnd = line.find("$aa#", posStart);
+			found = line.substr(posStart, posEnd - posStart);
+				cout<<"\t\t\t\t\t Aspiring Applicants: "<<found<<endl<<endl;
 		}
+		 userInFile.close();
 	}
+  	else cout << "Error: Unable to open Users database."; 
 }
+	
+
 
 string miscActions::hidePass(void){
 	START:
