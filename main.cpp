@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
 	//m.hidePass();
 	usersDB.loginUser();
 	
-//	while(1){
+	while(1){
 		if(usersDB.getUserLevel()=="manager"){
 			system("cls");
 			m.Menu();
@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
 			system("cls");
 			m.adminSubMenu();
 		}
-//}
+}
 
 //	usersDB.searchUserDB("gaytos", "$ln#", &testString, true);
 //	usersDB.deleteUser();

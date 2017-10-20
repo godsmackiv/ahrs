@@ -27,6 +27,7 @@ class miscActions {
 		void loadingBar(void);
 		void viewReports(void);
 		string hidePass(void);
+		void managerView();
 	
 };
 

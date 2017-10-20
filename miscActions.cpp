@@ -112,6 +112,7 @@ void miscActions::managerSubMenu(void){
 					cout<<"\t\t\t\t\t========================================="<<endl;
 					cout<<"\t\t\t\t\tEnter input: ";
 					cin>>perform;
+					managerView();
 					break;
 				}
 				case 'U':{
@@ -223,17 +224,11 @@ void miscActions::managerSubMenu(void){
 		case 'R':{
 			cout<<"\t\t\t\t============================ Report =========================="<<endl;
 			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
-			cout<<"\t\t\t\t=\t[2] Print Open Job Positions                         ="<<endl;
-			cout<<"\t\t\t\t=\t[3] Display List of Candidates                       ="<<endl;
-			cout<<"\t\t\t\t=\t[4] Print List of Candidates                         ="<<endl;
-			cout<<"\t\t\t\t=\t[5] View Pay Roll Information of Employee            ="<<endl;
-			cout<<"\t\t\t\t=\t[6] Print Pay Slip of Employee                       ="<<endl;
-			cout<<"\t\t\t\t=\t[7] View Pay Roll Information of All Employee        ="<<endl;
-			cout<<"\t\t\t\t=\t[8] Print Pay Slip of All Employee                   ="<<endl;
-			cout<<"\t\t\t\t=\t[9] View Current Benefit Enrollment                  ="<<endl;
-			cout<<"\t\t\t\t=\t[10] Print Current Benefit Enrollment                ="<<endl;
-			cout<<"\t\t\t\t=\t[11] View Current Benefit Enrollment of an Employee  ="<<endl;
-			cout<<"\t\t\t\t=\t[12] Print Current Benefit Enrollment of an Employee ="<<endl;
+			cout<<"\t\t\t\t=\t[2] View List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[3] View Pay Roll Information of Employee            ="<<endl;
+			cout<<"\t\t\t\t=\t[4] View Pay Roll Information of All Employee        ="<<endl;
+			cout<<"\t\t\t\t=\t[5] View Current Benefit Enrollment                  ="<<endl;
+			cout<<"\t\t\t\t=\t[6] View Current Benefit Enrollment of an Employee  ="<<endl;
 			cout<<"\t\t\t\t=============================================================="<<endl;
 			cout<<"\t\t\t\tEnter input: ";
 			cin>>report;
@@ -255,6 +250,206 @@ void miscActions::managerSubMenu(void){
 	
 }
 
+}
+
+void miscActions::managerView(){
+	string line, found,temp;
+	int posStart=0, posEnd=0;
+	switch(perform){
+		case '1':{
+			system("cls");
+			cout<<"\t\t\t\t\t View Department\n\n";
+			userInFile.open("database/departments.txt");
+			if (userInFile.is_open()) {
+					while ( getline (userInFile,line) ) {
+					
+							posStart = line.find("$did#") + 5;
+							posEnd = line.find("$did#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Department ID: "<<found<<endl;	
+							posStart = line.find("$dco#") + 5;
+							posEnd = line.find("$dco#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Department Code: "<<found<<endl;
+							posStart = line.find("$dna#") + 5;
+							posEnd = line.find("$dna#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Department Name: "<<found<<endl<<endl;		
+						}
+						system("pause");
+					userInFile.close();
+					}
+					else{
+						cout << "Error: Unable to open department database."; 
+				
+					}
+			break;
+		}
+		case '2':{
+			system("cls");
+			cout<<"\t\t\t\t\t View Location\n\n";
+			userInFile.open("database/locations.txt");
+			if (userInFile.is_open()) {
+					while ( getline (userInFile,line) ) {
+					
+							posStart = line.find("$lid#") + 5;
+							posEnd = line.find("$lid#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Location ID: "<<found<<endl;	
+							posStart = line.find("$lco#") + 5;
+							posEnd = line.find("$lco#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Location Code: "<<found<<endl;
+							posStart = line.find("$lna#") + 5;
+							posEnd = line.find("$lna#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Location Name: "<<found<<endl<<endl;		
+						}
+						system("pause");
+					userInFile.close();
+					}
+					else{
+						cout << "Error: Unable to open location database."; 
+				
+					}
+			break;
+		}
+		case '3':{
+			system("cls");
+			cout<<"\t\t\t\t\t View Job Position\n\n";
+			userInFile.open("database/job positions.txt");
+			if (userInFile.is_open()) {
+					while ( getline (userInFile,line) ) {
+					
+							posStart = line.find("$jid#") + 5;
+							posEnd = line.find("$jid#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Job Position ID: "<<found<<endl;	
+							posStart = line.find("$jpn#") + 5;
+							posEnd = line.find("$jpn#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Job: "<<found<<endl<<endl;		
+						}
+						system("pause");
+					userInFile.close();
+					}
+					else{
+						cout << "Error: Unable to open job position database."; 
+				
+					}
+			break;
+		}
+		case '4':{
+			system("cls");
+			cout<<"\t\t\t\t\t View Benefits\n\n";
+			userInFile.open("database/benefits.txt");
+			if (userInFile.is_open()) {
+					while ( getline (userInFile,line) ) {
+					
+							posStart = line.find("$bid#") + 5;
+							posEnd = line.find("$bid#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Benefit ID: "<<found<<endl;	
+							posStart = line.find("$bna#") + 5;
+							posEnd = line.find("$bna#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Benefit: "<<found<<endl<<endl;		
+						}
+						system("pause");
+					userInFile.close();
+					}
+					else{
+						cout << "Error: Unable to open benefit database."; 
+				
+					}
+			break;
+		}
+		case '5':{
+			system("cls");
+			cout<<"\t\t\t\t\t View Employee\n\n";
+			userInFile.open("database/employees.txt");
+			if (userInFile.is_open()) {
+					while ( getline (userInFile,line) ) {
+					
+							posStart = line.find("$eid#") + 5;
+							posEnd = line.find("$eid#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t ID: "<<found<<endl;
+							posStart = line.find("$ena#") + 5;
+							posEnd = line.find("$ena#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Name: "<<found<<endl;
+							posStart = line.find("$ead#") + 5;
+							posEnd = line.find("$ead#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Address: "<<found<<endl;
+							posStart = line.find("$ecn#") + 5;
+							posEnd = line.find("$ecn#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Contact #: "<<found<<endl;
+							posStart = line.find("$eag#") + 5;
+							posEnd = line.find("$eag#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Age: "<<found<<endl;
+							posStart = line.find("$eea#") + 5;
+							posEnd = line.find("$eea#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Email Address: "<<found<<endl;
+							posStart = line.find("$ebd#") + 5;
+							posEnd = line.find("$ebd#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Birthday: "<<found<<endl;
+							posStart = line.find("$esx#") + 5;
+							posEnd = line.find("$esx#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Sex: "<<found<<endl;
+							posStart = line.find("$efn#") + 5;
+							posEnd = line.find("$efn#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Father's Name: "<<found<<endl;
+							posStart = line.find("$efo#") + 5;
+							posEnd = line.find("$efo#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Father's Occupation: "<<found<<endl;
+							posStart = line.find("$emn#") + 5;
+							posEnd = line.find("$emn#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Mother's Name: "<<found<<endl;
+							posStart = line.find("$emo#") + 5;
+							posEnd = line.find("$emo#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Mother's: "<<found<<endl;
+							posStart = line.find("$ems#") + 5;
+							posEnd = line.find("$ems#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Civil Status: "<<found<<endl;
+							posStart = line.find("$esd#") + 5;
+							posEnd = line.find("$esd#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Start Date: "<<found<<endl;
+							posStart = line.find("$ees#") + 5;
+							posEnd = line.find("$ees#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Employment Status: "<<found<<endl;	
+							posStart = line.find("$eat#") + 5;
+							posEnd = line.find("$eat#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Educational Attainment: "<<found<<endl;
+								posStart = line.find("$ebs#") + 5;
+							posEnd = line.find("$ebs#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Base Salary: "<<found<<".00 PHP"<<endl<<endl;		
+						}
+						system("pause");
+					userInFile.close();
+					}
+					else{
+						cout << "Error: Unable to open employee database."; 
+				
+					}
+			break;
+		}
+	}
 }
 
 void miscActions::Menu(void){
@@ -312,13 +507,9 @@ void miscActions::recruiterSubMenu(void){
 		case 'R':{
 			cout<<"\t\t\t\t============================ Report =========================="<<endl;
 			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
-			cout<<"\t\t\t\t=\t[2] Print Open Job Positions                         ="<<endl;
-			cout<<"\t\t\t\t=\t[3] Display List of Candidates                       ="<<endl;
-			cout<<"\t\t\t\t=\t[4] Print List of Candidates                         ="<<endl;
-			cout<<"\t\t\t\t=\t[5] View Current Benefit Enrollment                  ="<<endl;
-			cout<<"\t\t\t\t=\t[6] Print Current Benefit Enrollment                ="<<endl;
-			cout<<"\t\t\t\t=\t[7] View Current Benefit Enrollment of an Employee  ="<<endl;
-			cout<<"\t\t\t\t=\t[8] Print Current Benefit Enrollment of an Employee ="<<endl;
+			cout<<"\t\t\t\t=\t[2] View List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[3] View Current Benefit Enrollment                  ="<<endl;
+			cout<<"\t\t\t\t=\t[4] View Current Benefit Enrollment of an Employee  ="<<endl;
 			cout<<"\t\t\t\t=============================================================="<<endl;
 			cout<<"\t\t\t\tEnter input: ";
 			cin>>input;
@@ -379,13 +570,9 @@ void miscActions::personnelSubMenu(void){
 		case 'R':{
 			cout<<"\t\t\t\t============================ Report =========================="<<endl;
 			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
-			cout<<"\t\t\t\t=\t[2] Print Open Job Positions                         ="<<endl;
-			cout<<"\t\t\t\t=\t[3] Display List of Candidates                       ="<<endl;
-			cout<<"\t\t\t\t=\t[4] Print List of Candidates                         ="<<endl;
-			cout<<"\t\t\t\t=\t[5] View Current Benefit Enrollment                  ="<<endl;
-			cout<<"\t\t\t\t=\t[6] Print Current Benefit Enrollment                 ="<<endl;
-			cout<<"\t\t\t\t=\t[7] View Current Benefit Enrollment of an Employee   ="<<endl;
-			cout<<"\t\t\t\t=\t[8] Print Current Benefit Enrollment of an Employee  ="<<endl;
+			cout<<"\t\t\t\t=\t[2] View List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[3] View Current Benefit Enrollment                  ="<<endl;
+			cout<<"\t\t\t\t=\t[4] View Current Benefit Enrollment of an Employee   ="<<endl;
 			cout<<"\t\t\t\t=============================================================="<<endl;
 			cout<<"\t\t\t\tEnter input: ";
 			cin>>input;
@@ -438,13 +625,9 @@ void miscActions::adminSubMenu(void){
 		case 'R':{
 			cout<<"\t\t\t\t============================ Report =========================="<<endl;
 			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
-			cout<<"\t\t\t\t=\t[2] Print Open Job Positions                         ="<<endl;
-			cout<<"\t\t\t\t=\t[3] Display List of Candidates                       ="<<endl;
-			cout<<"\t\t\t\t=\t[4] Print List of Candidates                         ="<<endl;
-			cout<<"\t\t\t\t=\t[5] View Current Benefit Enrollment                  ="<<endl;
-			cout<<"\t\t\t\t=\t[6] Print Current Benefit Enrollment                 ="<<endl;
-			cout<<"\t\t\t\t=\t[7] View Current Benefit Enrollment of an Employee   ="<<endl;
-			cout<<"\t\t\t\t=\t[8] Print Current Benefit Enrollment of an Employee  ="<<endl;
+			cout<<"\t\t\t\t=\t[2] View List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[3] View Current Benefit Enrollment                  ="<<endl;
+			cout<<"\t\t\t\t=\t[4] View Current Benefit Enrollment of an Employee   ="<<endl;
 			cout<<"\t\t\t\t=============================================================="<<endl;
 			cout<<"\t\t\t\tEnter input: ";
 			cin>>input;
@@ -472,71 +655,125 @@ void miscActions::adminSubMenu(void){
 }
 
 void miscActions::viewReports(){
-	string line, found;
+	string line, found,temp;
 	char ch;
 	int posStart=0, posEnd=0;
-	system("cls");
-	cout<<"\t\t\t\t\t All Available Job Opening\n\n";
-	userInFile.open("database/job openings.txt");
-	if (userInFile.is_open()) {
-		while ( getline (userInFile,line) ) {
-			posStart = line.find("$av#") + 4;
-			posEnd = line.find("$av#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-				if(found=="Open"){
-				posStart = line.find("$jn#") + 4;
-				posEnd = line.find("$jn#", posStart);
-				found = line.substr(posStart, posEnd - posStart);
-					cout<<"\t\t\t\t\t Job #: "<<found<<endl;	
-				posStart = line.find("$po#") + 4;
-				posEnd = line.find("$po#", posStart);
-				found = line.substr(posStart, posEnd - posStart);
-					cout<<"\t\t\t\t Job Position: "<<found<<endl;
-				posStart = line.find("$de#") + 4;
-				posEnd = line.find("$de#", posStart);
-				found = line.substr(posStart, posEnd - posStart);
-					cout<<"\t\t\t\t Department #: "<<found<<endl;		
-				posStart = line.find("$lo#") + 4;
-				posEnd = line.find("$lo#", posStart);
-				found = line.substr(posStart, posEnd - posStart);
-					cout<<"\t\t\t\t Location #: "<<found<<endl;
-				posStart = line.find("$jr#") + 4;
-				posEnd = line.find("$jr#", posStart);
-				found = line.substr(posStart, posEnd - posStart);
-					cout<<"\t\t\t\t Job Requirements: "<<found<<endl;
-				posStart = line.find("$aa#") + 4;
-				posEnd = line.find("$aa#", posStart);
-				found = line.substr(posStart, posEnd - posStart);
-					cout<<"\t\t\t\t Aspiring Applicants: "<<found<<endl<<endl;
+		switch(report){
+			case '1':{
+				system("cls");
+				cout<<"\t\t\t\t\t All Available Job Opening\n\n";
+				userInFile.open("database/job openings.txt");
+				if (userInFile.is_open()) {
+					while ( getline (userInFile,line) ) {
+						posStart = line.find("$av#") + 4;
+						posEnd = line.find("$av#", posStart);
+						found = line.substr(posStart, posEnd - posStart);
+							if(found=="Open"){
+							posStart = line.find("$jn#") + 4;
+							posEnd = line.find("$jn#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t\t Job #: "<<found<<endl;	
+							posStart = line.find("$po#") + 4;
+							posEnd = line.find("$po#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Job Position: "<<found<<endl;
+							posStart = line.find("$de#") + 4;
+							posEnd = line.find("$de#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Department #: "<<found<<endl;		
+							posStart = line.find("$lo#") + 4;
+							posEnd = line.find("$lo#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Location #: "<<found<<endl;
+							posStart = line.find("$jr#") + 4;
+							posEnd = line.find("$jr#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Job Requirements: "<<found<<endl;
+							posStart = line.find("$aa#") + 4;
+							posEnd = line.find("$aa#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Aspiring Applicants: "<<found<<endl<<endl;
+							}
+							else{
+								break;
+							}
+						}
+					userInFile.close();
+					}
+					else{
+						cout << "Error: Unable to open job openings database."; 
+				
+					}
+					cout<<"\t\t\t\t\t Do you want a hard copy of this list? (y/n): ";
+					cin>>ch;
+					system("cls");
+					loadingBar();
+					cout<<"\n\n\t\t\t\t\t\t Print Successful!"<<endl;
+					int Start=0, End=0;
+					userInFile.open("Database/job openings.txt");
+					userOutFile.open("Database/print job openings.txt");
+					if(ch=='y'||ch=='Y'){
+						userOutFile<<"All Available Job Opening"<<endl<<endl;
+						if(userInFile.is_open()){
+							while(getline(userInFile,temp)){
+							//	cout<<temp<<endl;
+							//	system("pause");
+							//	userOutFile<<temp<<endl;
+							Start = temp.find("$av#") + 4;
+							End = temp.find("$av#", Start);
+							found = temp.substr(Start, End - Start);
+//							userOutFile<<"Job #: "<<found<<endl;
+							if(found=="Open"){
+								Start = temp.find("$jn#") + 4;
+								End = temp.find("$jn#", Start);
+								found = temp.substr(Start, End - Start);
+								userOutFile<<"Job #: "<<found<<endl;
+								Start = temp.find("$po#") + 4;
+								End = temp.find("$po#", Start);
+								found = temp.substr(Start, End - Start);
+								userOutFile<<"Job Position: "<<found<<endl;
+								Start = temp.find("$de#") + 4;
+								End = temp.find("$de#", Start);
+								found = temp.substr(Start, End - Start);
+								userOutFile<<"Department: "<<found<<endl;
+								Start = temp.find("$lo#") + 4;
+								End = temp.find("$lo#", Start);
+								found = temp.substr(Start, End - Start);
+								userOutFile<<"Location: "<<found<<endl;
+								Start = temp.find("$jr#") + 4;
+								End = temp.find("$jr#", Start);
+								found = temp.substr(Start, End - Start);
+								
+								userOutFile<<"Job Requirement: "<<found<<endl;
+								Start = temp.find("$aa#") + 4;
+								End = temp.find("$aa#", Start);
+								found = temp.substr(Start, End - Start);
+								userOutFile<<"Aspiring Applicants: "<<found<<endl<<endl;
+//								Start = temp.find("$av#") + 4;
+//								End = temp.find("$av#", Start);
+//								found = temp.substr(Start, End - Start);
+//								if(found=="Open"||found=="Close"){
+//									userOutFile<<cin.ignore();
+//								}
+							}
+							else{
+								break;
+							}
+							
+							}
+							userInFile.close();
+							userOutFile.close();
+						}
+						else{
+							cout << "Error: Unable to print job openings."; 
+						}	
 				}
-				else{
-					break;
-				}
-		}
-		cout<<"\t\t\t\t\t Do you want a hard copy of this list? (y/n): ";
-		cin>>ch;
-		if(ch=='y'||ch=='Y'){
-			userInFile.open("database/job openings.txt");
-			userOutFile.open("database/print job openings.txt");
-			if(userInFile.is_open()&&userOutFile.is_open()){
-				while(getline(userInFile,line)){
-					userOutFile<<line<<endl;
-				}
-				userInFile.close();
-				userOutFile.close();
+				break;
 			}
-			else{
-				cout << "Error: Unable to print job openings."; 
-			}	
+		default:{
+			break;
 		}
-
-		else{
-			userInFile.close();
-			userOutFile.close();
-		}
-}
-
-  	else cout << "Error: Unable to open job openings database."; 
+	}	
 }
 	
 

@@ -1,0 +1,30 @@
+All Available Job Opening
+
+Job #: 000001
+Job Position: Teacher
+Department: Computer Engineering
+Location: Talamban
+Job Requirement: Masteral Degree%%Two years work experience%%Proficient in C++
+Aspiring Applicants: 000001%%000002%%000003
+
+Job #: 000002
+Job Position: Secretary
+Department: Computer Engineering
+Location: Talamban
+Job Requirement: High school graduate%%Proficient in English
+Aspiring Applicants: 000004%%000005
+
+Job #: 000003
+Job Position: Janitor
+Department: Dormitory
+Location: Talamban
+Job Requirement: Some high school%%Hardworking
+Aspiring Applicants: 000006
+
+Job #: 000004
+Job Position: Dorm Supervisor
+Department: Dormitory
+Location: Talamban
+Job Requirement: Bachelor's Degree in Psychology%%Two years work experience%%People skills
+Aspiring Applicants: 000007
+
