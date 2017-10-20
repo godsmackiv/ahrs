@@ -473,39 +473,70 @@ void miscActions::adminSubMenu(void){
 
 void miscActions::viewReports(){
 	string line, found;
+	char ch;
 	int posStart=0, posEnd=0;
+	system("cls");
 	cout<<"\t\t\t\t\t All Available Job Opening\n\n";
 	userInFile.open("database/job openings.txt");
 	if (userInFile.is_open()) {
 		while ( getline (userInFile,line) ) {
-			posStart = line.find("$jn#") + 4;
-			posEnd = line.find("$jn#", posStart);
+			posStart = line.find("$av#") + 4;
+			posEnd = line.find("$av#", posStart);
 			found = line.substr(posStart, posEnd - posStart);
-				cout<<"\t\t\t\t\t Job #: "<<found<<endl;	
-			posStart = line.find("$po#") + 4;
-			posEnd = line.find("$po#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-				cout<<"\t\t\t\t\t Job Position: "<<found<<endl;
-			posStart = line.find("$de#") + 4;
-			posEnd = line.find("$de#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-				cout<<"\t\t\t\t\t Department #: "<<found<<endl;		
-			posStart = line.find("$lo#") + 4;
-			posEnd = line.find("$lo#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-				cout<<"\t\t\t\t\t Location #: "<<found<<endl;
-			posStart = line.find("$jr#") + 4;
-			posEnd = line.find("$jr#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-				cout<<"\t\t\t\t\t Job Requirements: "<<found<<endl;
-			posStart = line.find("$aa#") + 4;
-			posEnd = line.find("$aa#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-				cout<<"\t\t\t\t\t Aspiring Applicants: "<<found<<endl<<endl;
+				if(found=="Open"){
+				posStart = line.find("$jn#") + 4;
+				posEnd = line.find("$jn#", posStart);
+				found = line.substr(posStart, posEnd - posStart);
+					cout<<"\t\t\t\t\t Job #: "<<found<<endl;	
+				posStart = line.find("$po#") + 4;
+				posEnd = line.find("$po#", posStart);
+				found = line.substr(posStart, posEnd - posStart);
+					cout<<"\t\t\t\t Job Position: "<<found<<endl;
+				posStart = line.find("$de#") + 4;
+				posEnd = line.find("$de#", posStart);
+				found = line.substr(posStart, posEnd - posStart);
+					cout<<"\t\t\t\t Department #: "<<found<<endl;		
+				posStart = line.find("$lo#") + 4;
+				posEnd = line.find("$lo#", posStart);
+				found = line.substr(posStart, posEnd - posStart);
+					cout<<"\t\t\t\t Location #: "<<found<<endl;
+				posStart = line.find("$jr#") + 4;
+				posEnd = line.find("$jr#", posStart);
+				found = line.substr(posStart, posEnd - posStart);
+					cout<<"\t\t\t\t Job Requirements: "<<found<<endl;
+				posStart = line.find("$aa#") + 4;
+				posEnd = line.find("$aa#", posStart);
+				found = line.substr(posStart, posEnd - posStart);
+					cout<<"\t\t\t\t Aspiring Applicants: "<<found<<endl<<endl;
+				}
+				else{
+					break;
+				}
 		}
-		 userInFile.close();
-	}
-  	else cout << "Error: Unable to open Users database."; 
+		cout<<"\t\t\t\t\t Do you want a hard copy of this list? (y/n): ";
+		cin>>ch;
+		if(ch=='y'||ch=='Y'){
+			userInFile.open("database/job openings.txt");
+			userOutFile.open("database/print job openings.txt");
+			if(userInFile.is_open()&&userOutFile.is_open()){
+				while(getline(userInFile,line)){
+					userOutFile<<line<<endl;
+				}
+				userInFile.close();
+				userOutFile.close();
+			}
+			else{
+				cout << "Error: Unable to print job openings."; 
+			}	
+		}
+
+		else{
+			userInFile.close();
+			userOutFile.close();
+		}
+}
+
+  	else cout << "Error: Unable to open job openings database."; 
 }
 	
 
@@ -542,7 +573,7 @@ string miscActions::hidePass(void){
 	
 	if(i<=3)
     {
-        cout<<"\nMinimum 6 digits needed.\nEnter Again";
+        cout<<"\n\t\t\t\t\t Minimum 4 digits needed.\n\t\t\t\t\t Enter Again: ";
         getch();//It was not pausing :p
         goto START;
     }
