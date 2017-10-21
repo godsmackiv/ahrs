@@ -224,11 +224,11 @@ void miscActions::managerSubMenu(void){
 		case 'R':{
 			cout<<"\t\t\t\t============================ Report =========================="<<endl;
 			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
-			cout<<"\t\t\t\t=\t[2] View List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[2] View List of Candidates                          ="<<endl;
 			cout<<"\t\t\t\t=\t[3] View Pay Roll Information of Employee            ="<<endl;
 			cout<<"\t\t\t\t=\t[4] View Pay Roll Information of All Employee        ="<<endl;
 			cout<<"\t\t\t\t=\t[5] View Current Benefit Enrollment                  ="<<endl;
-			cout<<"\t\t\t\t=\t[6] View Current Benefit Enrollment of an Employee  ="<<endl;
+			cout<<"\t\t\t\t=\t[6] View Current Benefit Enrollment of an Employee   ="<<endl;
 			cout<<"\t\t\t\t=============================================================="<<endl;
 			cout<<"\t\t\t\tEnter input: ";
 			cin>>report;
@@ -507,9 +507,9 @@ void miscActions::recruiterSubMenu(void){
 		case 'R':{
 			cout<<"\t\t\t\t============================ Report =========================="<<endl;
 			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
-			cout<<"\t\t\t\t=\t[2] View List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[2] View List of Candidates                          ="<<endl;
 			cout<<"\t\t\t\t=\t[3] View Current Benefit Enrollment                  ="<<endl;
-			cout<<"\t\t\t\t=\t[4] View Current Benefit Enrollment of an Employee  ="<<endl;
+			cout<<"\t\t\t\t=\t[4] View Current Benefit Enrollment of an Employee   ="<<endl;
 			cout<<"\t\t\t\t=============================================================="<<endl;
 			cout<<"\t\t\t\tEnter input: ";
 			cin>>input;
@@ -570,7 +570,7 @@ void miscActions::personnelSubMenu(void){
 		case 'R':{
 			cout<<"\t\t\t\t============================ Report =========================="<<endl;
 			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
-			cout<<"\t\t\t\t=\t[2] View List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[2] View List of Candidates                          ="<<endl;
 			cout<<"\t\t\t\t=\t[3] View Current Benefit Enrollment                  ="<<endl;
 			cout<<"\t\t\t\t=\t[4] View Current Benefit Enrollment of an Employee   ="<<endl;
 			cout<<"\t\t\t\t=============================================================="<<endl;
@@ -625,7 +625,7 @@ void miscActions::adminSubMenu(void){
 		case 'R':{
 			cout<<"\t\t\t\t============================ Report =========================="<<endl;
 			cout<<"\t\t\t\t=\t[1] View Open Job Positions                          ="<<endl;
-			cout<<"\t\t\t\t=\t[2] View List of Candidates                       ="<<endl;
+			cout<<"\t\t\t\t=\t[2] View List of Candidates                          ="<<endl;
 			cout<<"\t\t\t\t=\t[3] View Current Benefit Enrollment                  ="<<endl;
 			cout<<"\t\t\t\t=\t[4] View Current Benefit Enrollment of an Employee   ="<<endl;
 			cout<<"\t\t\t\t=============================================================="<<endl;
@@ -706,9 +706,6 @@ void miscActions::viewReports(){
 					}
 					cout<<"\t\t\t\t\t Do you want a hard copy of this list? (y/n): ";
 					cin>>ch;
-					system("cls");
-					loadingBar();
-					cout<<"\n\n\t\t\t\t\t\t Print Successful!"<<endl;
 					int Start=0, End=0;
 					userInFile.open("Database/job openings.txt");
 					userOutFile.open("Database/print job openings.txt");
@@ -755,12 +752,18 @@ void miscActions::viewReports(){
 //								if(found=="Open"||found=="Close"){
 //									userOutFile<<cin.ignore();
 //								}
+								
 							}
 							else{
 								break;
 							}
 							
 							}
+							system("cls");
+							loadingBar();
+							cout<<"\n\n\t\t\t\t\t\t Print Successful!"<<endl;
+							cout<<"\n\n\t\t\t\t\t\t ";
+							system("pause");
 							userInFile.close();
 							userOutFile.close();
 						}
