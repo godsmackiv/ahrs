@@ -6,12 +6,12 @@ CC       = gcc.exe
 WINDRES  = windres.exe
 OBJ      = main.o departments.o locations.o jobPositions.o benefits.o employeeRecords.o jobOpenings.o timeReports.o payroll.o users.o paySlips.o miscActions.o
 LINKOBJ  = main.o departments.o locations.o jobPositions.o benefits.o employeeRecords.o jobOpenings.o timeReports.o payroll.o users.o paySlips.o miscActions.o
-LIBS     = -L"C:/Dev-Cpp/MinGW64/lib" -L"C:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+LIBS     = -L"C:/Dev-Cpp/MinGW64/lib" -L"C:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"C:/Dev-Cpp/MinGW64/include" -I"C:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include"
 CXXINCS  = -I"C:/Dev-Cpp/MinGW64/include" -I"C:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++"
 BIN      = HRS.exe
-CXXFLAGS = $(CXXINCS) 
-CFLAGS   = $(INCS) 
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
 RM       = rm.exe -f
 
 .PHONY: all all-before all-after clean clean-custom

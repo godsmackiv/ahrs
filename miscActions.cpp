@@ -644,7 +644,7 @@ string miscActions::getDateTime(bool timeOnly, bool dateOnly) {
 	return t;
 }
 
-int miscActions::convertMonth(string sMonth) {
+int miscActions::convertToIMonth(string sMonth) {
 	int n = 0;
 	
 	if (sMonth == "Jan") {
@@ -674,4 +674,85 @@ int miscActions::convertMonth(string sMonth) {
 	} 
 	return n;
 }
+
+string miscActions::convertToSMonth(int iMonth) {
+	string n;
+	
+	if (iMonth == 1) {
+		n = "Jan";
+	} else if (iMonth == 2) {
+		n = "Feb";
+	} else if (iMonth == 3) {
+		n = "Mar";
+	} else if (iMonth == 4) {
+		n = "Apr";
+	} else if (iMonth == 5) {
+		n = "May";
+	} else if (iMonth == 6) {
+		n = "Jun";
+	} else if (iMonth == 7) {
+		n = "Jul";
+	} else if (iMonth == 8) {
+		n = "Aug";
+	} else if (iMonth == 9) {
+		n = "Sep";
+	} else if (iMonth == 10) {
+		n = "Oct";
+	} else if (iMonth == 11) {
+		n = "Nov";
+	} else if (iMonth == 12) {
+		n = "Dec";
+	} 
+	return n;
+}
+
+bool miscActions::isLeapYear(int argYear) {
+	if (argYear % 400 == 0) {
+		return true;
+	} else if (argYear % 100 == 0) {
+		return false;
+	} else if (argYear % 4 == 0) {
+		return true;
+	} 
+	return false;
+}
+
+int miscActions::numberOfDaysInMonth(int argMonth, int argYear) {
+	if (argMonth == 1 || argMonth == 3 || argMonth == 5 || argMonth == 7 || argMonth == 8 || argMonth == 10 || argMonth == 12) {
+		return 31;
+	} else if (argMonth == 2) {
+		if (isLeapYear(argYear)) {
+			return 29;
+		}
+		return 28;
+	} else if (argMonth == 4 || argMonth == 6 || argMonth == 9 || argMonth == 11 ) {
+		return 30;
+	} 
+	cout << "Error: Unable to return correct number of days in month.";
+	return 0;
+}
+
+int miscActions::whatIsDayOfDate(int argYear, int argMonth, int argDate) {
+	tm timeStruct = {};
+	timeStruct.tm_year = argYear - 1900;
+	timeStruct.tm_mon = argMonth - 1;
+	timeStruct.tm_mday = argDate;
+	timeStruct.tm_hour = 12;    //  To avoid any doubts about summer time, etc.
+	mktime( &timeStruct );
+	return timeStruct.tm_wday;
+}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		

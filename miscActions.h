@@ -37,7 +37,11 @@ class miscActions {
 	 	
 		string getDateTime(bool timeOnly, bool dateOnly);
 		int getYear();
-		int convertMonth(string);
+		int convertToIMonth(string);
+		string convertToSMonth(int);
+		bool isLeapYear(int);
+		int numberOfDaysInMonth(int, int);
+		int whatIsDayOfDate(int, int, int);
 				
 };
 

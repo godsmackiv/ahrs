@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <ctime>
 #include "miscActions.h"
 #include "employeeRecords.h"
 
@@ -17,7 +18,7 @@ class timeReports{
 		miscActions mActions;
 		employeeRecords eRecords;
 		
-		string timeRepID, employeeID, month, year, workDate, reportStatus, totalWorkHours, disapproval, adjustments, adjustmentTimeLog;
+		string timeRepID, employeeID, reportStatus, totalWorkHours, disapproval, adjustments, adjustmentTimeLog;
 	public:
 		void viewNoTimeReports();
 		void enterTimeReport();
@@ -30,11 +31,11 @@ class timeReports{
 		
 		void autoGenerateTimeReports(); //must be run during start of program, finds days automatically with no time reports		
 				
-		bool timeReports::doesReportExists(string employeeID, string year, string month, string day); // checks if a specific time report of individual exists
+		bool doesReportExists(string, string, string, string); // checks if a specific time report of individual exists
 		void updateTimeReportDB(string, string);
 		string getValueFromEntry(string element, string entry); //gets specific value of a database element within a database entry		
 		bool searchTimeReportDB(string, string, string *, bool); //assigns string to *focus where query was found
-	
+		int getLastReportID(string);
 };
 
 #endif
