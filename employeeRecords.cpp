@@ -338,39 +338,57 @@ int employeeRecords::getNumberOfEmployees() {
 }
 
 string employeeRecords::getEmployeeInfo(string ID, string type) {
-	string line, temp;
+//	cout << endl << "id: " << ID << " type: " << type;
+	string found, temp;
 	int posStart, posEnd;
+	
+//	cin.clear();
+//	cin.ignore(10000, '\n');
 	
 	erInFile.open("database/employees.txt");
 	if (erInFile.is_open()) {
 		
-		
+		erInFile.clear();
 //		cout<<"got here";
 //		cout << getline (erInFile,line);
 //		cout << getline (erInFile,line);
 //		cout << line;
-		
-		while ( getline (erInFile,line) ) {
+//		cout << getline (erInFile,temp);
+//		found = "";
+//		temp = "";
+//		getline(erInFile, temp, '\n');
+		while (getline(erInFile, temp, '\n')) {
+//			cin.clear();
+//			cout << endl << endl << "line is " << temp << " end" << endl <<endl;
 			
+				
 //			cout<<"got here";
-			posStart = line.find("$eid#") + 5;
-			posEnd = line.find("$eid#", posStart);
-//			cout << endl << posStart << " " << posEnd;
-//			cout << " " << line.substr(posStart, posEnd - posStart);
-			if (line.substr(posStart, posEnd - posStart) == ID) {
-//				cout << "got here";
-				posStart = line.find("$"+type+"#") + 5;
-				posEnd = line.find("$"+type+"#", posStart);
-//				cout << line;
-				line = line.substr(posStart, posEnd - posStart); 
-				break;
-			}// else {
+//			cout<<temp;
+			if (temp.size() > 0) {
+				posStart = temp.find("$eid#") + 5;
+				posEnd = temp.find("$eid#", posStart);
+	//			cout << endl << posStart << " " << posEnd;
+	//			cout << " " << line.substr(posStart, posEnd - posStart);
+				found = temp.substr(posStart, posEnd - posStart);
+//				cout << "found ID: " << found << endl << endl;
+				if (found == ID) {
+	//				cout << "got here";
+					posStart = temp.find("$"+type+"#") + 5;
+					posEnd = temp.find("$"+type+"#", posStart);
+	//				cout << line;
+					temp = temp.substr(posStart, posEnd - posStart); 
+					break;
+				}// else {	
+			} else {
+				cout << "Error (getEmployeeInfo): Got a blank line from getline.";
+			}
 ////				cout << endl << "boo!";
 //			}
+			erInFile.clear();
 		}
 		 erInFile.close();
 	}
   	else cout << "Error: Unable to open Employees database."; 
 	
-	return line;
+	return temp;
 }

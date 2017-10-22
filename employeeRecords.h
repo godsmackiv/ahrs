@@ -33,7 +33,7 @@ class employeeRecords{
 		bool rewriteEmployeeRecord();
 		int getNumberOfEmployees();
 		string getEmployeeInfo(string, string); // requires ID is known
-		
+	
 };
 
 #endif

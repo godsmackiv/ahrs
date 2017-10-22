@@ -42,6 +42,8 @@ class miscActions {
 		bool isLeapYear(int);
 		int numberOfDaysInMonth(int, int);
 		int whatIsDayOfDate(int, int, int);
+		int stringToInt(string);
+		string intToString(int);
 				
 };
 

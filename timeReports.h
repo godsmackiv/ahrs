@@ -29,7 +29,7 @@ class timeReports{
 		void viewSubmittedReports();
 		void disapproveReport();
 		
-		void autoGenerateTimeReports(); //must be run during start of program, finds days automatically with no time reports		
+		void autoGenerateTimeReports(); //must be run during start of program and hiring of an employee, finds days automatically with no time reports		
 				
 		bool doesReportExists(string, string, string, string); // checks if a specific time report of individual exists
 		void updateTimeReportDB(string, string);

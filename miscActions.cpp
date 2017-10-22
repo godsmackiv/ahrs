@@ -741,9 +741,26 @@ int miscActions::whatIsDayOfDate(int argYear, int argMonth, int argDate) {
 	mktime( &timeStruct );
 	return timeStruct.tm_wday;
 }
-		
-		
-		
+
+int miscActions::stringToInt(string argString) {
+	stringstream s;
+	int i;
+	
+	s << argString;
+	s >> i;
+	
+	return i;
+}
+
+string miscActions::intToString(int argInt) {
+	stringstream s;
+	string str;
+	
+	s << argInt;
+	str = s.str();
+	
+	return str;
+}
 		
 		
 		

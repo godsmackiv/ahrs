@@ -2,17 +2,63 @@
 
 void timeReports::viewNoTimeReports() {
 	stringstream sline;
+	string temp;
+	string *noReportEmployees;
+	int lastEmployeeID, lastAddedPos;
+	bool isAdded;
+//	int ctr;
 	
+	system("cls");
+	cout << endl << "Here are the list of employees without (or with missing) Time Reports: ";
 	
+	userInFile.open("database/timeReports.txt");
+	userInFile.clear();
 	
+	lastEmployeeID = eRecords.getNumberOfEmployees();
+	getline(userInFile, temp);
+	userInFile.clear();
+	noReportEmployees = new string[lastEmployeeID];
 	
-//	for (int i = 1; ) 
-	//for each non-applicant employee
-	//get worker's starting date
-	//for each to cut off periods of each month of to current month, determine if there are missing time reports
-	//
+	lastAddedPos = 0;
+	if (userInFile.is_open()) {
+		while(getline(userInFile, temp)) {
+			userInFile.clear();
+			
+			if (getValueFromEntry("$trs#", temp) == "No Report") {
+				temp = getValueFromEntry("$tei#", temp);
+//				cout << endl << temp;
+			}
+			
+			isAdded = false;
+			for(int i = 0; i < lastEmployeeID - 1; i++) {
+				if (noReportEmployees[i] == temp) {
+					isAdded = true;
+					break;
+				}
+			}
+			if (!isAdded) {
+//				cout << "adding";
+				noReportEmployees[lastAddedPos] = temp;
+//				cout << noReportEmployees[lastAddedPos];
+				lastAddedPos++;			
+			}
+		}
+		
+		cout << endl << "\tEmployee ID\tEmployee Name";
+		cout << endl << "\t___________\t_____________";
+		for (int i = 0; i < lastEmployeeID; i++) {
+			if (noReportEmployees[i] != "") {
+//				cout << "hey";
+				cout << endl << "\t" << noReportEmployees[i] << "\t\t";
+				cout << eRecords.getEmployeeInfo(noReportEmployees[i], "ena");
+			}
+		}
+		userInFile.close();
+	} else {
+		cout << endl << "Error (viewNoTimeReports): Unable to open Time Reports database.";
+	}
 	
-	
+	delete[] noReportEmployees;
 }
 
 void timeReports::autoGenerateTimeReports() {
@@ -88,7 +134,7 @@ void timeReports::autoGenerateTimeReports() {
 //						cout << mActions.whatIsDayOfDate(nYears, nMonths, nDays)<< " ";
 						if (mActions.whatIsDayOfDate(nYears, nMonths, nDays) > 0 && mActions.whatIsDayOfDate(nYears, nMonths, nDays) < 6) {
 							doesReportExists(currentEmployeeID, sYears, sMonths, sDays);
-							cout << "got here";
+//							cout << "got here";
 						}
 
 						if (nYears == mYears && nMonths == mMonths && nDays == mDays) {
@@ -282,7 +328,6 @@ bool timeReports::doesReportExists(string empID, string workYear, string workMon
 				tempOut << "$tid#"+nextID+"$tid#$tei#"+empID+"$tei#$twy#"+workYear+"$twy#$twm#"+workMonth+"$twm#$twd#"+workDay+"$twd#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#\n";
 			} else { 
 				cout << endl << "Error 2 (doesReportExists): Unable to open file. " << tempIn.is_open() << tempOut.is_open();
-				
 			}
 			
 			tempIn.close();
@@ -324,18 +369,14 @@ bool timeReports::doesReportExists(string empID, string workYear, string workMon
 }
 
 void timeReports::enterTimeReport() {
-	string newTimeRepID, newEmployeeID, newMonth, newYear, newWorkDate, newReportStatus, newTotalWorkHours;
-	string newDisapproval, newAdjustments, newAdjustmentTimeLog, temp;
-	int lI;
-	bool repeat;
+	string newEmployeeID, newMonth, newYear, temp, line, found, newInfo;
+	int cutoffSelection, iDay, iHours;
+	bool repeat, query1, query2, query3, toUpdate, gotUpdated;
 	char s;
 	stringstream sline, sLI;
 	
 	system("cls");		
 	
-	userInFile.open("database/timeReports.txt");
-	userOutFile.open("temp.txt");
-
 
 	repeat = true;
 	while (repeat) {
@@ -343,80 +384,168 @@ void timeReports::enterTimeReport() {
 		getline(cin, newEmployeeID);
 //		cout << eRecords.searchEmployee(newEmployeeID, "eid");
 		if (eRecords.searchEmployee(newEmployeeID, "eid")) {
-			repeat = false;
+			if (eRecords.getEmployeeInfo(newEmployeeID, "ees") == "Applicant") {
+				cout << "Error: You can't create time reports for applicants." << endl;			
+			} else {
+				repeat = false;
+			}
+			
 		} else {
 			cout << "Error: No employee exists with that ID." << endl;
 			cout << "Note: Make sure you don't enter any spaces." << endl;
-			system("pause");
+//			system("pause");
 		}
 	}
 	
-	repeat = true;
-	if (userInFile.is_open() && userOutFile.is_open()){
-		while (getline(userInFile, temp)) {
-			if (repeat) {
-				sline << getValueFromEntry("$lI#", temp);
-				sline >> lI;
-				sline.str(string());
-				sline.clear();	
-				
-				cout << endl << "Please indicate the year of work: ";
-				getline(cin, newYear);
-				
-				cout << endl << "Please indicate the month of work: ";
-				getline(cin, newMonth);
-				
-				cout << endl << "Please indicate the day of work (1-11 or 12-22): ";
-				getline(cin, newWorkDate);
-				
-				cout << endl << "Input the hours that worker clocked in for that work day: ";
-				getline(cin, newTotalWorkHours);
-			
-				lI++;
-				sline.str(string());
-				sline.clear();
-				sline << lI;
-				sline >> newTimeRepID;
-				while (newTimeRepID.length() < 6) {
-					newTimeRepID.insert(0, "0");
-				}	
-			}
-			repeat = false;
-			
-			temp += "\n";
-			userOutFile << temp;
+	
+	cout << endl << "Please indicate the year of work (ex: 2017): ";
+	getline(cin, newYear);
+	
+	cout << endl << "Please indicate the month of work (ex: Jan): ";
+	getline(cin, newMonth);
+	
+	do {
+		cout << endl << "Please select a cutoff period.";
+		cout << endl << " [1] 1st to 15th day";
+		cout << endl << " [2] 16th to 29th/30th/31st day (whichever applicable)";
+		cout << endl << "Selection: ";
+		getline(cin, temp);
+		sline << temp;
+		sline >> cutoffSelection;
+		if (cutoffSelection == 1 || cutoffSelection == 2) {
+			break;
+		} else {
+			cout << "Error: Invalid selection. Please try again." << endl;
 		}
+		sline.str(string());
+		sline.clear();
+	} while (!(cutoffSelection == 1 || cutoffSelection == 2));
+	
+	ifstream src("database/timeReports.txt", ios::binary);
+	ofstream dst("temp/tempReports.txt", ios::binary);
+	
+	dst << src.rdbuf();
+	
+	dst.close();
+	src.close();
+//	system("pause");
+	src.clear();
+	src.open("temp/tempReports.txt");
 		
-		userOutFile << "$tid#"+newTimeRepID+"$tid#$tei#"+newEmployeeID+"$tei#$twy#"+newYear+"$twy#$twm#"+newMonth+"$twm#$twd#"+newWorkDate+"$twd#$twh#"+newTotalWorkHours+"$twh#$trs#$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#";
-		
-		userInFile.close();
-		userOutFile.close();
-		
-		ifstream fileIn("temp.txt");
-		ofstream fileOut("database/timeReports.txt");
-		
-		repeat = true;
-		if (fileIn.is_open() && fileOut.is_open()) {
-			while (getline(fileIn, temp)) {
-				if (repeat) {
-					sLI << lI;
-					fileOut << "$lI#"+sLI.str()+"$lI#\n";
-					repeat = false;
-				} else {
-					temp += "\n";
-					fileOut << temp;
+	if (src.is_open()) {
+		src.clear();
+		getline(src, line);
+		src.clear();
+		while (getline(src, line)) {
+			toUpdate = false; query1 = false; query2 = false; query3 = false;
+//			cout << "last is " << last; 
+			
+			if (getValueFromEntry("$trs", line) == "No Report") {
+				found = getValueFromEntry("$tei#", line);		
+				if (found == newEmployeeID) {
+					query1 = true;
 				}
 				
-			}
-			fileIn.close();
-			fileOut.close();	
-		} else {
-			cout << endl << "Error: Unable to update Time Reports database."; 
+				found = getValueFromEntry("$twy#", line);		
+				if (found == newYear) {
+					query2 = true;
+				}
+	
+				found = getValueFromEntry("$twm#", line);		
+				if (found == newMonth) {
+					query3 = true;
+				}
+	
+				found = getValueFromEntry("$twd#", line);		
+				sline << found;
+				sline >> iDay;
+				sline.str(string());
+				sline.clear();
+				
+				
+				if (query1 && query2 && query3) {
+					newInfo = "$tid#"+getValueFromEntry("$tid#", line)+"$tid#";
+					newInfo += "$tei#"+newEmployeeID+"$tei#";
+					newInfo += "$twy#"+newYear+"$twy#";
+					newInfo += "$twm#"+newMonth+"$twm#";
+
+					if (cutoffSelection == 1) {
+						if (iDay <= 15) {
+							repeat = true;
+							do {
+								cout << endl << "Please enter the total hours the worker logged for ";
+								cout << newMonth << " " << found << ", " << newYear << ": ";
+								getline(cin, temp);
+								sline << temp;
+								sline >> iHours;
+								sline.str(string());
+								sline.clear();
+								
+								if (iHours >= 0 && iHours <= 24) {
+									repeat = false;
+									toUpdate = true;
+								} else {
+									cout << "Error: You can only enter from 0 to 24 hours per work day." << endl;
+								}	
+							} while (repeat);
+						}
+					} else {
+						if (iDay >= 16) {
+							repeat = true;
+							do {
+								cout << endl << "Please enter the total hours the worker logged for ";
+								cout << newMonth << " " << found << ", " << newYear << ": ";
+								getline(cin, temp);
+								sline << temp;
+								sline >> iHours;
+								sline.str(string());
+								sline.clear();
+								
+								if (iHours >= 0 && iHours <= 24) {
+									repeat = false;
+									toUpdate = true;
+								} else {
+									cout << "Error: You can only enter from 0 to 24 hours per work day." << endl;
+								}	
+							} while (repeat);
+						}
+					}
+				}
+
+				
+			}		
+
+			src.clear();
+			
+			
+			newInfo += "$twd#"+mActions.intToString(iDay)+"$twd#";
+			newInfo += "$twh#"+mActions.intToString(iHours)+"$twh#";
+			newInfo += "$trs#Submitted$trs#";
+			newInfo += "$trd#"+getValueFromEntry("$trd#", line)+"$trd#";
+			newInfo += "$tal#"+getValueFromEntry("$tal#", line)+"$tal#";
+			newInfo += "$ttd#"+getValueFromEntry("$ttd#", line)+"$ttd#";	
+			
+			if (toUpdate) {
+				updateTimeReportDB(getValueFromEntry("$tid#", line), newInfo);
+				gotUpdated = true;
+			} 
 		}
-	remove("temp.txt");	
+		
+		if (!gotUpdated) {
+			cout << endl << "Error: Sorry. There are no lacking/missing/needed time reports";
+			cout << endl << "for the cutoff period you specified. Or you may have entered";
+			cout << endl << "wrong information. Please try again.";
+		}
+		
+		
+		src.close();
+		
 	} else {
-		cout << endl << "Error: Unable to open Time Reports database."; 
+		cout << endl << "Error 1 (enterTimeReport): Unable to open file.";
 	}
+
+	
+	remove("temp/tempReports.txt");
 }
 
 void timeReports::employeeTimeReports() {
@@ -448,10 +577,13 @@ void timeReports::updateTimeReportDB(string reportID, string newInfo) {
 	string temp, orig;
 	int posStart, posEnd, id;
 	
-	userInFile.open("database/time reports.txt");
+	userInFile.open("database/timeReports.txt");
 	userOutFile.open("temp.txt");
 	
-	if (userInFile.is_open() && userOutFile.is_open()){
+	if (userInFile.is_open() && userOutFile.is_open()){ 
+		userInFile.clear();
+		userOutFile.clear();
+	
 		while (getline(userInFile, temp)) {
 			orig = temp;
 			posStart = temp.find("$tid#") + 5;
@@ -467,7 +599,7 @@ void timeReports::updateTimeReportDB(string reportID, string newInfo) {
 		userOutFile.close();
 		
 		ifstream fileIn("temp.txt");
-		ofstream fileOut("database/time reports.txt");
+		ofstream fileOut("database/timeReports.txt");
 		
 		if (fileIn.is_open() && fileOut.is_open()) {
 			while (getline(fileIn, temp)) {
@@ -478,31 +610,72 @@ void timeReports::updateTimeReportDB(string reportID, string newInfo) {
 			fileIn.close();
 			fileOut.close();	
 		} else {
-			cout << endl << "Error: Unable to update Time Reports database."; 
+			cout << endl << "Error 1 (updateTimeReportDB): Unable to update Time Reports database."; 
 		}
 	remove("temp.txt");	
 	} else {
-		cout << endl << "Error: Unable to open Time Reports database."; 
+		cout << endl << "Error 2 (updateTimeReportDB): Unable to open Time Reports database."; 
 	}
 	
 	
 }
 
 string timeReports::getValueFromEntry(string element, string entry) { //gets specific value of a database element within a database entry
+//	cout << endl << "Entering getValueFromEntry";
+	
 	int posStart, posEnd;
+	
 	
 	posStart = entry.find(element) + 5;
 	posEnd = entry.find(element, posStart);
 	
 	if (posEnd == -1) {
-		return "n/a";
+		cout << endl << "Error (getValueFromEntry): Unable to find element in entry.";
+		cout << endl << "element: " << element << ", entry: " << entry << endl << endl;
+		return "";
 	} else {
 		return entry.substr(posStart, posEnd - posStart);	
 	}
 }
 
-bool timeReports::searchTimeReportDB(string query, string, string *focus, bool keepSearching)  { //assigns string to *focus where query was found
+bool timeReports::searchTimeReportDB(string query, string element, string *focus, bool keepSearching)  { //assigns string to *focus where query was found
+	string line, found;
+	int ctr;
 
+	ctr = 0;
+	userInFile.open("database/timeReports.txt");
+	if (userInFile.is_open()) {
+		if (keepSearching) 
+			cout << endl << "Search results: ";	
+		while ( getline (userInFile,line) ) {
+			*focus = line;
+//			cout << endl << line;
+			found = getValueFromEntry(element, line);
+//			cout << endl << found;
+//			cout << endl << line.substr(posStart, posEnd - posStart);
+			if (keepSearching) {
+				if (query == found) {
+					cout << endl << line; // edit this to be more user friendly
+					ctr++;
+				}
+			} else {
+				if (query == found) {
+				userInFile.close();
+				//cout << endl << focus;
+				return true;
+				}		
+			}
+		}
+		if (!ctr) {
+			if (keepSearching) {
+				cout << endl << "No entries found!";
+			} 
+		}
+		 userInFile.close();
+	}
+  	else cout << "Error (searchTimeReportDB): Unable to open Time Reports database."; 
+
+	return false;
 }
 
 
