@@ -21,11 +21,12 @@ int main(int argc, char** argv) {
 	employeeRecords e;
 //	
 //	cout << e.getEmployeeInfo("000005", "esd");
-//	t.autoGenerateTimeReports();
+	t.autoGenerateTimeReports();
 //	cout << e.getNumberOfEmployees();
 //	t.viewNoTimeReports();
-	t.enterTimeReport();
-
+//	t.enterTimeReport();
+	t.employeeTimeReports();
+	
 //	q = m.stringToInt("a100a");
 //	cout << q;
 //	
