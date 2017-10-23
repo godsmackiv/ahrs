@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 //	cout << e.getNumberOfEmployees();
 //	t.viewNoTimeReports();
 //	t.enterTimeReport();
-	t.employeeTimeReports();
+//	t.employeeTimeReports();
 	
 //	q = m.stringToInt("a100a");
 //	cout << q;

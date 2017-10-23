@@ -18,7 +18,7 @@ class timeReports{
 		miscActions mActions;
 		employeeRecords eRecords;
 		
-		string timeRepID, employeeID, reportStatus, totalWorkHours, disapproval, adjustments, adjustmentTimeLog;
+//		string timeRepID, employeeID, reportStatus, totalWorkHours, disapproval, adjustments, adjustmentTimeLog;
 	public:
 		void viewNoTimeReports();
 		void enterTimeReport();

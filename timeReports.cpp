@@ -62,12 +62,9 @@ void timeReports::viewNoTimeReports() {
 }
 
 void timeReports::autoGenerateTimeReports() {
-	int lI, nYears, nMonths, nDays, mYears, mMonths, mDays;
-	string sYears, sMonths, sDays, temp, currentEmployeeID;
+	int lI, nYears, nMonths, nDays, mYears, mMonths, mDays, cutoffPeriod, lastCutoff;
+	string sYears, sMonths, sDays, temp, currentEmployeeID, sCutoffPeriod;
 	stringstream sline;
-	bool is_leap_year;
-//	bool bYears, bMonths, bDays;
-//	bool isApplicant;
 	
     lI = eRecords.getNumberOfEmployees();
 	userOutFile.open("temp/tempReports.txt");
@@ -77,76 +74,65 @@ void timeReports::autoGenerateTimeReports() {
 	
 	//first loop: search per employee
 	for (int i = 1; i <= lI; i++) {
-//		cout << lI;
-		sline << i;
-		sline >> currentEmployeeID;
-		sline.str(string());
-		sline.clear();
+		currentEmployeeID = mActions.intToString(i);
 
 		while (currentEmployeeID.length() < 6) {
 			currentEmployeeID.insert(0, "0");
 		}
 		
-//		cout << eRecords.getEmployeeInfo(currentEmployeeID.c_str(), "ees");
+		//get starting date from employee database
 		if (eRecords.getEmployeeInfo(currentEmployeeID.c_str(), "ees") != "Applicant") {
-//			cout << "entered here";
 			sYears = eRecords.getEmployeeInfo(currentEmployeeID.c_str(), "esd");
 			if (sYears.size() > 0) {
 				sDays = sYears.substr(4, 2);
 				sMonths = sYears.substr(0, 3);
 				sYears = sYears.substr(7, 4);	
 			}
-//			cout << endl << sMonths << " " << sDays << " " << sYears;
-//			
-			stringstream tYears(sYears);
-			tYears >> nYears;
-			nMonths = mActions.convertToIMonth(sMonths);
-			stringstream tDays(sDays);
-			tDays >> nDays;
+
+			//STARTING DATE in int form
+			nYears = mActions.stringToInt(sYears);
+			nMonths = mActions.convertToIMonth(sMonths);	
+			nDays = mActions.stringToInt(sDays);
 			
-			stringstream a(mActions.getDateTime(false, true).substr(8,4));
-			a >> mYears;
+			//CURRENT DATE in int form
+			mYears = mActions.stringToInt(mActions.getDateTime(false, true).substr(8,4));
 			mMonths = mActions.convertToIMonth(mActions.getDateTime(false, true).substr(0,3));
-			stringstream c(mActions.getDateTime(false, true).substr(4,2));			
-			c >> mDays;
+			mDays = mActions.stringToInt(mActions.getDateTime(false, true).substr(4,2));
+
 			
-			//n starting date, m date today
-//			cout << endl << "nMonths " << nMonths << " " << nDays << " " << nYears << endl;
-//			cout << endl << "mMonths " << mMonths << " " << mDays << " " << mYears << endl;
+			if (nDays < 16) {
+				cutoffPeriod = 1;
+			} else {
+				cutoffPeriod = 2;
+			}
 			
-			stringstream days;
-			stringstream years;
-			
+			if (mDays < 16) {
+				lastCutoff = 1;
+			} else {
+				lastCutoff = 2;
+			}
 			
 			while (nYears <= mYears) {
-				years.str(string());
-				years.clear();
-				years << nYears;
-				years >> sYears;
+				
+				sYears = mActions.intToString(nYears);
 				while (nMonths <= 12) {
-					while (nDays <= mActions.numberOfDaysInMonth(nMonths, nYears)) {
-						days.str(string());
-						days.clear();
-						days << nDays;
-						days >> sDays;
+					
+					while (cutoffPeriod <= 2) {
+						sCutoffPeriod = mActions.intToString(cutoffPeriod);
 						sMonths = mActions.convertToSMonth(nMonths);
-						
-//						cout << mActions.whatIsDayOfDate(nYears, nMonths, nDays)<< " ";
-						if (mActions.whatIsDayOfDate(nYears, nMonths, nDays) > 0 && mActions.whatIsDayOfDate(nYears, nMonths, nDays) < 6) {
-							doesReportExists(currentEmployeeID, sYears, sMonths, sDays);
-//							cout << "got here";
-						}
+						doesReportExists(currentEmployeeID, sYears, sMonths, sCutoffPeriod);						
 
-						if (nYears == mYears && nMonths == mMonths && nDays == mDays) {
+						if (nYears == mYears && nMonths == mMonths && cutoffPeriod == lastCutoff) {
 							break;
 						}
-						nDays++;	
+						cutoffPeriod++;	
 					}
-					if (nYears == mYears && nMonths == mMonths && nDays == mDays) {
+					
+					if (nYears == mYears && nMonths == mMonths && cutoffPeriod == lastCutoff) {
 						break;
 					}
 					nMonths++;
-					nDays = 1;
+					cutoffPeriod = 1;
 				}
 				nMonths = 1;
 				nYears++;
@@ -154,6 +140,7 @@ void timeReports::autoGenerateTimeReports() {
 		}	
 	}
 	
+//	system("pause");
 	
 	
 	ifstream tempIn("temp/newReports.txt");
@@ -162,7 +149,8 @@ void timeReports::autoGenerateTimeReports() {
 	
 	if (tempIn.is_open() && userInFile.is_open() && userOutFile.is_open()) {
 		getline(userInFile, temp); //ignore old lI
-		getline(tempIn, temp); 
+		getline(tempIn, temp);  
+//		cout << "new LI is: " << temp;
 		temp += "\n";
 		userOutFile << temp; //record new lI
 		
@@ -223,8 +211,7 @@ int timeReports::getLastReportID(string fileName) {
 		if (line.size() > 0) {
 			line = line.substr(posStart, posEnd - posStart);
 		}
-		stringstream s(line);
-		s >> num;
+		num = mActions.stringToInt(line);
 //		cout << "entered here";
 //		cout << "num is " << num <<".";
 		userInFile.close();
@@ -237,11 +224,12 @@ int timeReports::getLastReportID(string fileName) {
 }
 
 //if report doesn't exist, add it
-bool timeReports::doesReportExists(string empID, string workYear, string workMonth, string workDay) {
+bool timeReports::doesReportExists(string empID, string workYear, string workMonth, string cutOff) {
+	
 //	cout << endl << empID << " " << workYear << " " << workMonth << " " << workDay;
 	string line, found, orig, nextID, temp;
 	int posStart, posEnd, lastID;
-	bool query1, query2, query3, query4, doIt;
+	bool query1, query2, query3, query4, doIt, isFirstLine;
 	ofstream tempOut;
 	ifstream tempIn;
 	
@@ -250,23 +238,25 @@ bool timeReports::doesReportExists(string empID, string workYear, string workMon
 //	cout << getLastReportID("temp/newReports.txt");
 	if (getLastReportID("database/timeReports.txt") > getLastReportID("temp/newReports.txt")) {
 		lastID = getLastReportID("database/timeReports.txt");
-//		cout << "lastID from timeReports";
+//		cout << "lastID from timeReports " << lastID;
 	} else {
 		lastID = getLastReportID("temp/newReports.txt");
-//		cout << "lastID from newReports";
+//		cout << "lastID taken from newReports: " << lastID;
 	}
 	userInFile.open("database/timeReports.txt");
+	userInFile.clear();
+	
 	doIt = true;
 	if (userInFile.is_open()) {
 		while (getline(userInFile, line)) {
+			userInFile.clear();
+			
 			query1 = false; query2 = false; query3 = false; query4 = false;
-//			cout << "last is " << last; 
 			
 			posStart = line.find("$tei#") + 5;
 			posEnd = line.find("$tei#", posStart);
 			found = line.substr(posStart, posEnd - posStart);
 			
-//			cout << "found: " << found << " employeeID: " << empID << " ";
 			if (found == empID) {
 				query1 = true;
 			}
@@ -287,51 +277,55 @@ bool timeReports::doesReportExists(string empID, string workYear, string workMon
 				query3 = true;
 			}
 			
-			posStart = line.find("$twd#") + 5;
-			posEnd = line.find("$twd#", posStart);
+			posStart = line.find("$tco#") + 5;
+			posEnd = line.find("$tco#", posStart);
 			found = line.substr(posStart, posEnd - posStart);
 			
-			if (found == workDay) {
+//			cout << endl << "found: " << found << ", cutOff: " << cutOff;
+			if (found == cutOff) {
 				query4 = true;
 			}
 			
-//			cout << endl << line;
-//			cout << endl << empID << " " << workYear << " " << workMonth << " " << workDay;
-//			cout << endl << query1 << query2 << query3 << query4 << endl;
+//			cout << endl << query1 << query2 << query3 << query4;
 			if (query1 && query2 && query3 && query4) {
 				doIt = false; //time report found
 			}
-//			cout << "doIt: " << doIt << endl;
-
+			
 		}
 		
 		lastID++;
-		stringstream sline;
-		sline << lastID;
-		sline >> nextID;
+		nextID = mActions.intToString(lastID);
+
 		while (nextID.length() < 6) {
 			nextID.insert(0, "0");
 		}
-//		cout << "nextID is " << nextID; 
 		
 		if (doIt) {
+//			cout << "entered doIt";
 			tempIn.open("temp/newReports.txt");
 			tempOut.open("temp/tempReports.txt");
 			
 			if (tempIn.is_open() && tempOut.is_open()) {
-				tempOut << "$lI#" + sline.str() + "$lI#\n";
+				tempOut << "$lI#" + mActions.intToString(lastID) + "$lI#\n";
 				getline(tempIn, temp);
+				tempIn.clear();
 				while(getline(tempIn, temp)) {
 					temp += "\n";
 					tempOut << temp;
+//					cout << endl << "putting to tempreports: " << temp; 
+					tempIn.clear();
 				}
-				tempOut << "$tid#"+nextID+"$tid#$tei#"+empID+"$tei#$twy#"+workYear+"$twy#$twm#"+workMonth+"$twm#$twd#"+workDay+"$twd#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#\n";
+				cout << endl;
+				system("pause");
+				tempOut << "$tid#"+nextID+"$tid#$tei#"+empID+"$tei#$twy#"+workYear+"$twy#$twm#"+workMonth+"$twm#$tco#"+cutOff+"$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#\n";
 			} else { 
 				cout << endl << "Error 2 (doesReportExists): Unable to open file. " << tempIn.is_open() << tempOut.is_open();
 			}
 			
 			tempIn.close();
 			tempOut.close();
+			
+//			system("pause");
 			
 			tempIn.open("temp/tempReports.txt");
 			tempOut.open("temp/newReports.txt");
@@ -340,6 +334,7 @@ bool timeReports::doesReportExists(string empID, string workYear, string workMon
 				while(getline(tempIn, temp)) {
 					temp += "\n";
 					tempOut << temp;
+					tempIn.clear();
 				}
 			} else { 
 				cout << endl << "Error 3 (doesReportExists): Unable to open file.";
