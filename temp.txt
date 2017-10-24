@@ -1,5 +1,0 @@
-
-$tid#000001$tid#$tei#000001$tei#$twy#2017$twy#$twm#Sep$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
-$tid#000002$tid#$tei#000001$tei#$twy#2017$twy#$twm#Oct$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
-$tid#000003$tid#$tei#000001$tei#$twy#2017$twy#$twm#Oct$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
-$tid#000004$tid#$tei#000003$tei#$twy#2017$twy#$twm#Oct$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#

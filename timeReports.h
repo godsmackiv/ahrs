@@ -7,23 +7,25 @@
 #include <ctime>
 #include "miscActions.h"
 #include "employeeRecords.h"
-
+#include "departments.h"
 
 using namespace std;
 
 class timeReports{
 	private:
-		ofstream userOutFile;
-		ifstream userInFile;
+		ofstream trOutFile;
+		ifstream trInFile;
 		miscActions mActions;
 		employeeRecords eRecords;
+		departments dRecords;
+		
 		
 //		string timeRepID, employeeID, reportStatus, totalWorkHours, disapproval, adjustments, adjustmentTimeLog;
 	public:
 		void viewNoTimeReports();
 		void enterTimeReport();
 		void employeeTimeReports();
-		void approveTimeReport();
+		void displayTimeReport();
 		void adjustTimeReport();
 		void deleteAdjustment();
 		void viewSubmittedReports();

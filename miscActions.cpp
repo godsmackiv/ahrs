@@ -702,7 +702,9 @@ string miscActions::convertToSMonth(int iMonth) {
 		n = "Nov";
 	} else if (iMonth == 12) {
 		n = "Dec";
-	} 
+	} else {
+		n = -1;
+	}
 	return n;
 }
 

@@ -1,1 +1,45 @@
-$lI#0$lI#
+$lI#44$lI#
+$tid#000001$tid#$tei#000001$tei#$twy#2017$twy#$twm#Jan$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000002$tid#$tei#000001$tei#$twy#2017$twy#$twm#Feb$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000003$tid#$tei#000001$tei#$twy#2017$twy#$twm#Feb$twm#$tco#2$tco#$twh#86$twh#$trs#Submitted$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000004$tid#$tei#000001$tei#$twy#2017$twy#$twm#Mar$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000005$tid#$tei#000001$tei#$twy#2017$twy#$twm#Mar$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000006$tid#$tei#000001$tei#$twy#2017$twy#$twm#Apr$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000007$tid#$tei#000001$tei#$twy#2017$twy#$twm#Apr$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000008$tid#$tei#000001$tei#$twy#2017$twy#$twm#May$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000009$tid#$tei#000001$tei#$twy#2017$twy#$twm#May$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000010$tid#$tei#000001$tei#$twy#2017$twy#$twm#Jun$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000011$tid#$tei#000001$tei#$twy#2017$twy#$twm#Jun$twm#$tco#2$tco#$twh#120$twh#$trs#Submitted$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000012$tid#$tei#000001$tei#$twy#2017$twy#$twm#Jul$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000013$tid#$tei#000001$tei#$twy#2017$twy#$twm#Jul$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000014$tid#$tei#000001$tei#$twy#2017$twy#$twm#Aug$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000015$tid#$tei#000001$tei#$twy#2017$twy#$twm#Aug$twm#$tco#2$tco#$twh#144$twh#$trs#Submitted$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000016$tid#$tei#000001$tei#$twy#2017$twy#$twm#Sep$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000017$tid#$tei#000001$tei#$twy#2017$twy#$twm#Sep$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000018$tid#$tei#000001$tei#$twy#2017$twy#$twm#Oct$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000019$tid#$tei#000001$tei#$twy#2017$twy#$twm#Oct$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000020$tid#$tei#000003$tei#$twy#2017$twy#$twm#Oct$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000021$tid#$tei#000007$tei#$twy#2016$twy#$twm#Nov$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000022$tid#$tei#000007$tei#$twy#2016$twy#$twm#Nov$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000023$tid#$tei#000007$tei#$twy#2016$twy#$twm#Dec$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000024$tid#$tei#000007$tei#$twy#2016$twy#$twm#Dec$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000025$tid#$tei#000007$tei#$twy#2017$twy#$twm#Jan$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000026$tid#$tei#000007$tei#$twy#2017$twy#$twm#Jan$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000027$tid#$tei#000007$tei#$twy#2017$twy#$twm#Feb$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000028$tid#$tei#000007$tei#$twy#2017$twy#$twm#Feb$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000029$tid#$tei#000007$tei#$twy#2017$twy#$twm#Mar$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000030$tid#$tei#000007$tei#$twy#2017$twy#$twm#Mar$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000031$tid#$tei#000007$tei#$twy#2017$twy#$twm#Apr$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000032$tid#$tei#000007$tei#$twy#2017$twy#$twm#Apr$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000033$tid#$tei#000007$tei#$twy#2017$twy#$twm#May$twm#$tco#1$tco#$twh#70$twh#$trs#Submitted$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000034$tid#$tei#000007$tei#$twy#2017$twy#$twm#May$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000035$tid#$tei#000007$tei#$twy#2017$twy#$twm#Jun$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000036$tid#$tei#000007$tei#$twy#2017$twy#$twm#Jun$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000037$tid#$tei#000007$tei#$twy#2017$twy#$twm#Jul$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000038$tid#$tei#000007$tei#$twy#2017$twy#$twm#Jul$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000039$tid#$tei#000007$tei#$twy#2017$twy#$twm#Aug$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000040$tid#$tei#000007$tei#$twy#2017$twy#$twm#Aug$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000041$tid#$tei#000007$tei#$twy#2017$twy#$twm#Sep$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000042$tid#$tei#000007$tei#$twy#2017$twy#$twm#Sep$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000043$tid#$tei#000007$tei#$twy#2017$twy#$twm#Oct$twm#$tco#1$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#
+$tid#000044$tid#$tei#000007$tei#$twy#2017$twy#$twm#Oct$twm#$tco#2$tco#$twh#$twh#$trs#No Report$trs#$trd#$trd#$tal#$tal#$ttd#$ttd#

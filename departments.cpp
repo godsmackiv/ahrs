@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <sstream>
 
-bool departments::searchDepartment(string query,string type){
+bool departments::searchDepartment(string query,string type) {
 	string line, found;
 	int posStart=0, posEnd=0;
 	
@@ -201,10 +201,67 @@ bool departments::rewriteDepartmentRecord(){
 	return 0;
 }
 
+int departments::getLastDeptID() {
+	string line;
+	int num, posStart, posEnd;
+	
+//	cout << endl << "filename is " << fileName; 
+	
+	num = 0; posStart = 0; posEnd = 0;
+	
+	deptInFile.open("database/departments.txt");
+	
+	if (deptInFile.is_open()) {
+		getline(deptInFile, line);
+		posStart = line.find("$lI#") + 4;
+		posEnd = line.find("$lI#", posStart);
+		if (line.size() > 0) {
+			line = line.substr(posStart, posEnd - posStart);
+		}
+		num = mActions.stringToInt(line);
+//		cout << "entered here";
+//		cout << "num is " << num <<".";
+		deptInFile.close();
+	} else {
+		cout << "Error (getLastDeptID): Unable to open file.";		
+	}
+	
+	return num;
+		
+}
 
 
+string departments::getDepartmentInfo(string ID, string type) {
+	string found, temp;
+	int posStart, posEnd;
 
+	deptInFile.open("database/departments.txt");
+	if (deptInFile.is_open()) {
+		
+		deptInFile.clear();
+		while (getline(deptInFile, temp, '\n')) {
 
+			if (temp.size() > 0) {
+				posStart = temp.find("$did#") + 5;
+				posEnd = temp.find("$did#", posStart);
+				found = temp.substr(posStart, posEnd - posStart);
+				if (found == ID) {
+					posStart = temp.find("$"+type+"#") + 5;
+					posEnd = temp.find("$"+type+"#", posStart);
+					temp = temp.substr(posStart, posEnd - posStart); 
+					break;
+				}
+			} else {
+				cout << "Error (getDepartmentInfo): Got a blank line from getline.";
+			}
+			deptInFile.clear();
+		}
+		 deptInFile.close();
+	}
+  	else cout << "Error: Unable to open Employees database."; 
+	
+	return temp;
+}
 
 
 

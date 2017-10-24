@@ -2,6 +2,7 @@
 #define __DEPARTMENTS_H_INCLUDED__
 #include <iostream>
 #include <fstream>
+#include "miscActions.h"
 
 using namespace std;
 class departments{
@@ -10,7 +11,10 @@ class departments{
 		string code, name;
 		
 		ifstream deptInFile;
-		ofstream deptOutFile;				
+		ofstream deptOutFile;
+		
+		miscActions mActions;
+						
 	public:
 		bool searchDepartment(string,string);
 		bool createNewDepartment();
@@ -18,6 +22,8 @@ class departments{
 		bool updateDepartment();
 		bool editDepartment(string,string,string);
 		bool rewriteDepartmentRecord();
+		int getLastDeptID();
+		string getDepartmentInfo(string, string);
 };
 
 #endif
