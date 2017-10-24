@@ -1,6 +1,7 @@
 #include "timeReports.h"
 
 void timeReports::viewNoTimeReports() {
+	miscActions mActions;
 	stringstream sline;
 	string temp;
 	string *noReportEmployees;
@@ -9,7 +10,7 @@ void timeReports::viewNoTimeReports() {
 //	int ctr;
 	
 	system("cls");
-	cout << endl << "Here are the list of employees without (or with missing) time reports";
+	cout << endl << "Here are the list of employees without (or with missing) time reports:";
 	
 	trInFile.open("database/timeReports.txt");
 	trInFile.clear();
@@ -63,7 +64,73 @@ void timeReports::viewNoTimeReports() {
 	delete[] noReportEmployees;
 }
 
+void timeReports::viewWithTimeReports() {
+	miscActions mActions;
+	stringstream sline;
+	string temp;
+	string *noReportEmployees;
+	int lastEmployeeID, lastAddedPos;
+	bool isAdded;
+//	int ctr;
+	
+	system("cls");
+	cout << endl << "Here are the list of employees with partial/complete time reports:";
+	
+	trInFile.open("database/timeReports.txt");
+	trInFile.clear();
+	
+	lastEmployeeID = eRecords.getNumberOfEmployees();
+	getline(trInFile, temp);
+	trInFile.clear();
+	noReportEmployees = new string[lastEmployeeID];
+	
+	lastAddedPos = 0;
+	if (trInFile.is_open()) {
+		while(getline(trInFile, temp)) {
+			trInFile.clear();
+			
+			if (getValueFromEntry("$trs#", temp) == "No Report") {
+				temp = getValueFromEntry("$tei#", temp);
+//				cout << endl << temp;
+				
+				isAdded = false;
+				for(int i = 0; i < lastEmployeeID - 1; i++) {
+					if (noReportEmployees[i] == temp) {
+						isAdded = true;
+						break;
+					}
+				}
+				if (!isAdded) {
+//					cout << "adding";
+					noReportEmployees[lastAddedPos] = temp;
+		//				cout << noReportEmployees[lastAddedPos];
+					lastAddedPos++;			
+				}
+			}
+			
+
+		}
+		
+		cout << endl << "\tEmployee ID\tEmployee Name";
+		cout << endl << "\t___________\t_____________";
+		for (int i = 0; i < lastEmployeeID; i++) {
+			if (noReportEmployees[i] != "") {
+//				cout << "hey";
+				cout << endl << "\t" << noReportEmployees[i] << "\t\t";
+				cout << eRecords.getEmployeeInfo(noReportEmployees[i], "ena");
+			}
+		}
+		trInFile.close();
+	} else {
+		cout << endl << "Error (viewNoTimeReports): Unable to open Time Reports database.";
+	}
+	
+	delete[] noReportEmployees;
+}
+
+
 void timeReports::autoGenerateTimeReports() {
+	miscActions mActions;
 	int lI, nYears, nMonths, nDays, mYears, mMonths, mDays, cutoffPeriod, lastCutoff;
 	string sYears, sMonths, sDays, temp, currentEmployeeID, sCutoffPeriod;
 	stringstream sline;
@@ -203,6 +270,7 @@ void timeReports::autoGenerateTimeReports() {
 }
 
 int timeReports::getLastReportID(string fileName) {
+	miscActions mActions;
 	string line;
 	int num, posStart, posEnd;
 	
@@ -233,7 +301,7 @@ int timeReports::getLastReportID(string fileName) {
 
 //if report doesn't exist, add it
 bool timeReports::doesReportExists(string empID, string workYear, string workMonth, string cutOff) {
-	
+	miscActions mActions;
 //	cout << endl << empID << " " << workYear << " " << workMonth << " " << workDay;
 	string line, found, orig, nextID, temp;
 	int posStart, posEnd, lastID;
@@ -372,6 +440,7 @@ bool timeReports::doesReportExists(string empID, string workYear, string workMon
 }
 
 void timeReports::enterTimeReport() {
+	miscActions mActions;
 	string newEmployeeID, newMonth, newYear, temp, line, found, newInfo;
 	int cutoffSelection, iDays, iHours;
 	bool repeat, query1, query2, query3, query4, toUpdate, gotUpdated;
@@ -548,6 +617,7 @@ void timeReports::enterTimeReport() {
 }
 
 void timeReports::employeeTimeReports() {
+	miscActions mActions;
 	string currentEmployeeID, sYears, sMonths, sDays, line;
 	bool repeat, proceed;
 	
@@ -613,6 +683,7 @@ void timeReports::employeeTimeReports() {
 }
 
 void timeReports::displayTimeReport() {
+	miscActions mActions;
 	string sYear, sMonth, sPeriod, sDept, line, temp, found;
 	int iYear, iMonth, iPeriod;
 	bool repeat, query1, query2, query3, query4, isFound, headerDisplayed;
@@ -760,7 +831,7 @@ void timeReports::disapproveReport() {
 }
 
 void timeReports::updateTimeReportDB(string reportID, string newInfo) {
-	
+	miscActions mActions;
 	string temp, orig;
 	int posStart, posEnd, id;
 	
@@ -830,7 +901,7 @@ string timeReports::getValueFromEntry(string element, string entry) { //gets spe
 bool timeReports::searchTimeReportDB(string query, string element, string *focus, bool keepSearching)  { //assigns string to *focus where query was found
 	string line, found;
 	int ctr;
-
+	
 	ctr = 0;
 	trInFile.open("database/timeReports.txt");
 	if (trInFile.is_open()) {

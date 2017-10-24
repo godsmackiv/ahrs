@@ -15,7 +15,7 @@ class timeReports{
 	private:
 		ofstream trOutFile;
 		ifstream trInFile;
-		miscActions mActions;
+		
 		employeeRecords eRecords;
 		departments dRecords;
 		
@@ -23,6 +23,7 @@ class timeReports{
 //		string timeRepID, employeeID, reportStatus, totalWorkHours, disapproval, adjustments, adjustmentTimeLog;
 	public:
 		void viewNoTimeReports();
+		void viewWithTimeReports();
 		void enterTimeReport();
 		void employeeTimeReports();
 		void displayTimeReport();

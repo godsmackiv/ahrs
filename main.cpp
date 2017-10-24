@@ -2,7 +2,6 @@
 #include <string>
 #include "users.h"
 #include "miscActions.h"
-#include "timeReports.h"
 #include "employeeRecords.h"
 
 using namespace std;
@@ -20,6 +19,8 @@ int main(int argc, char** argv) {
 	usersDB.loginUser();
 	
 	while(1){
+//		m.tr.autoGenerateTimeReports();
+		
 		if(usersDB.getUserLevel()=="manager"){
 			system("cls");
 			m.Menu();

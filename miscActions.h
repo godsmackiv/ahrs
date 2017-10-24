@@ -7,6 +7,7 @@
 #include "benefits.h"
 #include "employeeRecords.h"
 #include "jobOpenings.h"
+#include "timeReports.h"
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -20,13 +21,15 @@ class miscActions {
 		ofstream userOutFile;
 		ifstream userInFile;
 		
-		users *u;
+//		users *u;
 		departments dept;
 		locations loc;
 		jobPositions jp;
 		benefits ben;
 		employeeRecords er;
 		jobOpenings jo;
+//		timeReports tr;
+		
 	public:
 		float askFloatInput(int); //
 		int askIntInput(int); //

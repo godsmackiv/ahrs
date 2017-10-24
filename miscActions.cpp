@@ -81,6 +81,7 @@ int miscActions::askIntInput(int mode) {
 //}
 
 void miscActions::managerSubMenu(void){
+	timeReports tr;
 	int result=0;
 	char input;
 	switch(toupper(task))
@@ -293,6 +294,10 @@ void miscActions::managerSubMenu(void){
 						case '1':{
 							viewEmployee();
 							break; 
+						}
+						case '2':{
+							
+							break;
 						}
 					}
 					break;
@@ -711,6 +716,7 @@ void miscActions::Menu(void){
 }
 
 void miscActions::recruiterSubMenu(void){
+	timeReports tr;
 	char input,result=0;
 	switch(toupper(task))
 	{
@@ -820,6 +826,7 @@ void miscActions::recruiterSubMenu(void){
 }
 
 void miscActions::personnelSubMenu(void){
+	timeReports tr;
 	char input;
 	switch(toupper(task))
 	{
@@ -843,15 +850,47 @@ void miscActions::personnelSubMenu(void){
 			break;
 		}
 		case 'T':{
-			cout<<"\t\t\t\t\t=============== Transactions ============="<<endl;
-			cout<<"\t\t\t\t\t= [V] View List of Employee Time Reports ="<<endl;
-			cout<<"\t\t\t\t\t= [T] View Time Report Status            ="<<endl;
-			cout<<"\t\t\t\t\t= [R] Time Report Adjustments            ="<<endl;
-			cout<<"\t\t\t\t\t= [D] Delete Time Report                 ="<<endl;
-			cout<<"\t\t\t\t\t= [B] View All Benefits                  ="<<endl;
-			cout<<"\t\t\t\t\t=========================================="<<endl;
+			cout<<"\t\t\t\t\t=============== Transactions =============="<<endl;
+			cout<<"\t\t\t\t\t= [V] View Employees without Time Reports ="<<endl;
+			cout<<"\t\t\t\t\t= [W] View Employees with Time Reports    ="<<endl;
+			cout<<"\t\t\t\t\t= [T] Enter Time Report                   ="<<endl;
+			cout<<"\t\t\t\t\t= [R] View Individual Time Report         ="<<endl;
+			cout<<"\t\t\t\t\t= [S] View Submitted Time Reports         ="<<endl;
+			cout<<"\t\t\t\t\t= [D] Delete Time Report                  ="<<endl;
+			cout<<"\t\t\t\t\t= [B] View All Benefits                   ="<<endl;
+			cout<<"\t\t\t\t\t==========================================="<<endl;
 			cout<<"\t\t\t\t\tEnter input: ";
 			cin>>input;
+			switch(toupper(input)) {
+				case 'V': {
+					tr.viewNoTimeReports();	
+					break;
+				}
+				case 'W': {
+					tr.viewWithTimeReports();
+					break;
+				}
+				case 'T': {
+					tr.enterTimeReport();
+					break;
+				}
+				case 'R': {
+					tr.employeeTimeReports();
+					break;
+				}
+				case 'S': {
+					tr.displayTimeReport();
+					break;
+				}
+				case 'D': {
+					
+					break;
+				}
+				case 'B': {
+					
+					break;
+				}
+			}
 			
 			break;
 		}
@@ -884,6 +923,8 @@ void miscActions::personnelSubMenu(void){
 
 }
 void miscActions::adminSubMenu(void){
+	timeReports tr;
+	users u;
 	char input;
 	switch(toupper(task))
 	{
@@ -928,14 +969,37 @@ void miscActions::adminSubMenu(void){
 			cout<<"\t\t\t\t\t=============== Utilities =================="<<endl;
 			cout<<"\t\t\t\t\t= \t   [R] Register New User           ="<<endl;
 			cout<<"\t\t\t\t\t= \t   [C] Change Password             ="<<endl;
-			cout<<"\t\t\t\t\t= \t   [O] Override Code               ="<<endl;
 			cout<<"\t\t\t\t\t= \t   [S] Delete Specific User        ="<<endl;
-			cout<<"\t\t\t\t\t= \t   [D] Delete User                 ="<<endl;
-			cout<<"\t\t\t\t\t= \t   [V] View Credentials            ="<<endl;
-			cout<<"\t\t\t\t\t= \t   [U] Update Credentials          ="<<endl;
 			cout<<"\t\t\t\t\t============================================"<<endl;
 			cout<<"\t\t\t\t\tEnter input: ";
 			cin>>input;
+			cin.ignore();
+			switch(toupper(input)) {
+				case 'R': 
+					u.registerUser();
+					break;
+				case 'C':
+					u.changePassword();
+					break;
+				case 'O':
+					
+					break;
+				case 'S':
+					u.deleteUser();
+					break;
+				case 'D':
+				
+					break;
+				case 'V':
+					
+					break;
+				case 'U':
+					
+					break;
+						
+					
+					
+			}
 			
 			break;
 		}
