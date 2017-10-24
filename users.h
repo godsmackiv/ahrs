@@ -7,7 +7,6 @@
 #include <sstream>
 
 #include "miscActions.h"
-
 class miscActions;
 using namespace std;
 
@@ -47,8 +46,8 @@ class users {
  		//bool assignUserInfo();
 		void updateUserDB(string, string); //
 		string getLastUserEntry();
+
 		string getValueFromEntry(string element, string entry); //gets specific value of a database element within a database entry
-//		string getValueFromEntry(string, string); //gets specific value of a database element within a database entry
 	//	int getUserLevel1(string);
 
 };

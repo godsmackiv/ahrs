@@ -663,7 +663,7 @@ void timeReports::displayTimeReport() {
 					
 					found = getValueFromEntry("$tei#", line);
 					found = eRecords.getEmployeeInfo(found, "ede");
-					found = dRecords.getDepartmentInfo(found, "dco");
+					found = mActions.getDepartmentInfo(found, "dco");
 					if (found == sDept) {
 						query4 = true;
 					}

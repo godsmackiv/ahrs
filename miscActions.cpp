@@ -34,6 +34,10 @@ float miscActions::askFloatInput(int mode) {
 	return input;
 }
 
+char miscActions::getTask(){
+	return task;
+}
+
 int miscActions::askIntInput(int mode) {
 	int input;
 	string str;
@@ -284,6 +288,13 @@ void miscActions::managerSubMenu(void){
 					cout<<"\t\t\t\t\t==========================================="<<endl;
 					cout<<"\t\t\t\t\tEnter input: ";
 					cin>>perform;
+					cin.ignore();
+					switch(toupper(perform)){
+						case '1':{
+							viewEmployee();
+							break; 
+						}
+					}
 					break;
 				}
 				case 'P':{
@@ -338,6 +349,114 @@ void miscActions::managerSubMenu(void){
 			break;
 		}
 	}
+}
+
+void miscActions::viewEmployee(){
+	string line, found,temp;
+	int posStart=0, posEnd=0;
+	system("cls");
+			cout<<"\t\t\t\t\t View Employee\n\n";
+			userInFile.open("database/employees.txt");
+			getline(userInFile,line);
+			if (userInFile.is_open()) {
+					while ( getline (userInFile,line) ) {
+					
+							posStart = line.find("$eid#") + 5;
+							posEnd = line.find("$eid#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t ID: "<<found<<endl;
+							posStart = line.find("$ena#") + 5;
+							posEnd = line.find("$ena#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Name: "<<found<<endl;
+							posStart = line.find("$ead#") + 5;
+							posEnd = line.find("$ead#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Address: "<<found<<endl;
+							posStart = line.find("$ecn#") + 5;
+							posEnd = line.find("$ecn#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Contact #: "<<found<<endl;
+							posStart = line.find("$eag#") + 5;
+							posEnd = line.find("$eag#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Age: "<<found<<endl;
+							posStart = line.find("$eea#") + 5;
+							posEnd = line.find("$eea#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Email Address: "<<found<<endl;
+							posStart = line.find("$ebd#") + 5;
+							posEnd = line.find("$ebd#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Birthday: "<<found<<endl;
+							posStart = line.find("$esx#") + 5;
+							posEnd = line.find("$esx#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Sex: "<<found<<endl;
+							posStart = line.find("$efn#") + 5;
+							posEnd = line.find("$efn#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Father's Name: "<<found<<endl;
+							posStart = line.find("$efo#") + 5;
+							posEnd = line.find("$efo#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Father's Occupation: "<<found<<endl;
+							posStart = line.find("$emn#") + 5;
+							posEnd = line.find("$emn#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Mother's Name: "<<found<<endl;
+							posStart = line.find("$emo#") + 5;
+							posEnd = line.find("$emo#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Mother's: "<<found<<endl;
+							posStart = line.find("$ems#") + 5;
+							posEnd = line.find("$ems#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Civil Status: "<<found<<endl;
+							posStart = line.find("$esd#") + 5;
+							posEnd = line.find("$esd#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+							if(found!="\t")
+								cout<<"\t\t\t\t Start Date: "<<found<<endl;
+							posStart = line.find("$ees#") + 5;
+							posEnd = line.find("$ees#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Employment Status: "<<found<<endl;	
+							posStart = line.find("$eat#") + 5;
+							posEnd = line.find("$eat#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Educational Attainment: "<<found<<endl;
+							posStart = line.find("$esn#") + 5;
+							posEnd = line.find("$esn#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t School Name: "<<found<<endl;
+							posStart = line.find("$esa#") + 5;
+							posEnd = line.find("$esa#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t School Address: "<<found<<endl;
+							posStart = line.find("$eyg#") + 5;
+							posEnd = line.find("$eyg#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+								cout<<"\t\t\t\t Year Graduated: "<<found<<endl;
+							posStart = line.find("$ebs#") + 5;
+							posEnd = line.find("$ebs#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+							if(found!="0")
+								cout<<"\t\t\t\t Base Salary: "<<found<<".00 PHP"<<endl;
+							else cout<<endl;
+							posStart = line.find("$ejp#") + 5;
+							posEnd = line.find("$ejp#", posStart);
+							found = line.substr(posStart, posEnd - posStart);
+							if(found!="\t")
+								cout<<"\t\t\t\t Base Salary: "<<found<<".00 PHP"<<endl<<endl;			
+						}
+						system("pause");
+					userInFile.close();
+					}
+					else{
+						cout << "Error: Unable to open employee database."; 
+				
+					}
 }
 
 void miscActions::managerView(char perform){
@@ -584,6 +703,7 @@ void miscActions::Menu(void){
 	cout<<"\t\t\t\t\t=\t[I] Inquiry\t\t\t ="<<endl;
 	cout<<"\t\t\t\t\t=\t[R] Report\t\t\t ="<<endl;
 	cout<<"\t\t\t\t\t=\t[U] Utilities\t\t\t ="<<endl;
+	cout<<"\t\t\t\t\t=\t[E] Logout\t\t\t ="<<endl;
 	cout<<"\t\t\t\t\t=========================================="<<endl;
 	cout<<"\t\t\t\t\tEnter letter of choice: ";
 //	cin.ignore();
@@ -816,6 +936,7 @@ void miscActions::adminSubMenu(void){
 			cout<<"\t\t\t\t\t============================================"<<endl;
 			cout<<"\t\t\t\t\tEnter input: ";
 			cin>>input;
+			
 			break;
 		}
 		default: {
@@ -1085,4 +1206,207 @@ void miscActions::loadingBar(void){
 		cout<<a;
 		Sleep(20);
 	}
+}
+
+string miscActions::getDateTime(bool timeOnly, bool dateOnly) {
+	time_t now;
+	time(&now); //get current time
+	string t;
+	
+	if (timeOnly && !dateOnly) {
+		t = ctime(&now);
+		t = t.substr(11, 5);
+	} else if (!timeOnly && dateOnly) {
+		t = ctime(&now);
+		t = t.substr(4, 6) + ", " + t.substr(20, 4);
+	} else if (!timeOnly && !dateOnly) {
+		t = ctime(&now);
+		t = t.substr(11, 5) + " " + t.substr(4, 6) + " " + t.substr(20, 4);
+	} else {
+		cout << endl << "Error: Invalid time and date mode.";
+	}
+
+	return t;
+}
+
+int miscActions::convertToIMonth(string sMonth) {
+	int n = 0;
+	
+	if (sMonth == "Jan") {
+		n = 1;
+	} else if (sMonth == "Feb") {
+		n = 2;
+	} else if (sMonth == "Mar") {
+		n = 3;
+	} else if (sMonth == "Apr") {
+		n = 4;
+	} else if (sMonth == "May") {
+		n = 5;
+	} else if (sMonth == "Jun") {
+		n = 6;
+	} else if (sMonth == "Jul") {
+		n = 7;
+	} else if (sMonth == "Aug") {
+		n = 8;
+	} else if (sMonth == "Sep") {
+		n = 9;
+	} else if (sMonth == "Oct") {
+		n = 10;
+	} else if (sMonth == "Nov") {
+		n = 11;
+	} else if (sMonth == "Dec") {
+		n = 12;
+	} 
+	return n;
+}
+
+string miscActions::convertToSMonth(int iMonth) {
+	string n;
+	
+	if (iMonth == 1) {
+		n = "Jan";
+	} else if (iMonth == 2) {
+		n = "Feb";
+	} else if (iMonth == 3) {
+		n = "Mar";
+	} else if (iMonth == 4) {
+		n = "Apr";
+	} else if (iMonth == 5) {
+		n = "May";
+	} else if (iMonth == 6) {
+		n = "Jun";
+	} else if (iMonth == 7) {
+		n = "Jul";
+	} else if (iMonth == 8) {
+		n = "Aug";
+	} else if (iMonth == 9) {
+		n = "Sep";
+	} else if (iMonth == 10) {
+		n = "Oct";
+	} else if (iMonth == 11) {
+		n = "Nov";
+	} else if (iMonth == 12) {
+		n = "Dec";
+	} else {
+		n = -1;
+	}
+	return n;
+}
+
+bool miscActions::isLeapYear(int argYear) {
+	if (argYear % 400 == 0) {
+		return true;
+	} else if (argYear % 100 == 0) {
+		return false;
+	} else if (argYear % 4 == 0) {
+		return true;
+	} 
+	return false;
+}
+
+int miscActions::numberOfDaysInMonth(int argMonth, int argYear) {
+	if (argMonth == 1 || argMonth == 3 || argMonth == 5 || argMonth == 7 || argMonth == 8 || argMonth == 10 || argMonth == 12) {
+		return 31;
+	} else if (argMonth == 2) {
+		if (isLeapYear(argYear)) {
+			return 29;
+		}
+		return 28;
+	} else if (argMonth == 4 || argMonth == 6 || argMonth == 9 || argMonth == 11 ) {
+		return 30;
+	} 
+	cout << "Error: Unable to return correct number of days in month.";
+	return 0;
+}
+
+int miscActions::whatIsDayOfDate(int argYear, int argMonth, int argDate) {
+	tm timeStruct = {};
+	timeStruct.tm_year = argYear - 1900;
+	timeStruct.tm_mon = argMonth - 1;
+	timeStruct.tm_mday = argDate;
+	timeStruct.tm_hour = 12;    //  To avoid any doubts about summer time, etc.
+	mktime( &timeStruct );
+	return timeStruct.tm_wday;
+}
+
+int miscActions::stringToInt(string argString) {
+	stringstream s;
+	int i;
+	
+	s << argString;
+	s >> i;
+	
+	return i;
+}
+
+string miscActions::intToString(int argInt) {
+	stringstream s;
+	string str;
+	
+	s << argInt;
+	str = s.str();
+	
+	return str;
+}
+
+int miscActions::getLastDeptID() {
+	string line;
+	int num, posStart, posEnd;
+	
+//	cout << endl << "filename is " << fileName; 
+	
+	num = 0; posStart = 0; posEnd = 0;
+	
+	dept.deptInFile.open("database/departments.txt");
+	
+	if (dept.deptInFile.is_open()) {
+		getline(dept.deptInFile, line);
+		posStart = line.find("$lI#") + 4;
+		posEnd = line.find("$lI#", posStart);
+		if (line.size() > 0) {
+			line = line.substr(posStart, posEnd - posStart);
+		}
+		num = stringToInt(line);
+//		cout << "entered here";
+//		cout << "num is " << num <<".";
+		dept.deptInFile.close();
+	} else {
+		cout << "Error (getLastDeptID): Unable to open file.";		
+	}
+	
+	return num;
+		
+}
+
+
+string miscActions::getDepartmentInfo(string ID, string type) {
+	string found, temp;
+	int posStart, posEnd;
+
+	dept.deptInFile.open("database/departments.txt");
+	if (dept.deptInFile.is_open()) {
+		
+		dept.deptInFile.clear();
+		while (getline(dept.deptInFile, temp, '\n')) {
+
+			if (temp.size() > 0) {
+				posStart = temp.find("$did#") + 5;
+				posEnd = temp.find("$did#", posStart);
+				found = temp.substr(posStart, posEnd - posStart);
+				if (found == ID) {
+					posStart = temp.find("$"+type+"#") + 5;
+					posEnd = temp.find("$"+type+"#", posStart);
+					temp = temp.substr(posStart, posEnd - posStart); 
+					break;
+				}
+			} else {
+				cout << "Error (getDepartmentInfo): Got a blank line from getline.";
+			}
+			dept.deptInFile.clear();
+		}
+		 dept.deptInFile.close();
+	}
+  	else cout << "Error: Unable to open Employees database."; 
+	
+	return temp;
 }

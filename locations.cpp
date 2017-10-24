@@ -34,12 +34,8 @@ bool locations::createNewLocation(){
 	
 	locInFile.open("database/locations.txt");
 	if (locInFile.is_open()) {
-		int posStart=0, posEnd=0;
-		while(getline(locInFile,line)){
-			posStart = line.find("$lid#") + 5;
-			posEnd = line.find("$lid#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-		}
+		getline(locInFile,line);
+		found=line.substr(4,6);
 		stringstream strID(found);
 		strID >>locationID;
 		locationID++;

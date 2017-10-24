@@ -1,5 +1,9 @@
 #include "employeeRecords.h"
-
+#include <iomanip>
+#include <string>
+#include <sstream>
+#include <cstdlib>
+#include <ctime>
 
 bool employeeRecords::searchEmployee(string query,string type){
 	string line, found;

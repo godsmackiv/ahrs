@@ -8,6 +8,7 @@
 using namespace std;
 
 int main(int argc, char** argv) {
+	BEGIN:
 	system("color 2f");
 	system("color 0a");
 	users usersDB;
@@ -15,12 +16,16 @@ int main(int argc, char** argv) {
 	int q;
 	float f;
 	miscActions m;
+	//m.hidePass();
 	usersDB.loginUser();
 	
 	while(1){
 		if(usersDB.getUserLevel()=="manager"){
 			system("cls");
 			m.Menu();
+			if(m.getTask()=='E'||m.getTask()=='e'){
+				goto BEGIN;
+			}
 			system("cls");
 			m.loadingBar();
 			system("cls");
@@ -29,6 +34,9 @@ int main(int argc, char** argv) {
 		else if(usersDB.getUserLevel()=="recruiter"){
 			system("cls");
 			m.Menu();
+			if(m.getTask()=='E'||m.getTask()=='e'){
+				goto BEGIN;
+			}
 			system("cls");
 			m.loadingBar();
 			system("cls");
@@ -37,6 +45,9 @@ int main(int argc, char** argv) {
 		else if(usersDB.getUserLevel()=="personnel"){
 			system("cls");
 			m.Menu();
+			if(m.getTask()=='E'||m.getTask()=='e'){
+				goto BEGIN;
+			}
 			system("cls");
 			m.loadingBar();
 			system("cls");
@@ -45,12 +56,16 @@ int main(int argc, char** argv) {
 		else if(usersDB.getUserLevel()=="admin"){
 			system("cls");
 			m.Menu();
+			if(m.getTask()=='E'||m.getTask()=='e'){
+				goto BEGIN;
+			}
 			system("cls");
 			m.loadingBar();
 			system("cls");
 			m.adminSubMenu();
 		}
 		else break;
+	}
 }
 
 

@@ -2,6 +2,7 @@
 
 // login users, verifies if account exist, and verifies if password is matched
 void users::loginUser() {
+	START:
 	string input, currentUser,pass;
 
 	system("cls");
@@ -29,15 +30,17 @@ void users::loginUser() {
 			cout << endl << "\t\t\t\t\t  Welcome " + lastName + ", " + firstName + " " + middleName + "!";
 			
 		} else {
-			cout << endl << "\t\t\t\t\t  Error: Incorrect password.";
+			cout << endl << "\t\t\t\t\t  Error: Incorrect password.\n\n\t\t\t\t\t ";
+			system("pause");
+			goto START;
 		}
 		
 	} else {
-		cout << "\t\t\t\t\t  Error: Unable to login. No user with that ID found.";
+		cout << "\t\t\t\t\t  Error: Unable to login. No user with that ID found.\n\n\t\t\t\t\t ";
+		system("pause");
+		goto START;
 	}
 	
-	cout <<endl<<endl<< "\t\t\t\t\t  ";
-	system("pause");
 }
 
 void users::changePassword() {

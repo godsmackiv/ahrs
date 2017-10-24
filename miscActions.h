@@ -41,6 +41,21 @@ class miscActions {
 		void viewReports(char);
 		string hidePass(void);
 		void managerView(char);
+		void viewEmployee();
+		char getTask();
+		string getDateTime(bool timeOnly, bool dateOnly);
+		int getYear();
+		int convertToIMonth(string);
+		string convertToSMonth(int);
+		bool isLeapYear(int);
+		int numberOfDaysInMonth(int, int);
+		int whatIsDayOfDate(int, int, int);
+		int stringToInt(string);
+		string intToString(int);
+		int getLastDeptID();
+		string getDepartmentInfo(string ID, string type);
+		
+		
 };
 
 

@@ -22,7 +22,7 @@ class jobOpenings{
 		ofstream joOutFile;	
 		
 		departments dept;	
-		locations loc;	
+		locations loc;
 		employeeRecords er;	
 		jobPositions jPos;
 	public:

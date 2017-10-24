@@ -1,4 +1,4 @@
-$lI#000012$lI#
+$lI#000011$lI#
 $did#000001$did#$dco#COMPE$dco#$dna#Computer Engineering$dna#
 $did#000002$did#$dco#DORM$dco#$dna#Dormitory$dna#
 $did#000003$did#$dco#EECE$dco#$dna#Electrical, Electronics & Communications Engineering$dna#
@@ -10,4 +10,3 @@ $did#000008$did#$dco#ES$dco#$dna#Elementary School$dna#
 $did#000009$did#$dco#KGN$dco#$dna#Kindergarten$dna#
 $did#000010$did#$dco#BUS$dco#$dna#Business$dna#
 $did#000011$did#$dco#PRES$dco#$dna#Office of the President$dna#
-$did#000012$did#$dco#LANG$dco#$dna#Department of Language$dna#
