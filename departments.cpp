@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <sstream>
 
-bool departments::searchDepartment(string query,string type) {
+bool departments::searchDepartment(string query,string type){
 	string line, found;
 	int posStart=0, posEnd=0;
 	
@@ -34,12 +34,8 @@ bool departments::createNewDepartment(){
 	
 	deptInFile.open("database/departments.txt");
 	if (deptInFile.is_open()) {
-		int posStart=0, posEnd=0;
-		while(getline(deptInFile,line)){
-			posStart = line.find("$did#") + 5;
-			posEnd = line.find("$did#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-		}
+		getline(deptInFile,line);
+		found=line.substr(4,6);
 		stringstream strID(found);
 		strID >>departmentID;
 		departmentID++;

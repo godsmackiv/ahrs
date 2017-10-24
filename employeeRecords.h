@@ -22,15 +22,17 @@ class employeeRecords{
 		int yearGraduated,baseSalary;
 		string position;
 		
-		ifstream erInFile;
-		ofstream erOutFile;				
 	public:		
+		ifstream erInFile;
+		ofstream erOutFile;		
+				
 		bool searchEmployee(string,string);
 		bool createNewEmployee();
 		bool deleteEmployee();
 		bool updateEmployee();
 		bool editEmployee(string,string,string);
 		bool rewriteEmployeeRecord();
+		bool isApplicant(string);
 		int getNumberOfEmployees();
 		string getEmployeeInfo(string, string); // requires ID is known
 	

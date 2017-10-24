@@ -7,7 +7,7 @@ using namespace std;
 class benefits{
 	private:
 		int benefitCode,amount;
-		string name,createDate;
+		string code,name,createDate;
 		ifstream benInFile;
 		ofstream benOutFile;
 	public:

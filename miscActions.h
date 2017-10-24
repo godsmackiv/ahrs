@@ -1,15 +1,15 @@
 #ifndef __MISCACTIONS_H_INCLUDED__
 #define __MISCACTIONS_H_INCLUDED__
-
+#include "users.h"
+#include "departments.h"
+#include "locations.h"
+#include "jobPositions.h"
+#include "benefits.h"
+#include "employeeRecords.h"
+#include "jobOpenings.h"
 #include <string>
 #include <sstream>
-#include <fstream>
 #include <iostream>
-#include <windows.h>
-#include <conio.h>
-#include <ctime>
-#include "users.h"
-
 class users;
 using namespace std;
 
@@ -19,8 +19,14 @@ class miscActions {
 		char perform,report;
 		ofstream userOutFile;
 		ifstream userInFile;
+		
 		users *u;
-			
+		departments dept;
+		locations loc;
+		jobPositions jp;
+		benefits ben;
+		employeeRecords er;
+		jobOpenings jo;
 	public:
 		float askFloatInput(int); //
 		int askIntInput(int); //
@@ -32,19 +38,9 @@ class miscActions {
 		void personnelSubMenu(void);
 		void adminSubMenu(void);
 		void loadingBar(void);
-		void viewReports(void);
+		void viewReports(char);
 		string hidePass(void);
-	 	
-		string getDateTime(bool timeOnly, bool dateOnly);
-		int getYear();
-		int convertToIMonth(string);
-		string convertToSMonth(int);
-		bool isLeapYear(int);
-		int numberOfDaysInMonth(int, int);
-		int whatIsDayOfDate(int, int, int);
-		int stringToInt(string);
-		string intToString(int);
-				
+		void managerView(char);
 };
 
 

@@ -23,7 +23,7 @@ bool jobPositions::searchJobPosition(string query,string type){
 }
 
 bool jobPositions::createNewJobPosition(){
-	string line;
+	string line,found;
 	
 	cout<<"Name: ";
 	getline(cin,name);
@@ -34,13 +34,8 @@ bool jobPositions::createNewJobPosition(){
 	
 	jpInFile.open("database/jobPositions.txt");
 	if (jpInFile.is_open()) {
-		string line, found;
-		int posStart=0, posEnd=0;
-		while(getline(jpInFile,line)){
-			posStart = line.find("$jid#") + 5;
-			posEnd = line.find("$jid#", posStart);
-			found = line.substr(posStart, posEnd - posStart);
-		}
+		getline(jpInFile,line);
+		found=line.substr(4,6);
 		stringstream strID(found);
 		strID >>jobPositionID;
 		jobPositionID++;
